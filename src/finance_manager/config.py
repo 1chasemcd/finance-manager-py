@@ -13,13 +13,14 @@ class Settings(BaseSettings):
     # Application
     app_name: str = "FinanceManager"
     app_version: str = "1.0.0"
-    debug: bool = False
+    debug: bool = True
     environment: str = "development"
 
     # Database
-    database_url: str = "postgresql+asyncpg://user:pass@localhost:5432/myapp"
+    database_url: str = "sqlite+aiosqlite:///:memory:"
     database_pool_size: int = 20
     database_max_overflow: int = 10
+    database_use_in_memory: bool = True
 
     # CORS
     allowed_origins: list[str] = ["http://localhost:3000"]

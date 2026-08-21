@@ -14,7 +14,7 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None]:
     settings = get_settings()
 
     # Startup
-    await sessionmanager.init(settings.database_url)
+    await sessionmanager.init(settings)
     yield
 
     # Shutdown
