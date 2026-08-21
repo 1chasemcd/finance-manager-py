@@ -16,4 +16,3 @@ class Conflict(Err):
 @dataclass(frozen=True)
 class Invalid(Err):
     message: str = "The request was invalid."
-    errors: dict[str, list[str]] | None = None
