@@ -11,6 +11,33 @@ dependencies = [
     "fastapi[standard]>=0.141.1",
 ]
 
+[tool.ruff]
+line-length = 100
+target-version = "py314"
+
+[tool.ruff.lint]
+select = [
+    "E",      # pycodestyle
+    "F",      # pyflakes
+    "I",      # import sorting
+    "UP",     # pyupgrade
+    "B",      # flake8-bugbear
+    "SIM",    # flake8-simplify
+    "ANN",    # annotations
+]
+ignore = [
+    "ANN401", # dynamically typed Any
+]
+
+[tool.ruff.format]
+quote-style = "double"
+
+[tool.pyright]
+include = ["src"]
+typeCheckingMode = "strict"
+pythonVersion = "3.14"
+strict = ["src"]
+
 [tool.uv]
 package = true
 
@@ -20,3 +47,10 @@ entrypoint = "finance_manager.api.main:app"
 [build-system]
 requires = ["uv_build>=0.12.5,<0.13.0"]
 build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pyright>=1.1.411",
+    "pytest>=9.1.1",
+    "ruff>=0.16.4",
+]
