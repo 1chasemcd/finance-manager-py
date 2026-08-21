@@ -1,0 +1,22 @@
+[project]
+name = "finance-manager"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Chase McDonald", email = "1chasemcd@gmail.com" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "fastapi[standard]>=0.141.1",
+]
+
+[tool.uv]
+package = true
+
+[tool.fastapi]
+entrypoint = "finance_manager.api.main:app"
+
+[build-system]
+requires = ["uv_build>=0.12.5,<0.13.0"]
+build-backend = "uv_build"
