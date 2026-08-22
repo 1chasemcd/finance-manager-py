@@ -1,2 +1,0 @@
-from .entity.entity_command_service import EntityCommandService as EntityCommandService
-from .entity.entity_query_service import EntityQueryService as EntityQueryService

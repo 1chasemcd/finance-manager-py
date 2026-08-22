@@ -1,9 +1,8 @@
-# app/api/v1/users.py
 from fastapi import APIRouter, status
 from fastapi.responses import JSONResponse
 
 from finance_manager.core.result_handler import handle_result, handled_error_responses
-from finance_manager.dependencies.people import PersonCommandServiceDep, PersonQueryServiceDep
+from finance_manager.dependencies.people import PersonRepositoryDep
 from finance_manager.schemas.person import PersonResponse, WritePerson
 
 router = APIRouter(prefix="/people")
@@ -16,9 +15,9 @@ router = APIRouter(prefix="/people")
 )
 async def lookup_person(
     id: int,
-    service: PersonQueryServiceDep,
+    repo: PersonRepositoryDep,
 ) -> PersonResponse | JSONResponse:
-    result = await service.lookup(id)
+    result = await repo.lookup(id)
     return handle_result(result)
 
 
@@ -30,9 +29,9 @@ async def lookup_person(
 )
 async def create_person(
     request: WritePerson,
-    service: PersonCommandServiceDep,
+    repo: PersonRepositoryDep,
 ) -> None | JSONResponse:
-    result = await service.create(request)
+    result = await repo.create(request)
     return handle_result(result)
 
 
@@ -45,9 +44,9 @@ async def create_person(
 async def update_person(
     id: int,
     request: WritePerson,
-    service: PersonCommandServiceDep,
+    repo: PersonRepositoryDep,
 ) -> None | JSONResponse:
-    result = await service.update(id, request)
+    result = await repo.update(id, request)
     return handle_result(result)
 
 
@@ -59,7 +58,7 @@ async def update_person(
 )
 async def delete_person(
     id: int,
-    service: PersonCommandServiceDep,
+    repo: PersonRepositoryDep,
 ) -> None | JSONResponse:
-    result = await service.delete(id)
+    result = await repo.delete(id)
     return handle_result(result)
