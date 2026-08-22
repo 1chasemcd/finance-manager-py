@@ -19,7 +19,7 @@ class EntityCommandService[T: BaseModel]:
         return await self.repository.create(request)
 
     async def update(self, id: int, request: T) -> Result:
-        return await self.repository.create(request)
+        return await self.repository.update(id, request)
 
     async def delete(self, id: int) -> Result:
         return await self.repository.delete(id)
