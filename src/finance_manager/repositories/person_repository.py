@@ -12,13 +12,13 @@ class PersonRepository(BaseRepository[Person, PersonResponse, WritePerson]):
     def __init__(self, session: AsyncSession) -> None:
         super().__init__(Person, PersonResponse, session)
 
-    def select_statement(self) -> Select[tuple[Any, ...]]:
+    def _select_statement(self) -> Select[tuple[Any, ...]]:
         return select(Person.first_name, Person.last_name)
 
-    def map_create(self, request: WritePerson) -> Person:
+    def _map_create(self, request: WritePerson) -> Person:
         return Person(first_name=request.first_name, last_name=request.last_name)
 
-    def map_update(self, request: WritePerson, model: Person) -> None:
+    def _map_update(self, request: WritePerson, model: Person) -> None:
         model.first_name = request.first_name
         model.last_name = request.last_name
 

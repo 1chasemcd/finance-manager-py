@@ -26,19 +26,19 @@ class BaseRepository[
         self.session = session
 
     @abstractmethod
-    def select_statement(self) -> Select[tuple[Any, ...]]:
+    def _select_statement(self) -> Select[tuple[Any, ...]]:
         pass
 
     @abstractmethod
-    def map_create(self, request: CreateType) -> ModelType:
+    def _map_create(self, request: CreateType) -> ModelType:
         pass
 
     @abstractmethod
-    def map_update(self, request: UpdateType, model: ModelType) -> None:
+    def _map_update(self, request: UpdateType, model: ModelType) -> None:
         pass
 
     async def lookup(self, id: int) -> Result[ReadType]:
-        stmt = self.select_statement()
+        stmt = self._select_statement()
         res = (
             (await self.session.execute(stmt.where(self.model.id == id).limit(2)))
             .mappings()
@@ -50,7 +50,7 @@ class BaseRepository[
         return Ok(read)
 
     async def search(self, skip: int, take: int) -> Result[list[ReadType]]:
-        stmt = self.select_statement()
+        stmt = self._select_statement()
         res = (await self.session.execute(stmt.offset(skip).limit(take))).mappings()
         return Ok([self.readType.model_validate(m) for m in res])
 
@@ -58,12 +58,12 @@ class BaseRepository[
         to_update = await self.session.get(self.model, id)
         if not to_update:
             return NotFound()
-        self.map_update(request, to_update)
+        self._map_update(request, to_update)
         await self.session.flush()
         return NoContent()
 
     async def create(self, request: CreateType) -> Result:
-        model = self.map_create(request)
+        model = self._map_create(request)
         self.session.add(model)
         await self.session.flush()
         return NoContent()
