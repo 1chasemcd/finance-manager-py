@@ -39,7 +39,7 @@ def _build_expression[T: Base](cls: type[T], template: str) -> ColumnElement[str
     return expression
 
 
-def autocomplete_enabled[T: Base](
+def autocomplete[T: Base](
     template: str,
 ) -> Callable[[type[T]], type[T]]:
     def decorator(cls: type[T]) -> type[T]:

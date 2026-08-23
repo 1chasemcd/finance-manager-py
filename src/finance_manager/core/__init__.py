@@ -1,4 +1,4 @@
-from .autocomplete_registry import autocomplete_enabled as autocomplete_enabled
+from .autocomplete_registry import autocomplete as autocomplete
 from .errors import NotFound as NotFound
 from .result import Err as Err
 from .result import NoContent as NoContent
