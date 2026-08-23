@@ -13,7 +13,7 @@ class PersonRepository(BaseRepository[Person, PersonResponse, WritePerson]):
         super().__init__(Person, PersonResponse, session)
 
     def _select_statement(self) -> Select[tuple[Any, ...]]:
-        return select(Person.first_name, Person.last_name)
+        return select(Person.id, Person.first_name, Person.last_name)
 
     def _map_create(self, request: WritePerson) -> Person:
         return Person(first_name=request.first_name, last_name=request.last_name)

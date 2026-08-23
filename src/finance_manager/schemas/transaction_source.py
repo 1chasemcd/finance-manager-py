@@ -7,6 +7,7 @@ class WriteTransactionSource(BaseModel):
 
 
 class TransactionSourceResponse(BaseModel):
+    id: int = Field()
     name: str = Field(max_length=100)
     owner_id: int = Field()
     owner_name: str = Field()

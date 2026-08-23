@@ -7,5 +7,6 @@ class WritePerson(BaseModel):
 
 
 class PersonResponse(BaseModel):
+    id: int = Field()
     first_name: str = Field(max_length=100)
     last_name: str = Field(max_length=100)
