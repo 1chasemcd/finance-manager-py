@@ -4,7 +4,14 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from finance_manager.api import autocomplete, people
+from finance_manager.api import (
+    autocomplete,
+    category_patterns,
+    people,
+    transaction_categories,
+    transaction_sources,
+    transactions,
+)
 from finance_manager.config import get_settings
 from finance_manager.dependencies.database import sessionmanager
 
@@ -42,6 +49,10 @@ def create_app() -> FastAPI:
 
     # Include routers
     app.include_router(people.router)
+    app.include_router(transactions.router)
+    app.include_router(transaction_sources.router)
+    app.include_router(transaction_categories.router)
+    app.include_router(category_patterns.router)
     app.include_router(autocomplete.router)
 
     return app
