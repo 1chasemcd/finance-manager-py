@@ -3,7 +3,7 @@ from typing import Any
 from sqlalchemy import Select, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from finance_manager.models import Person
+from finance_manager.models.person import Person
 from finance_manager.repositories.base import BaseRepository
 from finance_manager.schemas.person import PersonResponse, WritePerson
 

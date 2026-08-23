@@ -1,37 +1,37 @@
-from abc import ABC, abstractmethod
-
-from sqlalchemy import Select
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from finance_manager.core.errors import NotFound
-from finance_manager.core.result import Ok, Result
-from finance_manager.schemas.common import PagedRequest
+from finance_manager.core import NotFound, Ok, Result
+from finance_manager.core.autocomplete_registry import AutocompleteRegistry
+from finance_manager.schemas.common import AutocompleteRequest
 
 
-class AutocompleteRepository[T: PagedRequest = PagedRequest](ABC):
-    def __init__(self, session: AsyncSession) -> None:
+class AutocompleteRepository:
+    def __init__(self, session: AsyncSession, registry: AutocompleteRegistry) -> None:
         self._session = session
+        self._registry = registry
 
-    async def search(self, request: T) -> Result[dict[int, str]]:
-        stmt = self._statement().offset(request.skip).limit(request.take)
-        stmt = self._filter(stmt)
+    async def search(self, name: str, request: AutocompleteRequest) -> Result[dict[int, str]]:
+        entry = self._registry.get(name)
+        if entry.status == "err":
+            return entry
+        search = f"%{request.search}%"
+        stmt = (
+            select(entry.value.id, entry.value.display)
+            .where(entry.value.display.ilike(search))
+            .offset(request.skip)
+            .limit(request.take)
+        )
         res = await self._session.execute(stmt)
         pairs: dict[int, str] = {key: value for key, value in res}
         return Ok(pairs)
 
-    async def single(self, id: int) -> Result[str]:
-        stmt = self._statement()
-        id_column = stmt.selected_columns[0]
-        stmt = stmt.where(id_column == id)
-        res = await self._session.execute(stmt)
-        single = res.one_or_none()
-        if not single:
+    async def single(self, name: str, id: int) -> Result[str]:
+        entry = self._registry.get(name)
+        if entry.status == "err":
+            return entry
+        stmt = select(entry.value.display).where(entry.value.id == id)
+        res = await self._session.scalar(stmt)
+        if not res:
             return NotFound()
-        return Ok(single.tuple()[1])
-
-    @abstractmethod
-    def _statement(self) -> Select[tuple[int, str]]:
-        pass
-
-    def _filter(self, stmt: Select[tuple[int, str]]) -> Select[tuple[int, str]]:
-        return stmt
+        return Ok(res)
