@@ -8,5 +8,5 @@ from finance_manager.models.base import Base
 @autocomplete("{name}")
 class TransactionCategory(Base):
     __tablename__ = "transaction_categories"
-    name: Mapped[str] = mapped_column(String(100))
+    name: Mapped[str] = mapped_column(String(100), unique=True)
     description: Mapped[str | None] = mapped_column(String(500))

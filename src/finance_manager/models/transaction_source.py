@@ -13,6 +13,6 @@ if TYPE_CHECKING:
 @autocomplete("{name}")
 class TransactionSource(Base):
     __tablename__ = "transaction_sources"
-    name: Mapped[str] = mapped_column(String(100))
+    name: Mapped[str] = mapped_column(String(100), unique=True)
     owner_id: Mapped[int] = mapped_column(ForeignKey("people.id"))
     owner: Mapped[Person] = relationship()

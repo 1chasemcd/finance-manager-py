@@ -11,7 +11,7 @@ if TYPE_CHECKING:
 
 class CategoryPattern(Base):
     __tablename__ = "category_patterns"
-    pattern: Mapped[str] = mapped_column(String(100))
+    pattern: Mapped[str] = mapped_column(String(100), unique=True)
     transaction_category_id: Mapped[int | None] = mapped_column(
         ForeignKey("transaction_categories.id")
     )
