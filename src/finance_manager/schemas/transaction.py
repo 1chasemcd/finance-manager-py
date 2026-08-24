@@ -15,8 +15,8 @@ class WriteTransaction(BaseModel):
 class TransactionResponse(BaseModel):
     id: int = Field()
     timestamp: datetime = Field()
-    amount: Decimal = Field(max_digits=12, decimal_places=2)
-    summary: str = Field(max_length=500)
+    amount: Decimal = Field()
+    summary: str = Field()
     transaction_category_id: int = Field()
     transaction_category_name: str = Field()
     transaction_source_name: str = Field()

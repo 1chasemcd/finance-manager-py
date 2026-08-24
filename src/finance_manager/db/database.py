@@ -14,7 +14,7 @@ class DatabaseSessionManager:
         self._sessionmaker = None
 
     async def init(self, config: Settings) -> None:
-        if config.database_use_in_memory:
+        if config.debug and config.database_use_in_memory:
             self._engine = create_async_engine(
                 config.database_url,
                 pool_pre_ping=True,
@@ -38,6 +38,10 @@ class DatabaseSessionManager:
             class_=AsyncSession,
             expire_on_commit=False,
         )
+
+        if config.debug and config.database_seed is not None:
+            async with self.session() as session:
+                await config.database_seed(session)
 
     async def close(self) -> None:
         if self._engine:

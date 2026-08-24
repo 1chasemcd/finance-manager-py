@@ -8,5 +8,5 @@ class WriteTransactionCategory(BaseModel):
 
 class TransactionCategoryResponse(BaseModel):
     id: int = Field()
-    name: str = Field(max_length=100)
-    description: str | None = Field(max_length=500)
+    name: str = Field()
+    description: str | None = Field()

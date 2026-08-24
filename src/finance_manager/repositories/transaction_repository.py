@@ -18,15 +18,19 @@ class TransactionRepository(BaseRepository[Transaction, TransactionResponse, Wri
         super().__init__(Transaction, TransactionResponse, session)
 
     def _select_statement(self) -> Select[tuple[Any, ...]]:
-        return select(
-            Transaction.id,
-            Transaction.timestamp,
-            Transaction.amount,
-            Transaction.summary,
-            Transaction.transaction_source_id,
-            TransactionSource.name.label("transaction_source_name"),
-            Transaction.transaction_category_id,
-            TransactionCategory.name.label("transaction_category_name"),
+        return (
+            select(
+                Transaction.id,
+                Transaction.timestamp,
+                Transaction.amount,
+                Transaction.summary,
+                Transaction.transaction_source_id,
+                TransactionSource.name.label("transaction_source_name"),
+                Transaction.transaction_category_id,
+                TransactionCategory.name.label("transaction_category_name"),
+            )
+            .join(Transaction.transaction_category)
+            .join(Transaction.transaction_source)
         )
 
     def _map_create(self, request: WriteTransaction) -> Transaction:

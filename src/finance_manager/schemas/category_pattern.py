@@ -8,6 +8,6 @@ class WriteCategoryPattern(BaseModel):
 
 class CategoryPatternResponse(BaseModel):
     id: int = Field()
-    pattern: str = Field(max_length=100)
-    transaction_category_id: int = Field()
-    transaction_category_name: str = Field()
+    pattern: str = Field()
+    transaction_category_id: int | None = Field()
+    transaction_category_name: str | None = Field()

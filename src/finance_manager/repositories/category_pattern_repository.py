@@ -4,6 +4,7 @@ from sqlalchemy import Select, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from finance_manager.models.category_pattern import CategoryPattern
+from finance_manager.models.transaction_category import TransactionCategory
 from finance_manager.repositories.base import BaseRepository
 from finance_manager.schemas.category_pattern import (
     CategoryPatternResponse,
@@ -19,8 +20,11 @@ class CategoryPatternRepository(
 
     def _select_statement(self) -> Select[tuple[Any, ...]]:
         return select(
-            CategoryPattern.id, CategoryPattern.pattern, CategoryPattern.transaction_category_id
-        )
+            CategoryPattern.id,
+            CategoryPattern.pattern,
+            CategoryPattern.transaction_category_id,
+            TransactionCategory.name.label("transaction_category_name"),
+        ).outerjoin(CategoryPattern.transaction_category)
 
     def _map_create(self, request: WriteCategoryPattern) -> CategoryPattern:
         return CategoryPattern(

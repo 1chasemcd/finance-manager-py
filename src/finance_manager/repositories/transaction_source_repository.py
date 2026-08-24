@@ -24,7 +24,7 @@ class TransactionSourceRepository(
             TransactionSource.name,
             TransactionSource.owner_id,
             (Person.first_name + " " + Person.last_name).label("owner_name"),
-        )
+        ).join(TransactionSource.owner)
 
     def _map_create(self, request: WriteTransactionSource) -> TransactionSource:
         return TransactionSource(name=request.name, owner_id=request.owner_id)
