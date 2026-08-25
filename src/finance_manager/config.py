@@ -1,10 +1,13 @@
-from collections.abc import Awaitable, Callable
+from enum import StrEnum
 from functools import lru_cache
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
-from sqlalchemy.ext.asyncio import AsyncSession
 
-from finance_manager.db.seed import seed
+
+class Environment(StrEnum):
+    DEV = "dev"
+    CI = "ci"
+    PROD = "prod"
 
 
 class Settings(BaseSettings):
@@ -17,17 +20,17 @@ class Settings(BaseSettings):
     # Application
     app_name: str = "FinanceManager"
     app_version: str = "1.0.0"
-    debug: bool = True
+    app_env: Environment = Environment.PROD
 
     # Database
-    database_url: str = "sqlite+aiosqlite:///:memory:"
+    database_url: str = ""
     database_pool_size: int = 20
     database_max_overflow: int = 10
-    database_use_in_memory: bool = True
-    database_seed: Callable[[AsyncSession], Awaitable[None]] = seed
+    database_use_in_memory: bool = False
+    database_seed_data: str | None = None
 
     # CORS
-    allowed_origins: list[str] = ["http://localhost:3000"]
+    allowed_origins: list[str] = []
 
 
 @lru_cache

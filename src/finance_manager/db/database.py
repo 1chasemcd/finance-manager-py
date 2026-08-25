@@ -1,10 +1,12 @@
 from collections.abc import AsyncGenerator
 from contextlib import asynccontextmanager
+from typing import Any
 
 from sqlalchemy import StaticPool
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 
 from finance_manager.config import Settings
+from finance_manager.db import seed
 from finance_manager.models import Base
 
 
@@ -14,34 +16,33 @@ class DatabaseSessionManager:
         self._sessionmaker = None
 
     async def init(self, config: Settings) -> None:
-        if config.debug and config.database_use_in_memory:
-            self._engine = create_async_engine(
-                config.database_url,
-                pool_pre_ping=True,
-                echo=False,
-                connect_args={"check_same_thread": False},
-                poolclass=StaticPool,
-            )
-            async with self._engine.begin() as conn:
-                await conn.run_sync(Base.metadata.create_all)
-        else:
-            self._engine = create_async_engine(
-                config.database_url,
-                pool_size=config.database_pool_size,
-                max_overflow=config.database_max_overflow,
-                pool_pre_ping=True,
-                echo=False,
-            )
+        db_args: dict[str, Any] = {
+            "pool_pre_ping": True,
+            "echo": False,
+            "pool_size": config.database_pool_size,
+            "max_overflow": config.database_max_overflow,
+        }
 
+        if config.app_env != "prod":
+            db_args["poolclass"] = StaticPool
+            db_args["connect_args"] = {"check_same_thread": False}
+            db_args.pop("pool_size")
+            db_args.pop("max_overflow")
+
+        self._engine = create_async_engine(config.database_url, **db_args)
         self._sessionmaker = async_sessionmaker(
             bind=self._engine,
             class_=AsyncSession,
             expire_on_commit=False,
         )
 
-        if config.debug and config.database_seed is not None:
-            async with self.session() as session:
-                await config.database_seed(session)
+        if config.app_env != "prod":
+            async with self._engine.connect() as connection:
+                await connection.run_sync(Base.metadata.create_all)
+
+            if config.database_seed_data is not None:
+                async with self.session() as session:
+                    await seed.create_data(session, config.database_seed_data)
 
     async def close(self) -> None:
         if self._engine:
