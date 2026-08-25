@@ -19,4 +19,5 @@ class TransactionResponse(BaseModel):
     summary: str = Field()
     transaction_category_id: int = Field()
     transaction_category_name: str = Field()
+    transaction_source_id: int = Field()
     transaction_source_name: str = Field()
