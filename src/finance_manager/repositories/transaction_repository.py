@@ -8,12 +8,17 @@ from finance_manager.models.transaction_category import TransactionCategory
 from finance_manager.models.transaction_source import TransactionSource
 from finance_manager.repositories.base import BaseRepository
 from finance_manager.schemas.transaction import (
+    SearchTransactions,
     TransactionResponse,
     WriteTransaction,
 )
 
 
-class TransactionRepository(BaseRepository[Transaction, TransactionResponse, WriteTransaction]):
+class TransactionRepository(
+    BaseRepository[
+        Transaction, TransactionResponse, WriteTransaction, WriteTransaction, SearchTransactions
+    ]
+):
     def __init__(self, session: AsyncSession) -> None:
         super().__init__(Transaction, TransactionResponse, session)
 
@@ -48,6 +53,30 @@ class TransactionRepository(BaseRepository[Transaction, TransactionResponse, Wri
         model.summary = request.summary
         model.transaction_source_id = request.transaction_source_id
         model.transaction_category_id = request.transaction_category_id
+
+    def _filter_search(
+        self, statement: Select[tuple[Any, ...]], request: SearchTransactions
+    ) -> Select[tuple[Any, ...]]:
+        statement = super()._filter_search(statement, request)
+        if request.min_amount is not None:
+            statement = statement.where(Transaction.amount >= request.min_amount)
+        if request.max_amount is not None:
+            statement = statement.where(Transaction.amount <= request.max_amount)
+        if request.min_date is not None:
+            statement = statement.where(Transaction.timestamp >= request.min_date)
+        if request.max_date is not None:
+            statement = statement.where(Transaction.timestamp <= request.max_date)
+        if request.transaction_source_id is not None:
+            statement = statement.where(
+                Transaction.transaction_source_id == request.transaction_source_id
+            )
+        if request.transaction_category_id is not None:
+            statement = statement.where(
+                Transaction.transaction_category_id == request.transaction_category_id
+            )
+        if request.owner_id is not None:
+            statement = statement.where(TransactionSource.owner_id == request.owner_id)
+        return statement
 
 
 def get_transaction_repository(

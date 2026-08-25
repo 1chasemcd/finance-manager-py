@@ -1,3 +1,5 @@
+from typing import Protocol
+
 from pydantic import BaseModel, ConfigDict, Field
 
 
@@ -12,6 +14,11 @@ class ApiBase(BaseModel):
         validate_by_name=True,
         validate_by_alias=True,
     )
+
+
+class HasPage(Protocol):
+    skip: int
+    take: int
 
 
 class PagedRequest(ApiBase):

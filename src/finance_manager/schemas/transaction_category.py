@@ -5,10 +5,10 @@ from finance_manager.schemas import ApiBase
 
 class WriteTransactionCategory(ApiBase):
     name: str = Field(max_length=100)
-    description: str | None = Field(max_length=500)
+    description: str | None = Field(default=None, max_length=500)
 
 
 class TransactionCategoryResponse(ApiBase):
-    id: int = Field()
-    name: str = Field()
-    description: str | None = Field()
+    id: int
+    name: str
+    description: str | None

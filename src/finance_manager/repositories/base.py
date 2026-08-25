@@ -7,7 +7,9 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from finance_manager.core import NoContent, NotFound, Ok, Result
 from finance_manager.models import DbBase
-from finance_manager.schemas.common import PagedRequest
+from finance_manager.schemas.common import HasPage, PagedRequest
+
+SelectStatement = Select[tuple[Any, ...]]
 
 
 class BaseRepository[
@@ -15,6 +17,7 @@ class BaseRepository[
     ReadType: BaseModel,
     CreateType: BaseModel,
     UpdateType = CreateType,
+    SearchType: HasPage = PagedRequest,
 ](ABC):
     def __init__(
         self,
@@ -27,7 +30,7 @@ class BaseRepository[
         self.session = session
 
     @abstractmethod
-    def _select_statement(self) -> Select[tuple[Any, ...]]:
+    def _select_statement(self) -> SelectStatement:
         pass
 
     @abstractmethod
@@ -37,6 +40,9 @@ class BaseRepository[
     @abstractmethod
     def _map_update(self, request: UpdateType, model: ModelType) -> None:
         pass
+
+    def _filter_search(self, statement: SelectStatement, request: SearchType) -> SelectStatement:
+        return statement.order_by(self.model.id).offset(request.skip).limit(request.take)
 
     async def lookup(self, id: int) -> Result[ReadType]:
         stmt = self._select_statement()
@@ -50,9 +56,9 @@ class BaseRepository[
         read = self.readType.model_validate(res)
         return Ok(read)
 
-    async def search(self, request: PagedRequest) -> Result[list[ReadType]]:
+    async def search(self, request: SearchType) -> Result[list[ReadType]]:
         stmt = self._select_statement()
-        res = (await self.session.execute(stmt.offset(request.skip).limit(request.take))).mappings()
+        res = (await self.session.execute(self._filter_search(stmt, request))).mappings()
         return Ok([self.readType.model_validate(m) for m in res])
 
     async def update(self, id: int, request: UpdateType) -> Result:

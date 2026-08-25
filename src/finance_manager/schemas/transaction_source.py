@@ -9,7 +9,7 @@ class WriteTransactionSource(ApiBase):
 
 
 class TransactionSourceResponse(ApiBase):
-    id: int = Field()
-    name: str = Field()
-    owner_id: int = Field()
-    owner_name: str = Field()
+    id: int
+    name: str
+    owner_id: int
+    owner_name: str

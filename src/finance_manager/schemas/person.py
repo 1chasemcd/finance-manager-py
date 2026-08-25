@@ -9,6 +9,6 @@ class WritePerson(ApiBase):
 
 
 class PersonResponse(ApiBase):
-    id: int = Field()
-    first_name: str = Field()
-    last_name: str = Field()
+    id: int
+    first_name: str
+    last_name: str
