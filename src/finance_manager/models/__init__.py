@@ -1,1 +1,1 @@
-from .base import Base as Base
+from .base import DbBase as DbBase

@@ -1,10 +1,12 @@
 from datetime import datetime
 from decimal import Decimal
 
-from pydantic import BaseModel, Field
+from pydantic import Field
+
+from finance_manager.schemas import ApiBase
 
 
-class WriteTransaction(BaseModel):
+class WriteTransaction(ApiBase):
     timestamp: datetime = Field()
     amount: Decimal = Field(max_digits=12, decimal_places=2)
     summary: str = Field(max_length=500)
@@ -12,7 +14,7 @@ class WriteTransaction(BaseModel):
     transaction_source_id: int = Field()
 
 
-class TransactionResponse(BaseModel):
+class TransactionResponse(ApiBase):
     id: int = Field()
     timestamp: datetime = Field()
     amount: Decimal = Field()

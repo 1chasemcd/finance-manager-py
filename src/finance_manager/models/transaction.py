@@ -5,14 +5,14 @@ from typing import TYPE_CHECKING
 from sqlalchemy import DateTime, ForeignKey, Numeric, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from finance_manager.models.base import Base
+from finance_manager.models.base import DbBase
 
 if TYPE_CHECKING:
     from .transaction_category import TransactionCategory
     from .transaction_source import TransactionSource
 
 
-class Transaction(Base):
+class Transaction(DbBase):
     __tablename__ = "transactions"
     timestamp: Mapped[datetime] = mapped_column(DateTime)
     amount: Mapped[Decimal] = mapped_column(Numeric(12, 2))

@@ -3,13 +3,13 @@ from typing import TYPE_CHECKING
 from sqlalchemy import ForeignKey, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from finance_manager.models.base import Base
+from finance_manager.models.base import DbBase
 
 if TYPE_CHECKING:
     from .transaction_category import TransactionCategory
 
 
-class CategoryPattern(Base):
+class CategoryPattern(DbBase):
     __tablename__ = "category_patterns"
     pattern: Mapped[str] = mapped_column(String(100), unique=True)
     transaction_category_id: Mapped[int | None] = mapped_column(

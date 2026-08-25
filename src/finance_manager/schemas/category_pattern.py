@@ -1,12 +1,14 @@
-from pydantic import BaseModel, Field
+from pydantic import Field
+
+from finance_manager.schemas import ApiBase
 
 
-class WriteCategoryPattern(BaseModel):
+class WriteCategoryPattern(ApiBase):
     pattern: str = Field(max_length=100)
     transaction_category_id: int = Field(ge=0)
 
 
-class CategoryPatternResponse(BaseModel):
+class CategoryPatternResponse(ApiBase):
     id: int = Field()
     pattern: str = Field()
     transaction_category_id: int | None = Field()

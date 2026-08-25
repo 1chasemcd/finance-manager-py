@@ -2,7 +2,8 @@ from typing import Any, TypeVar
 
 from fastapi import status
 from fastapi.responses import JSONResponse
-from pydantic import BaseModel
+
+from finance_manager.schemas.common import ApiBase
 
 from .errors import Conflict, Invalid, NotFound
 from .result import Err, Result
@@ -10,7 +11,7 @@ from .result import Err, Result
 T = TypeVar("T")
 
 
-class ProblemDetails(BaseModel):
+class ProblemDetails(ApiBase):
     title: str
     status: int
     detail: str

@@ -6,11 +6,11 @@ from sqlalchemy import Select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from finance_manager.core import NoContent, NotFound, Ok, Result
-from finance_manager.models import Base
+from finance_manager.models import DbBase
 
 
 class BaseRepository[
-    ModelType: Base,
+    ModelType: DbBase,
     ReadType: BaseModel,
     CreateType: BaseModel,
     UpdateType = CreateType,

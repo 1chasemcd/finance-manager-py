@@ -1,12 +1,14 @@
-from pydantic import BaseModel, Field
+from pydantic import Field
+
+from finance_manager.schemas import ApiBase
 
 
-class WritePerson(BaseModel):
+class WritePerson(ApiBase):
     first_name: str = Field(max_length=100)
     last_name: str = Field(max_length=100)
 
 
-class PersonResponse(BaseModel):
+class PersonResponse(ApiBase):
     id: int = Field()
     first_name: str = Field()
     last_name: str = Field()

@@ -7,7 +7,7 @@ from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_asyn
 
 from finance_manager.config import Settings
 from finance_manager.db import seed
-from finance_manager.models import Base
+from finance_manager.models import DbBase
 
 
 class DatabaseSessionManager:
@@ -38,7 +38,7 @@ class DatabaseSessionManager:
 
         if config.app_env != "prod":
             async with self._engine.connect() as connection:
-                await connection.run_sync(Base.metadata.create_all)
+                await connection.run_sync(DbBase.metadata.create_all)
 
             if config.database_seed_data is not None:
                 async with self.session() as session:

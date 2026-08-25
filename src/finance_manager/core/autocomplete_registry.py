@@ -4,7 +4,7 @@ from dataclasses import dataclass
 
 from sqlalchemy import ColumnElement, SQLColumnExpression, literal
 
-from finance_manager.models import Base
+from finance_manager.models import DbBase
 
 from .errors import NotFound
 from .result import Ok, Result
@@ -19,7 +19,7 @@ class _AutocompleteRegistryEntry:
 _autocomplete_registry: dict[str, _AutocompleteRegistryEntry] = {}
 
 
-def _build_expression[T: Base](cls: type[T], template: str) -> ColumnElement[str]:
+def _build_expression[T: DbBase](cls: type[T], template: str) -> ColumnElement[str]:
     parts = re.split(r"(\{[^}]+\})", template)
 
     expression: ColumnElement[str] | None = None
@@ -39,7 +39,7 @@ def _build_expression[T: Base](cls: type[T], template: str) -> ColumnElement[str
     return expression
 
 
-def autocomplete[T: Base](
+def autocomplete[T: DbBase](
     template: str,
 ) -> Callable[[type[T]], type[T]]:
     def decorator(cls: type[T]) -> type[T]:
