@@ -1,8 +1,11 @@
-from fastapi import APIRouter, status
+from typing import Annotated
+
+from fastapi import APIRouter, Query, status
 from fastapi.responses import JSONResponse
 
 from finance_manager.core.result_handler import handle_result, handled_error_responses
-from finance_manager.dependencies.transaction_sources import TransactionsourceRepositoryDep
+from finance_manager.dependencies.transaction_sources import TransactionSourceRepositoryDep
+from finance_manager.schemas.common import PagedRequest
 from finance_manager.schemas.transaction_source import (
     TransactionSourceResponse,
     WriteTransactionSource,
@@ -18,9 +21,22 @@ router = APIRouter(prefix="/transactionsources")
 )
 async def lookup_transaction_source(
     id: int,
-    repo: TransactionsourceRepositoryDep,
+    repo: TransactionSourceRepositoryDep,
 ) -> TransactionSourceResponse | JSONResponse:
     result = await repo.lookup(id)
+    return handle_result(result)
+
+
+@router.get(
+    "/",
+    response_model=list[TransactionSourceResponse],
+    responses=handled_error_responses(),
+)
+async def search_transaction_sources(
+    request: Annotated[PagedRequest, Query()],
+    repo: TransactionSourceRepositoryDep,
+) -> list[TransactionSourceResponse] | JSONResponse:
+    result = await repo.search(request)
     return handle_result(result)
 
 
@@ -32,7 +48,7 @@ async def lookup_transaction_source(
 )
 async def create_transaction_source(
     request: WriteTransactionSource,
-    repo: TransactionsourceRepositoryDep,
+    repo: TransactionSourceRepositoryDep,
 ) -> None | JSONResponse:
     result = await repo.create(request)
     return handle_result(result)
@@ -47,7 +63,7 @@ async def create_transaction_source(
 async def update_transaction_source(
     id: int,
     request: WriteTransactionSource,
-    repo: TransactionsourceRepositoryDep,
+    repo: TransactionSourceRepositoryDep,
 ) -> None | JSONResponse:
     result = await repo.update(id, request)
     return handle_result(result)
@@ -61,7 +77,7 @@ async def update_transaction_source(
 )
 async def delete_transaction_source(
     id: int,
-    repo: TransactionsourceRepositoryDep,
+    repo: TransactionSourceRepositoryDep,
 ) -> None | JSONResponse:
     result = await repo.delete(id)
     return handle_result(result)

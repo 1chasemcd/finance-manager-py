@@ -1,8 +1,11 @@
-from fastapi import APIRouter, status
+from typing import Annotated
+
+from fastapi import APIRouter, Query, status
 from fastapi.responses import JSONResponse
 
 from finance_manager.core.result_handler import handle_result, handled_error_responses
 from finance_manager.dependencies.people import PersonRepositoryDep
+from finance_manager.schemas.common import PagedRequest
 from finance_manager.schemas.person import PersonResponse, WritePerson
 
 router = APIRouter(prefix="/people")
@@ -18,6 +21,19 @@ async def lookup_person(
     repo: PersonRepositoryDep,
 ) -> PersonResponse | JSONResponse:
     result = await repo.lookup(id)
+    return handle_result(result)
+
+
+@router.get(
+    "/",
+    response_model=list[PersonResponse],
+    responses=handled_error_responses(),
+)
+async def search_people(
+    request: Annotated[PagedRequest, Query()],
+    repo: PersonRepositoryDep,
+) -> list[PersonResponse] | JSONResponse:
+    result = await repo.search(request)
     return handle_result(result)
 
 

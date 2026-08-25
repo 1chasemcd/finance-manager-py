@@ -1,8 +1,11 @@
-from fastapi import APIRouter, status
+from typing import Annotated
+
+from fastapi import APIRouter, Query, status
 from fastapi.responses import JSONResponse
 
 from finance_manager.core.result_handler import handle_result, handled_error_responses
 from finance_manager.dependencies.transaction_categories import TransactionCategoryRepositoryDep
+from finance_manager.schemas.common import PagedRequest
 from finance_manager.schemas.transaction_category import (
     TransactionCategoryResponse,
     WriteTransactionCategory,
@@ -21,6 +24,19 @@ async def lookup_transaction_category(
     repo: TransactionCategoryRepositoryDep,
 ) -> TransactionCategoryResponse | JSONResponse:
     result = await repo.lookup(id)
+    return handle_result(result)
+
+
+@router.get(
+    "/",
+    response_model=list[TransactionCategoryResponse],
+    responses=handled_error_responses(),
+)
+async def search_transaction_categories(
+    request: Annotated[PagedRequest, Query()],
+    repo: TransactionCategoryRepositoryDep,
+) -> list[TransactionCategoryResponse] | JSONResponse:
+    result = await repo.search(request)
     return handle_result(result)
 
 

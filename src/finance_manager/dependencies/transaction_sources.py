@@ -12,7 +12,7 @@ def get_transaction_source_repository(
     return TransactionSourceRepository(session)
 
 
-TransactionsourceRepositoryDep = Annotated[
+TransactionSourceRepositoryDep = Annotated[
     TransactionSourceRepository,
     Depends(get_transaction_source_repository),
 ]

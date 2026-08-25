@@ -7,6 +7,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from finance_manager.core import NoContent, NotFound, Ok, Result
 from finance_manager.models import DbBase
+from finance_manager.schemas.common import PagedRequest
 
 
 class BaseRepository[
@@ -49,9 +50,9 @@ class BaseRepository[
         read = self.readType.model_validate(res)
         return Ok(read)
 
-    async def search(self, skip: int, take: int) -> Result[list[ReadType]]:
+    async def search(self, request: PagedRequest) -> Result[list[ReadType]]:
         stmt = self._select_statement()
-        res = (await self.session.execute(stmt.offset(skip).limit(take))).mappings()
+        res = (await self.session.execute(stmt.offset(request.skip).limit(request.take))).mappings()
         return Ok([self.readType.model_validate(m) for m in res])
 
     async def update(self, id: int, request: UpdateType) -> Result:
