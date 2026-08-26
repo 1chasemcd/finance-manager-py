@@ -1,4 +1,8 @@
-import type { HttpValidationError, ProblemDetails } from "@/lib/generated";
+import type {
+  HttpValidationError,
+  ProblemDetails,
+  ValidationError,
+} from "@/lib/generated";
 import { App, type FormInstance } from "antd";
 import { useCallback } from "react";
 
@@ -31,17 +35,12 @@ function handleValidationFormErrors(
   problem: HttpValidationError,
 ) {
   if (!problem.detail) return;
-  form.setFields(
-    problem.detail.map((err) => ({
-      name: "",
-      errors: [err.msg],
-    })),
-  );
+  form.setFields(groupValidations(problem.detail));
 }
 
 function joinFieldValidationErrors(problem: HttpValidationError) {
   return (problem.detail ?? [])
-    .flatMap((err) => `${err.loc}: ${err.msg}`)
+    .flatMap((err) => `${createPath(err.loc)}: ${err.msg}`)
     .join("\n");
 }
 
@@ -59,4 +58,20 @@ function isProblemDetails(error: unknown): error is ProblemDetails {
     error !== null &&
     (Object.hasOwn(error, "title") || Object.hasOwn(error, "detail"))
   );
+}
+
+function groupValidations(details: ValidationError[]) {
+  const grouped = details.reduce<Record<string, string[]>>((acc, error) => {
+    (acc[createPath(error.loc)] ??= []).push(error.msg);
+    return acc;
+  }, {});
+
+  return Object.entries(grouped).map(([name, errors]) => ({
+    name,
+    errors,
+  }));
+}
+
+function createPath(loc: (string | number)[]) {
+  return loc.slice(1).join(".");
 }

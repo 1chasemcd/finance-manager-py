@@ -42,7 +42,7 @@ class BaseRepository[
 
     def _map_write(self, request: TUpdate | TCreate, orm_model: TOrm) -> None:
         values = request.model_dump()
-        for field_name, value in values:
+        for field_name, value in values.items():
             setattr(orm_model, field_name, value)
 
     def _filter_search(self, statement: SelectStatement, request: TSearch) -> SelectStatement:
