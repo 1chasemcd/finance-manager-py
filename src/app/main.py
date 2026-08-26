@@ -4,6 +4,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from app.api.route_processor import get_route_processor
 from app.api.routes import (
     autocomplete,
     category_patterns,
@@ -30,6 +31,7 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None]:
 
 def create_app() -> FastAPI:
     settings = get_settings()
+    route_processor = get_route_processor()
 
     app = FastAPI(
         title=settings.app_name,
@@ -54,6 +56,7 @@ def create_app() -> FastAPI:
     app.include_router(transaction_categories.router)
     app.include_router(category_patterns.router)
     app.include_router(autocomplete.router)
+    route_processor.process_routes(app.routes)
 
     return app
 

@@ -2,15 +2,12 @@ from typing import Protocol
 
 from pydantic import BaseModel, ConfigDict, Field
 
-
-def to_camel(s: str) -> str:
-    parts = s.split("_")
-    return parts[0] + "".join(word.capitalize() for word in parts[1:])
+from app.core.string_utils import snake_to_camel
 
 
 class SchemaBase(BaseModel):
     model_config = ConfigDict(
-        alias_generator=to_camel,
+        alias_generator=snake_to_camel,
         validate_by_name=True,
         validate_by_alias=True,
     )
