@@ -5,9 +5,6 @@ from app.core.string_utils import snake_to_camel
 
 
 class RouteProcessor:
-    def __init__(self) -> None:
-        self.route_ids = set[str]()
-
     def process_routes(self, routes: list[routing.BaseRoute]) -> None:
         self._set_operation_ids(routes)
 
@@ -15,8 +12,6 @@ class RouteProcessor:
         for route in routes:
             if isinstance(route, APIRoute):
                 id = snake_to_camel(route.endpoint.__name__)
-                if id in self.route_ids:
-                    raise ValueError(f"Duplicate openapi operation_id {id}")
                 route.operation_id = id
 
             elif hasattr(route, "original_router"):
