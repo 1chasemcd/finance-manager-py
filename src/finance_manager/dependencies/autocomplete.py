@@ -2,9 +2,12 @@ from typing import Annotated
 
 from fastapi import Depends
 
+from finance_manager.application.contract.autocomplete_repository import AutocompleteRepository
 from finance_manager.dependencies import SessionDep
 from finance_manager.infrastructure.autocomplete_registry import AutocompleteRegistry
-from finance_manager.infrastructure.repositories import AutocompleteRepository
+from finance_manager.infrastructure.repositories.autocomplete_repository import (
+    AutocompleteRepositoryImpl,
+)
 
 
 def get_autocomplete_registry() -> AutocompleteRegistry:
@@ -21,7 +24,7 @@ def get_autocomplete_repository(
     session: SessionDep,
     registry: AutocompleteRegistryDep,
 ) -> AutocompleteRepository:
-    return AutocompleteRepository(session, registry)
+    return AutocompleteRepositoryImpl(session, registry)
 
 
 AutocompleteRepositoryDep = Annotated[

@@ -12,7 +12,7 @@ from finance_manager.schemas.category_pattern import (
 )
 
 
-class CategoryPatternRepository(
+class CategoryPatternRepositoryImpl(
     BaseRepository[CategoryPatternRow, CategoryPattern, WriteCategoryPattern]
 ):
     def __init__(self, session: AsyncSession) -> None:
@@ -25,9 +25,3 @@ class CategoryPatternRepository(
             CategoryPatternRow.transaction_category_id,
             TransactionCategoryRow.name.label("transaction_category_name"),
         ).outerjoin(CategoryPatternRow.transaction_category)
-
-
-def get_category_pattern_repository(
-    session: AsyncSession,
-) -> CategoryPatternRepository:
-    return CategoryPatternRepository(session)

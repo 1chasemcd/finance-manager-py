@@ -5,7 +5,7 @@ from finance_manager.infrastructure.repositories.base_repository import BaseRepo
 from finance_manager.schemas.person import Person, WritePerson
 
 
-class PersonRepository(BaseRepository[PersonRow, Person, WritePerson]):
+class PersonRepositoryImpl(BaseRepository[PersonRow, Person, WritePerson]):
     def __init__(self, session: AsyncSession) -> None:
         super().__init__(PersonRow, Person, session)
 

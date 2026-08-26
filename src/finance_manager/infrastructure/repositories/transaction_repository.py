@@ -14,7 +14,7 @@ from finance_manager.schemas.transaction import (
 )
 
 
-class TransactionRepository(
+class TransactionRepositoryImpl(
     BaseRepository[
         TransactionRow, Transaction, WriteTransaction, WriteTransaction, SearchTransactions
     ]

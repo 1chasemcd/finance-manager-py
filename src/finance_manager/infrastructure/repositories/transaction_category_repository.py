@@ -8,7 +8,7 @@ from finance_manager.schemas.transaction_category import (
 )
 
 
-class TransactionCategoryRepository(
+class TransactionCategoryRepositoryImpl(
     BaseRepository[TransactionCategoryRow, TransactionCategory, WriteTransactionCategory]
 ):
     def __init__(self, session: AsyncSession) -> None:
@@ -18,4 +18,4 @@ class TransactionCategoryRepository(
 def get_transaction_category_repository(
     session: AsyncSession,
 ) -> TransactionCategoryRepository:
-    return TransactionCategoryRepository(session)
+    return TransactionCategoryRepositoryImpl(session)

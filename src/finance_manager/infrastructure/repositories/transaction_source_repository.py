@@ -12,7 +12,7 @@ from finance_manager.schemas.transaction_source import (
 )
 
 
-class TransactionSourceRepository(
+class TransactionSourceRepositoryImpl(
     BaseRepository[TransactionSourceRow, TransactionSource, WriteTransactionSource]
 ):
     def __init__(self, session: AsyncSession) -> None:

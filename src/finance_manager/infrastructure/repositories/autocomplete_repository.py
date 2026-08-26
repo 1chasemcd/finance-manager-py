@@ -6,7 +6,7 @@ from finance_manager.infrastructure.autocomplete_registry import AutocompleteReg
 from finance_manager.schemas.common import AutocompleteRequest
 
 
-class AutocompleteRepository:
+class AutocompleteRepositoryImpl:
     def __init__(self, session: AsyncSession, registry: AutocompleteRegistry) -> None:
         self._session = session
         self._registry = registry
