@@ -1665,8 +1665,8 @@
     },
     "/autocomplete/{name}": {
       "get": {
-        "summary": "Search",
-        "operationId": "search",
+        "summary": "Autocomplete Search",
+        "operationId": "autocompleteSearch",
         "parameters": [
           {
             "name": "name",
@@ -1721,7 +1721,7 @@
                   "additionalProperties": {
                     "type": "string"
                   },
-                  "title": "Response Search"
+                  "title": "Response Autocompletesearch"
                 }
               }
             }
@@ -1771,8 +1771,8 @@
     },
     "/autocomplete/{name}/{id}": {
       "get": {
-        "summary": "Single",
-        "operationId": "single",
+        "summary": "Autocomplete Single",
+        "operationId": "autocompleteSingle",
         "parameters": [
           {
             "name": "name",
@@ -1800,7 +1800,7 @@
               "application/json": {
                 "schema": {
                   "type": "string",
-                  "title": "Response Single"
+                  "title": "Response Autocompletesingle"
                 }
               }
             }

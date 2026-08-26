@@ -7,11 +7,11 @@ import {
   transactionCategoryAutocomplete,
   transactionSourceAutocomplete,
 } from "@/utils/autocompleteRequests";
-import type { SearchTransactionData } from "@/lib/generated";
+import type { SearchTransactionsData } from "@/lib/generated";
 import { Flex, Form, type FormInstance } from "antd";
 import InputCurrency from "@/components/InputCurrency";
 
-type TransactionQuery = NonNullable<SearchTransactionData["query"]>;
+type TransactionQuery = NonNullable<SearchTransactionsData["query"]>;
 
 type TransactionsFilterPageProps = {
   form: FormInstance<TransactionQuery>;
@@ -26,7 +26,7 @@ export default function TransactionsFilter({
         <Flex gap="small">
           <Form.Item<TransactionQuery>
             {...dateConverterProps}
-            name="MinDate"
+            name="minDate"
             noStyle
             style={{ flex: 1 }}
           >
@@ -34,7 +34,7 @@ export default function TransactionsFilter({
           </Form.Item>
           <Form.Item<TransactionQuery>
             {...dateConverterProps}
-            name="MaxDate"
+            name="maxDate"
             noStyle
             style={{ flex: 1 }}
           >
@@ -46,14 +46,14 @@ export default function TransactionsFilter({
       <Form.Item label="Amount Range">
         <Flex gap="small">
           <Form.Item<TransactionQuery>
-            name="MinAmount"
+            name="minAmount"
             noStyle
             style={{ flex: 1 }}
           >
             <InputCurrency placeholder="Low" />
           </Form.Item>
           <Form.Item<TransactionQuery>
-            name="MaxAmount"
+            name="maxAmount"
             noStyle
             style={{ flex: 1 }}
           >
@@ -62,18 +62,18 @@ export default function TransactionsFilter({
         </Flex>
       </Form.Item>
 
-      <Form.Item<TransactionQuery> label="Source" name="TransactionSourceId">
+      <Form.Item<TransactionQuery> label="Source" name="transactionSourceId">
         <AppAutocomplete requestOptions={transactionSourceAutocomplete} />
       </Form.Item>
 
       <Form.Item<TransactionQuery>
         label="Category"
-        name="TransactionCategoryId"
+        name="transactionCategoryId"
       >
         <AppAutocomplete requestOptions={transactionCategoryAutocomplete} />
       </Form.Item>
 
-      <Form.Item<TransactionQuery> label="Owner" name="OwnerId">
+      <Form.Item<TransactionQuery> label="Owner" name="ownerId">
         <AppAutocomplete requestOptions={personAutocomplete} />
       </Form.Item>
     </Form>

@@ -1,6 +1,6 @@
 import EntityCreateForm from "@/components/EntityForm/EntityCreateForm";
 import {
-  searchPersonQueryKey,
+  searchPeopleQueryKey,
   createPersonMutation,
 } from "@/lib/generated/@tanstack/react-query.gen";
 import PersonModifyShared from "./PersonModifyShared";
@@ -10,7 +10,7 @@ export default function PersonCreate() {
     <EntityCreateForm
       title="Add Person"
       createEntityMutation={createPersonMutation}
-      toInvalidate={[searchPersonQueryKey()]}
+      toInvalidate={[searchPeopleQueryKey()]}
     >
       <PersonModifyShared />
     </EntityCreateForm>

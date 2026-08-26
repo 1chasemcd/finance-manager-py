@@ -1,19 +1,19 @@
 import EntityCreateForm from "@/components/EntityForm/EntityCreateForm";
 import {
-  searchCategoryPatternQueryKey,
+  searchCategoryPatternsQueryKey,
   createCategoryPatternMutation,
 } from "@/lib/generated/@tanstack/react-query.gen";
 import CategoryPatternModifyShared from "./CategoryPatternModifyShared";
 import { Form } from "antd";
-import type { WriteCategoryPatternRequest } from "@/lib/generated";
+import type { WriteCategoryPattern } from "@/lib/generated";
 
 export default function CategoryPatternCreate() {
-  const [form] = Form.useForm<WriteCategoryPatternRequest>();
+  const [form] = Form.useForm<WriteCategoryPattern>();
   return (
     <EntityCreateForm
       title="Add Category Pattern"
       createEntityMutation={createCategoryPatternMutation}
-      toInvalidate={[searchCategoryPatternQueryKey()]}
+      toInvalidate={[searchCategoryPatternsQueryKey()]}
       form={form}
     >
       <CategoryPatternModifyShared form={form} />

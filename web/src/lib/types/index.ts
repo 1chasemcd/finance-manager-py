@@ -4,12 +4,12 @@ import type {
 } from "@tanstack/react-query";
 import type { QueryKey } from "../generated/@tanstack/react-query.gen";
 import type {
-  HttpValidationProblemDetails,
   Options,
   ProblemDetails,
+  HttpValidationError,
 } from "../generated";
 
-export type ApiError = ProblemDetails | HttpValidationProblemDetails;
+export type ApiError = ProblemDetails | HttpValidationError;
 
 export type Entity = {
   id: number;
@@ -39,7 +39,7 @@ export type DeleteEntityMutation = (
 ) => UseMutationOptions<void, ApiError, Options<DeleteEntityData>>;
 
 export type UpdateEntityData<TBody> = {
-  body?: TBody;
+  body: TBody;
   path: {
     id: number;
   };
@@ -52,7 +52,7 @@ export type UpdateEntityMutation<TBody> = (
 ) => UseMutationOptions<void, ApiError, Options<UpdateEntityData<TBody>>>;
 
 export type CreateEntityData<TBody> = {
-  body?: TBody;
+  body: TBody;
   path?: never;
   query?: never;
   url: string;
@@ -88,6 +88,6 @@ export type SearchEntityOptions<
 >;
 
 export type SearchResponse<TEntity extends Entity> = {
-  results: TEntity[];
+  result: Array<TEntity>;
   total: number;
 };

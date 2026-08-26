@@ -1,7 +1,7 @@
 import { defineConfig } from "@hey-api/openapi-ts";
 
 export default defineConfig({
-  input: "./FinanceManager.Api.json",
+  input: "../openapi.json",
   output: {
     path: "./src/lib/generated",
   },

@@ -1,5 +1,5 @@
-import type { TransactionResponse } from "@/lib/generated";
-import { searchTransactionOptions } from "@/lib/generated/@tanstack/react-query.gen";
+import type { Transaction } from "@/lib/generated";
+import { searchTransactionsOptions } from "@/lib/generated/@tanstack/react-query.gen";
 import TransactionsFilter from "./TransactionsFilter";
 import { currencyColumn, dateColumn } from "@/utils/columnFormatters";
 import useQueryForTable from "@/hooks/useQueryForTable";
@@ -9,7 +9,7 @@ import type { ColumnsType } from "antd/es/table";
 import { useMemo } from "react";
 
 export default function Transactions() {
-  const columns = useMemo<ColumnsType<TransactionResponse>>(
+  const columns = useMemo<ColumnsType<Transaction>>(
     () => [
       {
         title: "Date",
@@ -44,7 +44,7 @@ export default function Transactions() {
   );
 
   const { query, updateQuery, useQueryResult } = useQueryForTable(
-    searchTransactionOptions,
+    searchTransactionsOptions,
   );
 
   const filterAction = (

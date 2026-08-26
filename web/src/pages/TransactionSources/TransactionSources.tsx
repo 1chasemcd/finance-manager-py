@@ -1,4 +1,4 @@
-import type { TransactionSourceResponse } from "@/lib/generated";
+import type { TransactionSource } from "@/lib/generated";
 import EntityTable from "@/components/EntityTable/EntityTable";
 import useEditActionForTable from "@/hooks/useEditActionForTable";
 import useDeleteActionForTable from "@/hooks/useDeleteActionForTable";
@@ -8,12 +8,12 @@ import type { ColumnsType } from "antd/es/table";
 import { useMemo } from "react";
 import {
   deleteTransactionSourceMutation,
-  searchTransactionSourceOptions,
-  searchTransactionSourceQueryKey,
+  searchTransactionSourcesOptions,
+  searchTransactionSourcesQueryKey,
 } from "@/lib/generated/@tanstack/react-query.gen";
 
 export default function TransactionSources() {
-  const columns = useMemo<ColumnsType<TransactionSourceResponse>>(
+  const columns = useMemo<ColumnsType<TransactionSource>>(
     () => [
       {
         title: "Name",
@@ -30,12 +30,12 @@ export default function TransactionSources() {
   );
 
   const { query, updateQuery, useQueryResult } = useQueryForTable(
-    searchTransactionSourceOptions,
+    searchTransactionSourcesOptions,
   );
   const editAction = useEditActionForTable();
   const deleteAction = useDeleteActionForTable(
     deleteTransactionSourceMutation,
-    [searchTransactionSourceQueryKey()],
+    [searchTransactionSourcesQueryKey()],
   );
 
   return (

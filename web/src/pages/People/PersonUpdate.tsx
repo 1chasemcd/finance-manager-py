@@ -1,11 +1,11 @@
 import {
   lookupPersonOptions,
-  searchPersonQueryKey,
+  searchPeopleQueryKey,
   updatePersonMutation,
 } from "@/lib/generated/@tanstack/react-query.gen";
 import PersonModifyShared from "./PersonModifyShared";
 import EntityUpdateForm from "@/components/EntityForm/EntityUpdateForm";
-import type { WritePersonRequest } from "@/lib/generated";
+import type { WritePerson } from "@/lib/generated";
 
 export default function PersonUpdate() {
   return (
@@ -13,8 +13,8 @@ export default function PersonUpdate() {
       title="Edit Person"
       lookupEntityOptions={lookupPersonOptions}
       updateEntityMutation={updatePersonMutation}
-      dataTransform={(x) => x as WritePersonRequest}
-      toInvalidate={[searchPersonQueryKey()]}
+      dataTransform={(x) => x as WritePerson}
+      toInvalidate={[searchPeopleQueryKey()]}
     >
       <PersonModifyShared />
     </EntityUpdateForm>

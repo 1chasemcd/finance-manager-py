@@ -111,7 +111,7 @@ export default function EntityTable<
           size="small"
           rowKey={(record) => record.id}
           tableLayout="fixed"
-          dataSource={props.useQueryResult.data?.results ?? []}
+          dataSource={props.useQueryResult.data?.result ?? []}
           loading={props.useQueryResult.isPending}
           columns={columns}
           pagination={{

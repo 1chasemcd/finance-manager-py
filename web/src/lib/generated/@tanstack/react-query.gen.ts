@@ -3,13 +3,16 @@
 import { queryOptions, type UseMutationOptions } from '@tanstack/react-query';
 
 import { client } from '../client.gen';
-import { autocompletePerson, autocompletePersonById, autocompleteTransactionCategory, autocompleteTransactionCategoryById, autocompleteTransactionSource, autocompleteTransactionSourceById, createCategoryPattern, createPerson, createTransactionCategory, createTransactionSource, deleteCategoryPattern, deletePerson, deleteTransactionCategory, deleteTransactionSource, lookupCategoryPattern, lookupPerson, lookupTransaction, lookupTransactionCategory, lookupTransactionSource, type Options, searchCategoryPattern, searchPerson, searchTransaction, searchTransactionCategory, searchTransactionSource, updateCategoryPattern, updatePerson, updateTransactionCategory, updateTransactionSource } from '../sdk.gen';
-import type { AutocompletePersonByIdData, AutocompletePersonByIdError, AutocompletePersonByIdResponse, AutocompletePersonData, AutocompletePersonError, AutocompletePersonResponse, AutocompleteTransactionCategoryByIdData, AutocompleteTransactionCategoryByIdError, AutocompleteTransactionCategoryByIdResponse, AutocompleteTransactionCategoryData, AutocompleteTransactionCategoryError, AutocompleteTransactionCategoryResponse, AutocompleteTransactionSourceByIdData, AutocompleteTransactionSourceByIdError, AutocompleteTransactionSourceByIdResponse, AutocompleteTransactionSourceData, AutocompleteTransactionSourceError, AutocompleteTransactionSourceResponse, CreateCategoryPatternData, CreateCategoryPatternError, CreatePersonData, CreatePersonError, CreateTransactionCategoryData, CreateTransactionCategoryError, CreateTransactionSourceData, CreateTransactionSourceError, DeleteCategoryPatternData, DeleteCategoryPatternError, DeleteCategoryPatternResponse, DeletePersonData, DeletePersonError, DeletePersonResponse, DeleteTransactionCategoryData, DeleteTransactionCategoryError, DeleteTransactionCategoryResponse, DeleteTransactionSourceData, DeleteTransactionSourceError, DeleteTransactionSourceResponse, LookupCategoryPatternData, LookupCategoryPatternError, LookupCategoryPatternResponse, LookupPersonData, LookupPersonError, LookupPersonResponse, LookupTransactionCategoryData, LookupTransactionCategoryError, LookupTransactionCategoryResponse, LookupTransactionData, LookupTransactionError, LookupTransactionResponse, LookupTransactionSourceData, LookupTransactionSourceError, LookupTransactionSourceResponse, SearchCategoryPatternData, SearchCategoryPatternError, SearchCategoryPatternResponse, SearchPersonData, SearchPersonError, SearchPersonResponse, SearchTransactionCategoryData, SearchTransactionCategoryError, SearchTransactionCategoryResponse, SearchTransactionData, SearchTransactionError, SearchTransactionResponse, SearchTransactionSourceData, SearchTransactionSourceError, SearchTransactionSourceResponse, UpdateCategoryPatternData, UpdateCategoryPatternError, UpdateCategoryPatternResponse, UpdatePersonData, UpdatePersonError, UpdatePersonResponse, UpdateTransactionCategoryData, UpdateTransactionCategoryError, UpdateTransactionCategoryResponse, UpdateTransactionSourceData, UpdateTransactionSourceError, UpdateTransactionSourceResponse } from '../types.gen';
+import { autocompleteSearch, autocompleteSingle, createCategoryPattern, createPerson, createTransactionCategory, createTransactionSource, deleteCategoryPattern, deletePerson, deleteTransactionCategory, deleteTransactionSource, lookupCategoryPattern, lookupPerson, lookupTransaction, lookupTransactionCategory, lookupTransactionSource, type Options, searchCategoryPatterns, searchPeople, searchTransactionCategories, searchTransactions, searchTransactionSources, updateCategoryPattern, updatePerson, updateTransactionCategory, updateTransactionSource } from '../sdk.gen';
+import type { AutocompleteSearchData, AutocompleteSearchError, AutocompleteSearchResponse, AutocompleteSingleData, AutocompleteSingleError, AutocompleteSingleResponse, CreateCategoryPatternData, CreateCategoryPatternError, CreatePersonData, CreatePersonError, CreateTransactionCategoryData, CreateTransactionCategoryError, CreateTransactionSourceData, CreateTransactionSourceError, DeleteCategoryPatternData, DeleteCategoryPatternError, DeleteCategoryPatternResponse, DeletePersonData, DeletePersonError, DeletePersonResponse, DeleteTransactionCategoryData, DeleteTransactionCategoryError, DeleteTransactionCategoryResponse, DeleteTransactionSourceData, DeleteTransactionSourceError, DeleteTransactionSourceResponse, LookupCategoryPatternData, LookupCategoryPatternError, LookupCategoryPatternResponse, LookupPersonData, LookupPersonError, LookupPersonResponse, LookupTransactionCategoryData, LookupTransactionCategoryError, LookupTransactionCategoryResponse, LookupTransactionData, LookupTransactionError, LookupTransactionResponse, LookupTransactionSourceData, LookupTransactionSourceError, LookupTransactionSourceResponse, SearchCategoryPatternsData, SearchCategoryPatternsError, SearchCategoryPatternsResponse, SearchPeopleData, SearchPeopleError, SearchPeopleResponse, SearchTransactionCategoriesData, SearchTransactionCategoriesError, SearchTransactionCategoriesResponse, SearchTransactionsData, SearchTransactionsError, SearchTransactionSourcesData, SearchTransactionSourcesError, SearchTransactionSourcesResponse, SearchTransactionsResponse, UpdateCategoryPatternData, UpdateCategoryPatternError, UpdateCategoryPatternResponse, UpdatePersonData, UpdatePersonError, UpdatePersonResponse, UpdateTransactionCategoryData, UpdateTransactionCategoryError, UpdateTransactionCategoryResponse, UpdateTransactionSourceData, UpdateTransactionSourceError, UpdateTransactionSourceResponse } from '../types.gen';
 
-export const deleteTransactionCategoryMutation = (options?: Partial<Options<DeleteTransactionCategoryData>>): UseMutationOptions<DeleteTransactionCategoryResponse, DeleteTransactionCategoryError, Options<DeleteTransactionCategoryData>> => {
-    const mutationOptions: UseMutationOptions<DeleteTransactionCategoryResponse, DeleteTransactionCategoryError, Options<DeleteTransactionCategoryData>> = {
+/**
+ * Delete Person
+ */
+export const deletePersonMutation = (options?: Partial<Options<DeletePersonData>>): UseMutationOptions<DeletePersonResponse, DeletePersonError, Options<DeletePersonData>> => {
+    const mutationOptions: UseMutationOptions<DeletePersonResponse, DeletePersonError, Options<DeletePersonData>> = {
         mutationFn: async (fnOptions) => {
-            const { data } = await deleteTransactionCategory({
+            const { data } = await deletePerson({
                 ...options,
                 ...fnOptions,
                 throwOnError: true
@@ -53,11 +56,14 @@ const createQueryKey = <TOptions extends Options>(id: string, options?: TOptions
     return [params];
 };
 
-export const lookupTransactionCategoryQueryKey = (options: Options<LookupTransactionCategoryData>) => createQueryKey('lookupTransactionCategory', options);
+export const lookupPersonQueryKey = (options: Options<LookupPersonData>) => createQueryKey('lookupPerson', options);
 
-export const lookupTransactionCategoryOptions = (options: Options<LookupTransactionCategoryData>) => queryOptions<LookupTransactionCategoryResponse, LookupTransactionCategoryError, LookupTransactionCategoryResponse, ReturnType<typeof lookupTransactionCategoryQueryKey>>({
+/**
+ * Lookup Person
+ */
+export const lookupPersonOptions = (options: Options<LookupPersonData>) => queryOptions<LookupPersonResponse, LookupPersonError, LookupPersonResponse, ReturnType<typeof lookupPersonQueryKey>>({
     queryFn: async ({ queryKey, signal }) => {
-        const { data } = await lookupTransactionCategory({
+        const { data } = await lookupPerson({
             ...options,
             ...queryKey[0],
             signal,
@@ -65,13 +71,16 @@ export const lookupTransactionCategoryOptions = (options: Options<LookupTransact
         });
         return data;
     },
-    queryKey: lookupTransactionCategoryQueryKey(options)
+    queryKey: lookupPersonQueryKey(options)
 });
 
-export const updateTransactionCategoryMutation = (options?: Partial<Options<UpdateTransactionCategoryData>>): UseMutationOptions<UpdateTransactionCategoryResponse, UpdateTransactionCategoryError, Options<UpdateTransactionCategoryData>> => {
-    const mutationOptions: UseMutationOptions<UpdateTransactionCategoryResponse, UpdateTransactionCategoryError, Options<UpdateTransactionCategoryData>> = {
+/**
+ * Update Person
+ */
+export const updatePersonMutation = (options?: Partial<Options<UpdatePersonData>>): UseMutationOptions<UpdatePersonResponse, UpdatePersonError, Options<UpdatePersonData>> => {
+    const mutationOptions: UseMutationOptions<UpdatePersonResponse, UpdatePersonError, Options<UpdatePersonData>> = {
         mutationFn: async (fnOptions) => {
-            const { data } = await updateTransactionCategory({
+            const { data } = await updatePerson({
                 ...options,
                 ...fnOptions,
                 throwOnError: true
@@ -82,11 +91,14 @@ export const updateTransactionCategoryMutation = (options?: Partial<Options<Upda
     return mutationOptions;
 };
 
-export const searchTransactionCategoryQueryKey = (options?: Options<SearchTransactionCategoryData>) => createQueryKey('searchTransactionCategory', options);
+export const searchPeopleQueryKey = (options?: Options<SearchPeopleData>) => createQueryKey('searchPeople', options);
 
-export const searchTransactionCategoryOptions = (options?: Options<SearchTransactionCategoryData>) => queryOptions<SearchTransactionCategoryResponse, SearchTransactionCategoryError, SearchTransactionCategoryResponse, ReturnType<typeof searchTransactionCategoryQueryKey>>({
+/**
+ * Search People
+ */
+export const searchPeopleOptions = (options?: Options<SearchPeopleData>) => queryOptions<SearchPeopleResponse, SearchPeopleError, SearchPeopleResponse, ReturnType<typeof searchPeopleQueryKey>>({
     queryFn: async ({ queryKey, signal }) => {
-        const { data } = await searchTransactionCategory({
+        const { data } = await searchPeople({
             ...options,
             ...queryKey[0],
             signal,
@@ -94,13 +106,16 @@ export const searchTransactionCategoryOptions = (options?: Options<SearchTransac
         });
         return data;
     },
-    queryKey: searchTransactionCategoryQueryKey(options)
+    queryKey: searchPeopleQueryKey(options)
 });
 
-export const createTransactionCategoryMutation = (options?: Partial<Options<CreateTransactionCategoryData>>): UseMutationOptions<unknown, CreateTransactionCategoryError, Options<CreateTransactionCategoryData>> => {
-    const mutationOptions: UseMutationOptions<unknown, CreateTransactionCategoryError, Options<CreateTransactionCategoryData>> = {
+/**
+ * Create Person
+ */
+export const createPersonMutation = (options?: Partial<Options<CreatePersonData>>): UseMutationOptions<unknown, CreatePersonError, Options<CreatePersonData>> => {
+    const mutationOptions: UseMutationOptions<unknown, CreatePersonError, Options<CreatePersonData>> = {
         mutationFn: async (fnOptions) => {
-            const { data } = await createTransactionCategory({
+            const { data } = await createPerson({
                 ...options,
                 ...fnOptions,
                 throwOnError: true
@@ -113,6 +128,9 @@ export const createTransactionCategoryMutation = (options?: Partial<Options<Crea
 
 export const lookupTransactionQueryKey = (options: Options<LookupTransactionData>) => createQueryKey('lookupTransaction', options);
 
+/**
+ * Lookup Transaction
+ */
 export const lookupTransactionOptions = (options: Options<LookupTransactionData>) => queryOptions<LookupTransactionResponse, LookupTransactionError, LookupTransactionResponse, ReturnType<typeof lookupTransactionQueryKey>>({
     queryFn: async ({ queryKey, signal }) => {
         const { data } = await lookupTransaction({
@@ -126,11 +144,14 @@ export const lookupTransactionOptions = (options: Options<LookupTransactionData>
     queryKey: lookupTransactionQueryKey(options)
 });
 
-export const searchTransactionQueryKey = (options?: Options<SearchTransactionData>) => createQueryKey('searchTransaction', options);
+export const searchTransactionsQueryKey = (options?: Options<SearchTransactionsData>) => createQueryKey('searchTransactions', options);
 
-export const searchTransactionOptions = (options?: Options<SearchTransactionData>) => queryOptions<SearchTransactionResponse, SearchTransactionError, SearchTransactionResponse, ReturnType<typeof searchTransactionQueryKey>>({
+/**
+ * Search Transactions
+ */
+export const searchTransactionsOptions = (options?: Options<SearchTransactionsData>) => queryOptions<SearchTransactionsResponse, SearchTransactionsError, SearchTransactionsResponse, ReturnType<typeof searchTransactionsQueryKey>>({
     queryFn: async ({ queryKey, signal }) => {
-        const { data } = await searchTransaction({
+        const { data } = await searchTransactions({
             ...options,
             ...queryKey[0],
             signal,
@@ -138,9 +159,12 @@ export const searchTransactionOptions = (options?: Options<SearchTransactionData
         });
         return data;
     },
-    queryKey: searchTransactionQueryKey(options)
+    queryKey: searchTransactionsQueryKey(options)
 });
 
+/**
+ * Delete Transaction Source
+ */
 export const deleteTransactionSourceMutation = (options?: Partial<Options<DeleteTransactionSourceData>>): UseMutationOptions<DeleteTransactionSourceResponse, DeleteTransactionSourceError, Options<DeleteTransactionSourceData>> => {
     const mutationOptions: UseMutationOptions<DeleteTransactionSourceResponse, DeleteTransactionSourceError, Options<DeleteTransactionSourceData>> = {
         mutationFn: async (fnOptions) => {
@@ -157,6 +181,9 @@ export const deleteTransactionSourceMutation = (options?: Partial<Options<Delete
 
 export const lookupTransactionSourceQueryKey = (options: Options<LookupTransactionSourceData>) => createQueryKey('lookupTransactionSource', options);
 
+/**
+ * Lookup Transaction Source
+ */
 export const lookupTransactionSourceOptions = (options: Options<LookupTransactionSourceData>) => queryOptions<LookupTransactionSourceResponse, LookupTransactionSourceError, LookupTransactionSourceResponse, ReturnType<typeof lookupTransactionSourceQueryKey>>({
     queryFn: async ({ queryKey, signal }) => {
         const { data } = await lookupTransactionSource({
@@ -170,6 +197,9 @@ export const lookupTransactionSourceOptions = (options: Options<LookupTransactio
     queryKey: lookupTransactionSourceQueryKey(options)
 });
 
+/**
+ * Update Transaction Source
+ */
 export const updateTransactionSourceMutation = (options?: Partial<Options<UpdateTransactionSourceData>>): UseMutationOptions<UpdateTransactionSourceResponse, UpdateTransactionSourceError, Options<UpdateTransactionSourceData>> => {
     const mutationOptions: UseMutationOptions<UpdateTransactionSourceResponse, UpdateTransactionSourceError, Options<UpdateTransactionSourceData>> = {
         mutationFn: async (fnOptions) => {
@@ -184,11 +214,14 @@ export const updateTransactionSourceMutation = (options?: Partial<Options<Update
     return mutationOptions;
 };
 
-export const searchTransactionSourceQueryKey = (options?: Options<SearchTransactionSourceData>) => createQueryKey('searchTransactionSource', options);
+export const searchTransactionSourcesQueryKey = (options?: Options<SearchTransactionSourcesData>) => createQueryKey('searchTransactionSources', options);
 
-export const searchTransactionSourceOptions = (options?: Options<SearchTransactionSourceData>) => queryOptions<SearchTransactionSourceResponse, SearchTransactionSourceError, SearchTransactionSourceResponse, ReturnType<typeof searchTransactionSourceQueryKey>>({
+/**
+ * Search Transaction Sources
+ */
+export const searchTransactionSourcesOptions = (options?: Options<SearchTransactionSourcesData>) => queryOptions<SearchTransactionSourcesResponse, SearchTransactionSourcesError, SearchTransactionSourcesResponse, ReturnType<typeof searchTransactionSourcesQueryKey>>({
     queryFn: async ({ queryKey, signal }) => {
-        const { data } = await searchTransactionSource({
+        const { data } = await searchTransactionSources({
             ...options,
             ...queryKey[0],
             signal,
@@ -196,9 +229,12 @@ export const searchTransactionSourceOptions = (options?: Options<SearchTransacti
         });
         return data;
     },
-    queryKey: searchTransactionSourceQueryKey(options)
+    queryKey: searchTransactionSourcesQueryKey(options)
 });
 
+/**
+ * Create Transaction Source
+ */
 export const createTransactionSourceMutation = (options?: Partial<Options<CreateTransactionSourceData>>): UseMutationOptions<unknown, CreateTransactionSourceError, Options<CreateTransactionSourceData>> => {
     const mutationOptions: UseMutationOptions<unknown, CreateTransactionSourceError, Options<CreateTransactionSourceData>> = {
         mutationFn: async (fnOptions) => {
@@ -213,10 +249,13 @@ export const createTransactionSourceMutation = (options?: Partial<Options<Create
     return mutationOptions;
 };
 
-export const deletePersonMutation = (options?: Partial<Options<DeletePersonData>>): UseMutationOptions<DeletePersonResponse, DeletePersonError, Options<DeletePersonData>> => {
-    const mutationOptions: UseMutationOptions<DeletePersonResponse, DeletePersonError, Options<DeletePersonData>> = {
+/**
+ * Delete Transaction Category
+ */
+export const deleteTransactionCategoryMutation = (options?: Partial<Options<DeleteTransactionCategoryData>>): UseMutationOptions<DeleteTransactionCategoryResponse, DeleteTransactionCategoryError, Options<DeleteTransactionCategoryData>> => {
+    const mutationOptions: UseMutationOptions<DeleteTransactionCategoryResponse, DeleteTransactionCategoryError, Options<DeleteTransactionCategoryData>> = {
         mutationFn: async (fnOptions) => {
-            const { data } = await deletePerson({
+            const { data } = await deleteTransactionCategory({
                 ...options,
                 ...fnOptions,
                 throwOnError: true
@@ -227,11 +266,14 @@ export const deletePersonMutation = (options?: Partial<Options<DeletePersonData>
     return mutationOptions;
 };
 
-export const lookupPersonQueryKey = (options: Options<LookupPersonData>) => createQueryKey('lookupPerson', options);
+export const lookupTransactionCategoryQueryKey = (options: Options<LookupTransactionCategoryData>) => createQueryKey('lookupTransactionCategory', options);
 
-export const lookupPersonOptions = (options: Options<LookupPersonData>) => queryOptions<LookupPersonResponse, LookupPersonError, LookupPersonResponse, ReturnType<typeof lookupPersonQueryKey>>({
+/**
+ * Lookup Transaction Category
+ */
+export const lookupTransactionCategoryOptions = (options: Options<LookupTransactionCategoryData>) => queryOptions<LookupTransactionCategoryResponse, LookupTransactionCategoryError, LookupTransactionCategoryResponse, ReturnType<typeof lookupTransactionCategoryQueryKey>>({
     queryFn: async ({ queryKey, signal }) => {
-        const { data } = await lookupPerson({
+        const { data } = await lookupTransactionCategory({
             ...options,
             ...queryKey[0],
             signal,
@@ -239,13 +281,16 @@ export const lookupPersonOptions = (options: Options<LookupPersonData>) => query
         });
         return data;
     },
-    queryKey: lookupPersonQueryKey(options)
+    queryKey: lookupTransactionCategoryQueryKey(options)
 });
 
-export const updatePersonMutation = (options?: Partial<Options<UpdatePersonData>>): UseMutationOptions<UpdatePersonResponse, UpdatePersonError, Options<UpdatePersonData>> => {
-    const mutationOptions: UseMutationOptions<UpdatePersonResponse, UpdatePersonError, Options<UpdatePersonData>> = {
+/**
+ * Update Transaction Category
+ */
+export const updateTransactionCategoryMutation = (options?: Partial<Options<UpdateTransactionCategoryData>>): UseMutationOptions<UpdateTransactionCategoryResponse, UpdateTransactionCategoryError, Options<UpdateTransactionCategoryData>> => {
+    const mutationOptions: UseMutationOptions<UpdateTransactionCategoryResponse, UpdateTransactionCategoryError, Options<UpdateTransactionCategoryData>> = {
         mutationFn: async (fnOptions) => {
-            const { data } = await updatePerson({
+            const { data } = await updateTransactionCategory({
                 ...options,
                 ...fnOptions,
                 throwOnError: true
@@ -256,11 +301,14 @@ export const updatePersonMutation = (options?: Partial<Options<UpdatePersonData>
     return mutationOptions;
 };
 
-export const searchPersonQueryKey = (options?: Options<SearchPersonData>) => createQueryKey('searchPerson', options);
+export const searchTransactionCategoriesQueryKey = (options?: Options<SearchTransactionCategoriesData>) => createQueryKey('searchTransactionCategories', options);
 
-export const searchPersonOptions = (options?: Options<SearchPersonData>) => queryOptions<SearchPersonResponse, SearchPersonError, SearchPersonResponse, ReturnType<typeof searchPersonQueryKey>>({
+/**
+ * Search Transaction Categories
+ */
+export const searchTransactionCategoriesOptions = (options?: Options<SearchTransactionCategoriesData>) => queryOptions<SearchTransactionCategoriesResponse, SearchTransactionCategoriesError, SearchTransactionCategoriesResponse, ReturnType<typeof searchTransactionCategoriesQueryKey>>({
     queryFn: async ({ queryKey, signal }) => {
-        const { data } = await searchPerson({
+        const { data } = await searchTransactionCategories({
             ...options,
             ...queryKey[0],
             signal,
@@ -268,13 +316,16 @@ export const searchPersonOptions = (options?: Options<SearchPersonData>) => quer
         });
         return data;
     },
-    queryKey: searchPersonQueryKey(options)
+    queryKey: searchTransactionCategoriesQueryKey(options)
 });
 
-export const createPersonMutation = (options?: Partial<Options<CreatePersonData>>): UseMutationOptions<unknown, CreatePersonError, Options<CreatePersonData>> => {
-    const mutationOptions: UseMutationOptions<unknown, CreatePersonError, Options<CreatePersonData>> = {
+/**
+ * Create Transaction Category
+ */
+export const createTransactionCategoryMutation = (options?: Partial<Options<CreateTransactionCategoryData>>): UseMutationOptions<unknown, CreateTransactionCategoryError, Options<CreateTransactionCategoryData>> => {
+    const mutationOptions: UseMutationOptions<unknown, CreateTransactionCategoryError, Options<CreateTransactionCategoryData>> = {
         mutationFn: async (fnOptions) => {
-            const { data } = await createPerson({
+            const { data } = await createTransactionCategory({
                 ...options,
                 ...fnOptions,
                 throwOnError: true
@@ -285,6 +336,9 @@ export const createPersonMutation = (options?: Partial<Options<CreatePersonData>
     return mutationOptions;
 };
 
+/**
+ * Delete Category Pattern
+ */
 export const deleteCategoryPatternMutation = (options?: Partial<Options<DeleteCategoryPatternData>>): UseMutationOptions<DeleteCategoryPatternResponse, DeleteCategoryPatternError, Options<DeleteCategoryPatternData>> => {
     const mutationOptions: UseMutationOptions<DeleteCategoryPatternResponse, DeleteCategoryPatternError, Options<DeleteCategoryPatternData>> = {
         mutationFn: async (fnOptions) => {
@@ -301,6 +355,9 @@ export const deleteCategoryPatternMutation = (options?: Partial<Options<DeleteCa
 
 export const lookupCategoryPatternQueryKey = (options: Options<LookupCategoryPatternData>) => createQueryKey('lookupCategoryPattern', options);
 
+/**
+ * Lookup Category Pattern
+ */
 export const lookupCategoryPatternOptions = (options: Options<LookupCategoryPatternData>) => queryOptions<LookupCategoryPatternResponse, LookupCategoryPatternError, LookupCategoryPatternResponse, ReturnType<typeof lookupCategoryPatternQueryKey>>({
     queryFn: async ({ queryKey, signal }) => {
         const { data } = await lookupCategoryPattern({
@@ -314,6 +371,9 @@ export const lookupCategoryPatternOptions = (options: Options<LookupCategoryPatt
     queryKey: lookupCategoryPatternQueryKey(options)
 });
 
+/**
+ * Update Category Pattern
+ */
 export const updateCategoryPatternMutation = (options?: Partial<Options<UpdateCategoryPatternData>>): UseMutationOptions<UpdateCategoryPatternResponse, UpdateCategoryPatternError, Options<UpdateCategoryPatternData>> => {
     const mutationOptions: UseMutationOptions<UpdateCategoryPatternResponse, UpdateCategoryPatternError, Options<UpdateCategoryPatternData>> = {
         mutationFn: async (fnOptions) => {
@@ -328,11 +388,14 @@ export const updateCategoryPatternMutation = (options?: Partial<Options<UpdateCa
     return mutationOptions;
 };
 
-export const searchCategoryPatternQueryKey = (options?: Options<SearchCategoryPatternData>) => createQueryKey('searchCategoryPattern', options);
+export const searchCategoryPatternsQueryKey = (options?: Options<SearchCategoryPatternsData>) => createQueryKey('searchCategoryPatterns', options);
 
-export const searchCategoryPatternOptions = (options?: Options<SearchCategoryPatternData>) => queryOptions<SearchCategoryPatternResponse, SearchCategoryPatternError, SearchCategoryPatternResponse, ReturnType<typeof searchCategoryPatternQueryKey>>({
+/**
+ * Search Category Patterns
+ */
+export const searchCategoryPatternsOptions = (options?: Options<SearchCategoryPatternsData>) => queryOptions<SearchCategoryPatternsResponse, SearchCategoryPatternsError, SearchCategoryPatternsResponse, ReturnType<typeof searchCategoryPatternsQueryKey>>({
     queryFn: async ({ queryKey, signal }) => {
-        const { data } = await searchCategoryPattern({
+        const { data } = await searchCategoryPatterns({
             ...options,
             ...queryKey[0],
             signal,
@@ -340,9 +403,12 @@ export const searchCategoryPatternOptions = (options?: Options<SearchCategoryPat
         });
         return data;
     },
-    queryKey: searchCategoryPatternQueryKey(options)
+    queryKey: searchCategoryPatternsQueryKey(options)
 });
 
+/**
+ * Create Category Pattern
+ */
 export const createCategoryPatternMutation = (options?: Partial<Options<CreateCategoryPatternData>>): UseMutationOptions<unknown, CreateCategoryPatternError, Options<CreateCategoryPatternData>> => {
     const mutationOptions: UseMutationOptions<unknown, CreateCategoryPatternError, Options<CreateCategoryPatternData>> = {
         mutationFn: async (fnOptions) => {
@@ -357,11 +423,14 @@ export const createCategoryPatternMutation = (options?: Partial<Options<CreateCa
     return mutationOptions;
 };
 
-export const autocompleteTransactionCategoryByIdQueryKey = (options: Options<AutocompleteTransactionCategoryByIdData>) => createQueryKey('autocompleteTransactionCategoryById', options);
+export const autocompleteSearchQueryKey = (options: Options<AutocompleteSearchData>) => createQueryKey('autocompleteSearch', options);
 
-export const autocompleteTransactionCategoryByIdOptions = (options: Options<AutocompleteTransactionCategoryByIdData>) => queryOptions<AutocompleteTransactionCategoryByIdResponse, AutocompleteTransactionCategoryByIdError, AutocompleteTransactionCategoryByIdResponse, ReturnType<typeof autocompleteTransactionCategoryByIdQueryKey>>({
+/**
+ * Autocomplete Search
+ */
+export const autocompleteSearchOptions = (options: Options<AutocompleteSearchData>) => queryOptions<AutocompleteSearchResponse, AutocompleteSearchError, AutocompleteSearchResponse, ReturnType<typeof autocompleteSearchQueryKey>>({
     queryFn: async ({ queryKey, signal }) => {
-        const { data } = await autocompleteTransactionCategoryById({
+        const { data } = await autocompleteSearch({
             ...options,
             ...queryKey[0],
             signal,
@@ -369,14 +438,17 @@ export const autocompleteTransactionCategoryByIdOptions = (options: Options<Auto
         });
         return data;
     },
-    queryKey: autocompleteTransactionCategoryByIdQueryKey(options)
+    queryKey: autocompleteSearchQueryKey(options)
 });
 
-export const autocompleteTransactionCategoryQueryKey = (options?: Options<AutocompleteTransactionCategoryData>) => createQueryKey('autocompleteTransactionCategory', options);
+export const autocompleteSingleQueryKey = (options: Options<AutocompleteSingleData>) => createQueryKey('autocompleteSingle', options);
 
-export const autocompleteTransactionCategoryOptions = (options?: Options<AutocompleteTransactionCategoryData>) => queryOptions<AutocompleteTransactionCategoryResponse, AutocompleteTransactionCategoryError, AutocompleteTransactionCategoryResponse, ReturnType<typeof autocompleteTransactionCategoryQueryKey>>({
+/**
+ * Autocomplete Single
+ */
+export const autocompleteSingleOptions = (options: Options<AutocompleteSingleData>) => queryOptions<AutocompleteSingleResponse, AutocompleteSingleError, AutocompleteSingleResponse, ReturnType<typeof autocompleteSingleQueryKey>>({
     queryFn: async ({ queryKey, signal }) => {
-        const { data } = await autocompleteTransactionCategory({
+        const { data } = await autocompleteSingle({
             ...options,
             ...queryKey[0],
             signal,
@@ -384,65 +456,5 @@ export const autocompleteTransactionCategoryOptions = (options?: Options<Autocom
         });
         return data;
     },
-    queryKey: autocompleteTransactionCategoryQueryKey(options)
-});
-
-export const autocompleteTransactionSourceByIdQueryKey = (options: Options<AutocompleteTransactionSourceByIdData>) => createQueryKey('autocompleteTransactionSourceById', options);
-
-export const autocompleteTransactionSourceByIdOptions = (options: Options<AutocompleteTransactionSourceByIdData>) => queryOptions<AutocompleteTransactionSourceByIdResponse, AutocompleteTransactionSourceByIdError, AutocompleteTransactionSourceByIdResponse, ReturnType<typeof autocompleteTransactionSourceByIdQueryKey>>({
-    queryFn: async ({ queryKey, signal }) => {
-        const { data } = await autocompleteTransactionSourceById({
-            ...options,
-            ...queryKey[0],
-            signal,
-            throwOnError: true
-        });
-        return data;
-    },
-    queryKey: autocompleteTransactionSourceByIdQueryKey(options)
-});
-
-export const autocompleteTransactionSourceQueryKey = (options?: Options<AutocompleteTransactionSourceData>) => createQueryKey('autocompleteTransactionSource', options);
-
-export const autocompleteTransactionSourceOptions = (options?: Options<AutocompleteTransactionSourceData>) => queryOptions<AutocompleteTransactionSourceResponse, AutocompleteTransactionSourceError, AutocompleteTransactionSourceResponse, ReturnType<typeof autocompleteTransactionSourceQueryKey>>({
-    queryFn: async ({ queryKey, signal }) => {
-        const { data } = await autocompleteTransactionSource({
-            ...options,
-            ...queryKey[0],
-            signal,
-            throwOnError: true
-        });
-        return data;
-    },
-    queryKey: autocompleteTransactionSourceQueryKey(options)
-});
-
-export const autocompletePersonByIdQueryKey = (options: Options<AutocompletePersonByIdData>) => createQueryKey('autocompletePersonById', options);
-
-export const autocompletePersonByIdOptions = (options: Options<AutocompletePersonByIdData>) => queryOptions<AutocompletePersonByIdResponse, AutocompletePersonByIdError, AutocompletePersonByIdResponse, ReturnType<typeof autocompletePersonByIdQueryKey>>({
-    queryFn: async ({ queryKey, signal }) => {
-        const { data } = await autocompletePersonById({
-            ...options,
-            ...queryKey[0],
-            signal,
-            throwOnError: true
-        });
-        return data;
-    },
-    queryKey: autocompletePersonByIdQueryKey(options)
-});
-
-export const autocompletePersonQueryKey = (options?: Options<AutocompletePersonData>) => createQueryKey('autocompletePerson', options);
-
-export const autocompletePersonOptions = (options?: Options<AutocompletePersonData>) => queryOptions<AutocompletePersonResponse, AutocompletePersonError, AutocompletePersonResponse, ReturnType<typeof autocompletePersonQueryKey>>({
-    queryFn: async ({ queryKey, signal }) => {
-        const { data } = await autocompletePerson({
-            ...options,
-            ...queryKey[0],
-            signal,
-            throwOnError: true
-        });
-        return data;
-    },
-    queryKey: autocompletePersonQueryKey(options)
+    queryKey: autocompleteSingleQueryKey(options)
 });

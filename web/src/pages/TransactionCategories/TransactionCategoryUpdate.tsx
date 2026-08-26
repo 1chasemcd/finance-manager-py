@@ -1,11 +1,11 @@
 import {
   lookupTransactionCategoryOptions,
-  searchTransactionCategoryQueryKey,
+  searchTransactionCategoriesQueryKey,
   updateTransactionCategoryMutation,
 } from "@/lib/generated/@tanstack/react-query.gen";
 import TransactionCategoryModifyShared from "./TransactionCategoryModifyShared";
 import EntityUpdateForm from "@/components/EntityForm/EntityUpdateForm";
-import type { WriteTransactionCategoryRequest } from "@/lib/generated";
+import type { WriteTransactionCategory } from "@/lib/generated";
 
 export default function TransactionCategoryUpdate() {
   return (
@@ -13,8 +13,8 @@ export default function TransactionCategoryUpdate() {
       title="Edit Category"
       lookupEntityOptions={lookupTransactionCategoryOptions}
       updateEntityMutation={updateTransactionCategoryMutation}
-      dataTransform={(x) => x as WriteTransactionCategoryRequest}
-      toInvalidate={[searchTransactionCategoryQueryKey()]}
+      dataTransform={(x) => x as WriteTransactionCategory}
+      toInvalidate={[searchTransactionCategoriesQueryKey()]}
     >
       <TransactionCategoryModifyShared />
     </EntityUpdateForm>

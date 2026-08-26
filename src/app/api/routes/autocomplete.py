@@ -17,7 +17,7 @@ router = APIRouter(prefix="/autocomplete")
     response_model=AutocompleteResponse,
     responses=handled_error_responses(),
 )
-async def search(
+async def autocomplete_search(
     name: str,
     request: Annotated[AutocompleteRequest, Query()],
     repo: AutocompleteRepositoryDep,
@@ -31,7 +31,7 @@ async def search(
     response_model=str,
     responses=handled_error_responses(),
 )
-async def single(
+async def autocomplete_single(
     name: str,
     id: int,
     repo: AutocompleteRepositoryDep,

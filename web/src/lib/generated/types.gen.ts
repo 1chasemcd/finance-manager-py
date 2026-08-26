@@ -4,548 +4,327 @@ export type ClientOptions = {
     baseUrl: `${string}://${string}` | (string & {});
 };
 
-export type AutocompleteQueryResponse = {
+/**
+ * CategoryPattern
+ */
+export type CategoryPattern = {
+    /**
+     * Id
+     */
     id: number;
-    value: string;
-};
-
-export type CategoryPatternResponse = {
-    id: number;
+    /**
+     * Pattern
+     */
     pattern: string;
-    transactionCategoryId?: null | number;
-    transactionCategoryName?: null | string;
+    /**
+     * Transactioncategoryid
+     */
+    transactionCategoryId: number | null;
+    /**
+     * Transactioncategoryname
+     */
+    transactionCategoryName: string | null;
 };
 
-export type HttpValidationProblemDetails = {
-    type?: null | string;
-    title?: null | string;
-    status?: null | number;
-    detail?: null | string;
-    instance?: null | string;
-    errors?: {
-        [key: string]: Array<string>;
-    };
+/**
+ * HTTPValidationError
+ */
+export type HttpValidationError = {
+    /**
+     * Detail
+     */
+    detail?: Array<ValidationError>;
 };
 
-export type PersonResponse = {
+/**
+ * Person
+ */
+export type Person = {
+    /**
+     * Id
+     */
     id: number;
+    /**
+     * Firstname
+     */
     firstName: string;
+    /**
+     * Lastname
+     */
     lastName: string;
 };
 
+/**
+ * ProblemDetails
+ */
 export type ProblemDetails = {
-    type?: null | string;
-    title?: null | string;
-    status?: null | number;
-    detail?: null | string;
-    instance?: null | string;
+    /**
+     * Title
+     */
+    title: string;
+    /**
+     * Status
+     */
+    status: number;
+    /**
+     * Detail
+     */
+    detail: string;
+    /**
+     * Instance
+     */
+    instance?: string | null;
 };
 
-export type SearchEntityResponseOfCategoryPatternResponse = {
-    results: Array<CategoryPatternResponse>;
+/**
+ * SearchResponse[CategoryPattern]
+ */
+export type SearchResponseCategoryPattern = {
+    /**
+     * Total
+     */
     total: number;
+    /**
+     * Result
+     */
+    result: Array<CategoryPattern>;
 };
 
-export type SearchEntityResponseOfPersonResponse = {
-    results: Array<PersonResponse>;
+/**
+ * SearchResponse[Person]
+ */
+export type SearchResponsePerson = {
+    /**
+     * Total
+     */
     total: number;
+    /**
+     * Result
+     */
+    result: Array<Person>;
 };
 
-export type SearchEntityResponseOfTransactionCategoryResponse = {
-    results: Array<TransactionCategoryResponse>;
+/**
+ * SearchResponse[TransactionCategory]
+ */
+export type SearchResponseTransactionCategory = {
+    /**
+     * Total
+     */
     total: number;
+    /**
+     * Result
+     */
+    result: Array<TransactionCategory>;
 };
 
-export type SearchEntityResponseOfTransactionResponse = {
-    results: Array<TransactionResponse>;
+/**
+ * SearchResponse[TransactionSource]
+ */
+export type SearchResponseTransactionSource = {
+    /**
+     * Total
+     */
     total: number;
+    /**
+     * Result
+     */
+    result: Array<TransactionSource>;
 };
 
-export type SearchEntityResponseOfTransactionSourceResponse = {
-    results: Array<TransactionSourceResponse>;
+/**
+ * SearchResponse[Transaction]
+ */
+export type SearchResponseTransaction = {
+    /**
+     * Total
+     */
     total: number;
+    /**
+     * Result
+     */
+    result: Array<Transaction>;
 };
 
-export type TransactionCategoryResponse = {
+/**
+ * Transaction
+ */
+export type Transaction = {
+    /**
+     * Id
+     */
     id: number;
-    name: string;
-    description?: null | string;
-};
-
-export type TransactionResponse = {
-    id: number;
-    amount: number;
-    date: Date;
+    /**
+     * Timestamp
+     */
+    timestamp: Date;
+    /**
+     * Amount
+     */
+    amount: string;
+    /**
+     * Summary
+     */
     summary: string;
-    transactionSourceId: number;
-    transactionSourceName: string;
+    /**
+     * Transactioncategoryid
+     */
     transactionCategoryId: number;
+    /**
+     * Transactioncategoryname
+     */
     transactionCategoryName: string;
+    /**
+     * Transactionsourceid
+     */
+    transactionSourceId: number;
+    /**
+     * Transactionsourcename
+     */
+    transactionSourceName: string;
 };
 
-export type TransactionSourceResponse = {
+/**
+ * TransactionCategory
+ */
+export type TransactionCategory = {
+    /**
+     * Id
+     */
     id: number;
+    /**
+     * Name
+     */
     name: string;
+    /**
+     * Description
+     */
+    description: string | null;
+};
+
+/**
+ * TransactionSource
+ */
+export type TransactionSource = {
+    /**
+     * Id
+     */
+    id: number;
+    /**
+     * Name
+     */
+    name: string;
+    /**
+     * Ownerid
+     */
     ownerId: number;
+    /**
+     * Ownername
+     */
     ownerName: string;
 };
 
-export type WriteCategoryPatternRequest = {
-    pattern: string;
-    transactionCategoryId?: null | number;
+/**
+ * ValidationError
+ */
+export type ValidationError = {
+    /**
+     * Location
+     */
+    loc: Array<string | number>;
+    /**
+     * Message
+     */
+    msg: string;
+    /**
+     * Error Type
+     */
+    type: string;
+    /**
+     * Input
+     */
+    input?: unknown;
+    /**
+     * Context
+     */
+    ctx?: {
+        [key: string]: unknown;
+    };
 };
 
-export type WritePersonRequest = {
+/**
+ * WriteCategoryPattern
+ */
+export type WriteCategoryPattern = {
+    /**
+     * Pattern
+     */
+    pattern: string;
+    /**
+     * Transactioncategoryid
+     */
+    transactionCategoryId?: number | null;
+};
+
+/**
+ * WritePerson
+ */
+export type WritePerson = {
+    /**
+     * Firstname
+     */
     firstName: string;
+    /**
+     * Lastname
+     */
     lastName: string;
 };
 
-export type WriteTransactionCategoryRequest = {
+/**
+ * WriteTransactionCategory
+ */
+export type WriteTransactionCategory = {
+    /**
+     * Name
+     */
     name: string;
-    description?: null | string;
+    /**
+     * Description
+     */
+    description?: string | null;
 };
 
-export type WriteTransactionSourceRequest = {
+/**
+ * WriteTransactionSource
+ */
+export type WriteTransactionSource = {
+    /**
+     * Name
+     */
     name: string;
-    ownerId?: number;
-};
-
-export type DeleteTransactionCategoryData = {
-    body?: never;
-    path: {
-        id: number;
-    };
-    query?: never;
-    url: '/api/transactioncategories/{id}';
-};
-
-export type DeleteTransactionCategoryErrors = {
     /**
-     * Bad Request
+     * Ownerid
      */
-    400: HttpValidationProblemDetails;
-    /**
-     * Not Found
-     */
-    404: ProblemDetails;
-    /**
-     * Conflict
-     */
-    409: ProblemDetails;
-};
-
-export type DeleteTransactionCategoryError = DeleteTransactionCategoryErrors[keyof DeleteTransactionCategoryErrors];
-
-export type DeleteTransactionCategoryResponses = {
-    /**
-     * No Content
-     */
-    204: void;
-};
-
-export type DeleteTransactionCategoryResponse = DeleteTransactionCategoryResponses[keyof DeleteTransactionCategoryResponses];
-
-export type LookupTransactionCategoryData = {
-    body?: never;
-    path: {
-        id: number;
-    };
-    query?: never;
-    url: '/api/transactioncategories/{id}';
-};
-
-export type LookupTransactionCategoryErrors = {
-    /**
-     * Bad Request
-     */
-    400: HttpValidationProblemDetails;
-    /**
-     * Not Found
-     */
-    404: ProblemDetails;
-    /**
-     * Conflict
-     */
-    409: ProblemDetails;
-};
-
-export type LookupTransactionCategoryError = LookupTransactionCategoryErrors[keyof LookupTransactionCategoryErrors];
-
-export type LookupTransactionCategoryResponses = {
-    /**
-     * OK
-     */
-    200: TransactionCategoryResponse;
-};
-
-export type LookupTransactionCategoryResponse = LookupTransactionCategoryResponses[keyof LookupTransactionCategoryResponses];
-
-export type UpdateTransactionCategoryData = {
-    body?: WriteTransactionCategoryRequest;
-    path: {
-        id: number;
-    };
-    query?: never;
-    url: '/api/transactioncategories/{id}';
-};
-
-export type UpdateTransactionCategoryErrors = {
-    /**
-     * Bad Request
-     */
-    400: HttpValidationProblemDetails;
-    /**
-     * Not Found
-     */
-    404: ProblemDetails;
-    /**
-     * Conflict
-     */
-    409: ProblemDetails;
-};
-
-export type UpdateTransactionCategoryError = UpdateTransactionCategoryErrors[keyof UpdateTransactionCategoryErrors];
-
-export type UpdateTransactionCategoryResponses = {
-    /**
-     * No Content
-     */
-    204: void;
-};
-
-export type UpdateTransactionCategoryResponse = UpdateTransactionCategoryResponses[keyof UpdateTransactionCategoryResponses];
-
-export type SearchTransactionCategoryData = {
-    body?: never;
-    path?: never;
-    query?: {
-        take?: number;
-        skip?: number;
-    };
-    url: '/api/transactioncategories';
-};
-
-export type SearchTransactionCategoryErrors = {
-    /**
-     * Bad Request
-     */
-    400: HttpValidationProblemDetails;
-    /**
-     * Not Found
-     */
-    404: ProblemDetails;
-    /**
-     * Conflict
-     */
-    409: ProblemDetails;
-};
-
-export type SearchTransactionCategoryError = SearchTransactionCategoryErrors[keyof SearchTransactionCategoryErrors];
-
-export type SearchTransactionCategoryResponses = {
-    /**
-     * OK
-     */
-    200: SearchEntityResponseOfTransactionCategoryResponse;
-};
-
-export type SearchTransactionCategoryResponse = SearchTransactionCategoryResponses[keyof SearchTransactionCategoryResponses];
-
-export type CreateTransactionCategoryData = {
-    body?: WriteTransactionCategoryRequest;
-    path?: never;
-    query?: never;
-    url: '/api/transactioncategories';
-};
-
-export type CreateTransactionCategoryErrors = {
-    /**
-     * Bad Request
-     */
-    400: HttpValidationProblemDetails;
-    /**
-     * Not Found
-     */
-    404: ProblemDetails;
-    /**
-     * Conflict
-     */
-    409: ProblemDetails;
-};
-
-export type CreateTransactionCategoryError = CreateTransactionCategoryErrors[keyof CreateTransactionCategoryErrors];
-
-export type CreateTransactionCategoryResponses = {
-    /**
-     * Created
-     */
-    201: unknown;
-};
-
-export type LookupTransactionData = {
-    body?: never;
-    path: {
-        id: number;
-    };
-    query?: never;
-    url: '/api/transactions/{id}';
-};
-
-export type LookupTransactionErrors = {
-    /**
-     * Bad Request
-     */
-    400: HttpValidationProblemDetails;
-    /**
-     * Not Found
-     */
-    404: ProblemDetails;
-    /**
-     * Conflict
-     */
-    409: ProblemDetails;
-};
-
-export type LookupTransactionError = LookupTransactionErrors[keyof LookupTransactionErrors];
-
-export type LookupTransactionResponses = {
-    /**
-     * OK
-     */
-    200: TransactionResponse;
-};
-
-export type LookupTransactionResponse = LookupTransactionResponses[keyof LookupTransactionResponses];
-
-export type SearchTransactionData = {
-    body?: never;
-    path?: never;
-    query?: {
-        MinDate?: Date;
-        MaxDate?: Date;
-        MinAmount?: number;
-        MaxAmount?: number;
-        TransactionSourceId?: number;
-        TransactionCategoryId?: number;
-        OwnerId?: number;
-        take?: number;
-        skip?: number;
-    };
-    url: '/api/transactions';
-};
-
-export type SearchTransactionErrors = {
-    /**
-     * Bad Request
-     */
-    400: HttpValidationProblemDetails;
-    /**
-     * Not Found
-     */
-    404: ProblemDetails;
-    /**
-     * Conflict
-     */
-    409: ProblemDetails;
-};
-
-export type SearchTransactionError = SearchTransactionErrors[keyof SearchTransactionErrors];
-
-export type SearchTransactionResponses = {
-    /**
-     * OK
-     */
-    200: SearchEntityResponseOfTransactionResponse;
-};
-
-export type SearchTransactionResponse = SearchTransactionResponses[keyof SearchTransactionResponses];
-
-export type DeleteTransactionSourceData = {
-    body?: never;
-    path: {
-        id: number;
-    };
-    query?: never;
-    url: '/api/sources/{id}';
-};
-
-export type DeleteTransactionSourceErrors = {
-    /**
-     * Bad Request
-     */
-    400: HttpValidationProblemDetails;
-    /**
-     * Not Found
-     */
-    404: ProblemDetails;
-    /**
-     * Conflict
-     */
-    409: ProblemDetails;
-};
-
-export type DeleteTransactionSourceError = DeleteTransactionSourceErrors[keyof DeleteTransactionSourceErrors];
-
-export type DeleteTransactionSourceResponses = {
-    /**
-     * No Content
-     */
-    204: void;
-};
-
-export type DeleteTransactionSourceResponse = DeleteTransactionSourceResponses[keyof DeleteTransactionSourceResponses];
-
-export type LookupTransactionSourceData = {
-    body?: never;
-    path: {
-        id: number;
-    };
-    query?: never;
-    url: '/api/sources/{id}';
-};
-
-export type LookupTransactionSourceErrors = {
-    /**
-     * Bad Request
-     */
-    400: HttpValidationProblemDetails;
-    /**
-     * Not Found
-     */
-    404: ProblemDetails;
-    /**
-     * Conflict
-     */
-    409: ProblemDetails;
-};
-
-export type LookupTransactionSourceError = LookupTransactionSourceErrors[keyof LookupTransactionSourceErrors];
-
-export type LookupTransactionSourceResponses = {
-    /**
-     * OK
-     */
-    200: TransactionSourceResponse;
-};
-
-export type LookupTransactionSourceResponse = LookupTransactionSourceResponses[keyof LookupTransactionSourceResponses];
-
-export type UpdateTransactionSourceData = {
-    body?: WriteTransactionSourceRequest;
-    path: {
-        id: number;
-    };
-    query?: never;
-    url: '/api/sources/{id}';
-};
-
-export type UpdateTransactionSourceErrors = {
-    /**
-     * Bad Request
-     */
-    400: HttpValidationProblemDetails;
-    /**
-     * Not Found
-     */
-    404: ProblemDetails;
-    /**
-     * Conflict
-     */
-    409: ProblemDetails;
-};
-
-export type UpdateTransactionSourceError = UpdateTransactionSourceErrors[keyof UpdateTransactionSourceErrors];
-
-export type UpdateTransactionSourceResponses = {
-    /**
-     * No Content
-     */
-    204: void;
-};
-
-export type UpdateTransactionSourceResponse = UpdateTransactionSourceResponses[keyof UpdateTransactionSourceResponses];
-
-export type SearchTransactionSourceData = {
-    body?: never;
-    path?: never;
-    query?: {
-        take?: number;
-        skip?: number;
-    };
-    url: '/api/sources';
-};
-
-export type SearchTransactionSourceErrors = {
-    /**
-     * Bad Request
-     */
-    400: HttpValidationProblemDetails;
-    /**
-     * Not Found
-     */
-    404: ProblemDetails;
-    /**
-     * Conflict
-     */
-    409: ProblemDetails;
-};
-
-export type SearchTransactionSourceError = SearchTransactionSourceErrors[keyof SearchTransactionSourceErrors];
-
-export type SearchTransactionSourceResponses = {
-    /**
-     * OK
-     */
-    200: SearchEntityResponseOfTransactionSourceResponse;
-};
-
-export type SearchTransactionSourceResponse = SearchTransactionSourceResponses[keyof SearchTransactionSourceResponses];
-
-export type CreateTransactionSourceData = {
-    body?: WriteTransactionSourceRequest;
-    path?: never;
-    query?: never;
-    url: '/api/sources';
-};
-
-export type CreateTransactionSourceErrors = {
-    /**
-     * Bad Request
-     */
-    400: HttpValidationProblemDetails;
-    /**
-     * Not Found
-     */
-    404: ProblemDetails;
-    /**
-     * Conflict
-     */
-    409: ProblemDetails;
-};
-
-export type CreateTransactionSourceError = CreateTransactionSourceErrors[keyof CreateTransactionSourceErrors];
-
-export type CreateTransactionSourceResponses = {
-    /**
-     * Created
-     */
-    201: unknown;
+    ownerId: number;
 };
 
 export type DeletePersonData = {
     body?: never;
     path: {
+        /**
+         * Id
+         */
         id: number;
     };
     query?: never;
-    url: '/api/people/{id}';
+    url: '/people/{id}';
 };
 
 export type DeletePersonErrors = {
     /**
      * Bad Request
      */
-    400: HttpValidationProblemDetails;
+    400: ProblemDetails;
     /**
      * Not Found
      */
@@ -554,13 +333,17 @@ export type DeletePersonErrors = {
      * Conflict
      */
     409: ProblemDetails;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
 };
 
 export type DeletePersonError = DeletePersonErrors[keyof DeletePersonErrors];
 
 export type DeletePersonResponses = {
     /**
-     * No Content
+     * Successful Response
      */
     204: void;
 };
@@ -570,17 +353,20 @@ export type DeletePersonResponse = DeletePersonResponses[keyof DeletePersonRespo
 export type LookupPersonData = {
     body?: never;
     path: {
+        /**
+         * Id
+         */
         id: number;
     };
     query?: never;
-    url: '/api/people/{id}';
+    url: '/people/{id}';
 };
 
 export type LookupPersonErrors = {
     /**
      * Bad Request
      */
-    400: HttpValidationProblemDetails;
+    400: ProblemDetails;
     /**
      * Not Found
      */
@@ -589,33 +375,40 @@ export type LookupPersonErrors = {
      * Conflict
      */
     409: ProblemDetails;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
 };
 
 export type LookupPersonError = LookupPersonErrors[keyof LookupPersonErrors];
 
 export type LookupPersonResponses = {
     /**
-     * OK
+     * Successful Response
      */
-    200: PersonResponse;
+    200: Person;
 };
 
 export type LookupPersonResponse = LookupPersonResponses[keyof LookupPersonResponses];
 
 export type UpdatePersonData = {
-    body?: WritePersonRequest;
+    body: WritePerson;
     path: {
+        /**
+         * Id
+         */
         id: number;
     };
     query?: never;
-    url: '/api/people/{id}';
+    url: '/people/{id}';
 };
 
 export type UpdatePersonErrors = {
     /**
      * Bad Request
      */
-    400: HttpValidationProblemDetails;
+    400: ProblemDetails;
     /**
      * Not Found
      */
@@ -624,34 +417,44 @@ export type UpdatePersonErrors = {
      * Conflict
      */
     409: ProblemDetails;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
 };
 
 export type UpdatePersonError = UpdatePersonErrors[keyof UpdatePersonErrors];
 
 export type UpdatePersonResponses = {
     /**
-     * No Content
+     * Successful Response
      */
     204: void;
 };
 
 export type UpdatePersonResponse = UpdatePersonResponses[keyof UpdatePersonResponses];
 
-export type SearchPersonData = {
+export type SearchPeopleData = {
     body?: never;
     path?: never;
     query?: {
-        take?: number;
+        /**
+         * Skip
+         */
         skip?: number;
+        /**
+         * Take
+         */
+        take?: number;
     };
-    url: '/api/people';
+    url: '/people/';
 };
 
-export type SearchPersonErrors = {
+export type SearchPeopleErrors = {
     /**
      * Bad Request
      */
-    400: HttpValidationProblemDetails;
+    400: ProblemDetails;
     /**
      * Not Found
      */
@@ -660,31 +463,35 @@ export type SearchPersonErrors = {
      * Conflict
      */
     409: ProblemDetails;
-};
-
-export type SearchPersonError = SearchPersonErrors[keyof SearchPersonErrors];
-
-export type SearchPersonResponses = {
     /**
-     * OK
+     * Validation Error
      */
-    200: SearchEntityResponseOfPersonResponse;
+    422: HttpValidationError;
 };
 
-export type SearchPersonResponse = SearchPersonResponses[keyof SearchPersonResponses];
+export type SearchPeopleError = SearchPeopleErrors[keyof SearchPeopleErrors];
+
+export type SearchPeopleResponses = {
+    /**
+     * Successful Response
+     */
+    200: SearchResponsePerson;
+};
+
+export type SearchPeopleResponse = SearchPeopleResponses[keyof SearchPeopleResponses];
 
 export type CreatePersonData = {
-    body?: WritePersonRequest;
+    body: WritePerson;
     path?: never;
     query?: never;
-    url: '/api/people';
+    url: '/people/';
 };
 
 export type CreatePersonErrors = {
     /**
      * Bad Request
      */
-    400: HttpValidationProblemDetails;
+    400: ProblemDetails;
     /**
      * Not Found
      */
@@ -693,13 +500,547 @@ export type CreatePersonErrors = {
      * Conflict
      */
     409: ProblemDetails;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
 };
 
 export type CreatePersonError = CreatePersonErrors[keyof CreatePersonErrors];
 
 export type CreatePersonResponses = {
     /**
-     * Created
+     * Successful Response
+     */
+    201: unknown;
+};
+
+export type LookupTransactionData = {
+    body?: never;
+    path: {
+        /**
+         * Id
+         */
+        id: number;
+    };
+    query?: never;
+    url: '/transactions/{id}';
+};
+
+export type LookupTransactionErrors = {
+    /**
+     * Bad Request
+     */
+    400: ProblemDetails;
+    /**
+     * Not Found
+     */
+    404: ProblemDetails;
+    /**
+     * Conflict
+     */
+    409: ProblemDetails;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type LookupTransactionError = LookupTransactionErrors[keyof LookupTransactionErrors];
+
+export type LookupTransactionResponses = {
+    /**
+     * Successful Response
+     */
+    200: Transaction;
+};
+
+export type LookupTransactionResponse = LookupTransactionResponses[keyof LookupTransactionResponses];
+
+export type SearchTransactionsData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * Skip
+         */
+        skip?: number;
+        /**
+         * Take
+         */
+        take?: number;
+        /**
+         * Mindate
+         */
+        minDate?: Date | null;
+        /**
+         * Maxdate
+         */
+        maxDate?: Date | null;
+        /**
+         * Minamount
+         */
+        minAmount?: number | string | null;
+        /**
+         * Maxamount
+         */
+        maxAmount?: number | string | null;
+        /**
+         * Transactioncategoryid
+         */
+        transactionCategoryId?: number | null;
+        /**
+         * Transactionsourceid
+         */
+        transactionSourceId?: number | null;
+        /**
+         * Ownerid
+         */
+        ownerId?: number | null;
+    };
+    url: '/transactions/';
+};
+
+export type SearchTransactionsErrors = {
+    /**
+     * Bad Request
+     */
+    400: ProblemDetails;
+    /**
+     * Not Found
+     */
+    404: ProblemDetails;
+    /**
+     * Conflict
+     */
+    409: ProblemDetails;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type SearchTransactionsError = SearchTransactionsErrors[keyof SearchTransactionsErrors];
+
+export type SearchTransactionsResponses = {
+    /**
+     * Successful Response
+     */
+    200: SearchResponseTransaction;
+};
+
+export type SearchTransactionsResponse = SearchTransactionsResponses[keyof SearchTransactionsResponses];
+
+export type DeleteTransactionSourceData = {
+    body?: never;
+    path: {
+        /**
+         * Id
+         */
+        id: number;
+    };
+    query?: never;
+    url: '/transactionsources/{id}';
+};
+
+export type DeleteTransactionSourceErrors = {
+    /**
+     * Bad Request
+     */
+    400: ProblemDetails;
+    /**
+     * Not Found
+     */
+    404: ProblemDetails;
+    /**
+     * Conflict
+     */
+    409: ProblemDetails;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type DeleteTransactionSourceError = DeleteTransactionSourceErrors[keyof DeleteTransactionSourceErrors];
+
+export type DeleteTransactionSourceResponses = {
+    /**
+     * Successful Response
+     */
+    204: void;
+};
+
+export type DeleteTransactionSourceResponse = DeleteTransactionSourceResponses[keyof DeleteTransactionSourceResponses];
+
+export type LookupTransactionSourceData = {
+    body?: never;
+    path: {
+        /**
+         * Id
+         */
+        id: number;
+    };
+    query?: never;
+    url: '/transactionsources/{id}';
+};
+
+export type LookupTransactionSourceErrors = {
+    /**
+     * Bad Request
+     */
+    400: ProblemDetails;
+    /**
+     * Not Found
+     */
+    404: ProblemDetails;
+    /**
+     * Conflict
+     */
+    409: ProblemDetails;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type LookupTransactionSourceError = LookupTransactionSourceErrors[keyof LookupTransactionSourceErrors];
+
+export type LookupTransactionSourceResponses = {
+    /**
+     * Successful Response
+     */
+    200: TransactionSource;
+};
+
+export type LookupTransactionSourceResponse = LookupTransactionSourceResponses[keyof LookupTransactionSourceResponses];
+
+export type UpdateTransactionSourceData = {
+    body: WriteTransactionSource;
+    path: {
+        /**
+         * Id
+         */
+        id: number;
+    };
+    query?: never;
+    url: '/transactionsources/{id}';
+};
+
+export type UpdateTransactionSourceErrors = {
+    /**
+     * Bad Request
+     */
+    400: ProblemDetails;
+    /**
+     * Not Found
+     */
+    404: ProblemDetails;
+    /**
+     * Conflict
+     */
+    409: ProblemDetails;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type UpdateTransactionSourceError = UpdateTransactionSourceErrors[keyof UpdateTransactionSourceErrors];
+
+export type UpdateTransactionSourceResponses = {
+    /**
+     * Successful Response
+     */
+    204: void;
+};
+
+export type UpdateTransactionSourceResponse = UpdateTransactionSourceResponses[keyof UpdateTransactionSourceResponses];
+
+export type SearchTransactionSourcesData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * Skip
+         */
+        skip?: number;
+        /**
+         * Take
+         */
+        take?: number;
+    };
+    url: '/transactionsources/';
+};
+
+export type SearchTransactionSourcesErrors = {
+    /**
+     * Bad Request
+     */
+    400: ProblemDetails;
+    /**
+     * Not Found
+     */
+    404: ProblemDetails;
+    /**
+     * Conflict
+     */
+    409: ProblemDetails;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type SearchTransactionSourcesError = SearchTransactionSourcesErrors[keyof SearchTransactionSourcesErrors];
+
+export type SearchTransactionSourcesResponses = {
+    /**
+     * Successful Response
+     */
+    200: SearchResponseTransactionSource;
+};
+
+export type SearchTransactionSourcesResponse = SearchTransactionSourcesResponses[keyof SearchTransactionSourcesResponses];
+
+export type CreateTransactionSourceData = {
+    body: WriteTransactionSource;
+    path?: never;
+    query?: never;
+    url: '/transactionsources/';
+};
+
+export type CreateTransactionSourceErrors = {
+    /**
+     * Bad Request
+     */
+    400: ProblemDetails;
+    /**
+     * Not Found
+     */
+    404: ProblemDetails;
+    /**
+     * Conflict
+     */
+    409: ProblemDetails;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type CreateTransactionSourceError = CreateTransactionSourceErrors[keyof CreateTransactionSourceErrors];
+
+export type CreateTransactionSourceResponses = {
+    /**
+     * Successful Response
+     */
+    201: unknown;
+};
+
+export type DeleteTransactionCategoryData = {
+    body?: never;
+    path: {
+        /**
+         * Id
+         */
+        id: number;
+    };
+    query?: never;
+    url: '/transactioncategories/{id}';
+};
+
+export type DeleteTransactionCategoryErrors = {
+    /**
+     * Bad Request
+     */
+    400: ProblemDetails;
+    /**
+     * Not Found
+     */
+    404: ProblemDetails;
+    /**
+     * Conflict
+     */
+    409: ProblemDetails;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type DeleteTransactionCategoryError = DeleteTransactionCategoryErrors[keyof DeleteTransactionCategoryErrors];
+
+export type DeleteTransactionCategoryResponses = {
+    /**
+     * Successful Response
+     */
+    204: void;
+};
+
+export type DeleteTransactionCategoryResponse = DeleteTransactionCategoryResponses[keyof DeleteTransactionCategoryResponses];
+
+export type LookupTransactionCategoryData = {
+    body?: never;
+    path: {
+        /**
+         * Id
+         */
+        id: number;
+    };
+    query?: never;
+    url: '/transactioncategories/{id}';
+};
+
+export type LookupTransactionCategoryErrors = {
+    /**
+     * Bad Request
+     */
+    400: ProblemDetails;
+    /**
+     * Not Found
+     */
+    404: ProblemDetails;
+    /**
+     * Conflict
+     */
+    409: ProblemDetails;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type LookupTransactionCategoryError = LookupTransactionCategoryErrors[keyof LookupTransactionCategoryErrors];
+
+export type LookupTransactionCategoryResponses = {
+    /**
+     * Successful Response
+     */
+    200: TransactionCategory;
+};
+
+export type LookupTransactionCategoryResponse = LookupTransactionCategoryResponses[keyof LookupTransactionCategoryResponses];
+
+export type UpdateTransactionCategoryData = {
+    body: WriteTransactionCategory;
+    path: {
+        /**
+         * Id
+         */
+        id: number;
+    };
+    query?: never;
+    url: '/transactioncategories/{id}';
+};
+
+export type UpdateTransactionCategoryErrors = {
+    /**
+     * Bad Request
+     */
+    400: ProblemDetails;
+    /**
+     * Not Found
+     */
+    404: ProblemDetails;
+    /**
+     * Conflict
+     */
+    409: ProblemDetails;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type UpdateTransactionCategoryError = UpdateTransactionCategoryErrors[keyof UpdateTransactionCategoryErrors];
+
+export type UpdateTransactionCategoryResponses = {
+    /**
+     * Successful Response
+     */
+    204: void;
+};
+
+export type UpdateTransactionCategoryResponse = UpdateTransactionCategoryResponses[keyof UpdateTransactionCategoryResponses];
+
+export type SearchTransactionCategoriesData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * Skip
+         */
+        skip?: number;
+        /**
+         * Take
+         */
+        take?: number;
+    };
+    url: '/transactioncategories/';
+};
+
+export type SearchTransactionCategoriesErrors = {
+    /**
+     * Bad Request
+     */
+    400: ProblemDetails;
+    /**
+     * Not Found
+     */
+    404: ProblemDetails;
+    /**
+     * Conflict
+     */
+    409: ProblemDetails;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type SearchTransactionCategoriesError = SearchTransactionCategoriesErrors[keyof SearchTransactionCategoriesErrors];
+
+export type SearchTransactionCategoriesResponses = {
+    /**
+     * Successful Response
+     */
+    200: SearchResponseTransactionCategory;
+};
+
+export type SearchTransactionCategoriesResponse = SearchTransactionCategoriesResponses[keyof SearchTransactionCategoriesResponses];
+
+export type CreateTransactionCategoryData = {
+    body: WriteTransactionCategory;
+    path?: never;
+    query?: never;
+    url: '/transactioncategories/';
+};
+
+export type CreateTransactionCategoryErrors = {
+    /**
+     * Bad Request
+     */
+    400: ProblemDetails;
+    /**
+     * Not Found
+     */
+    404: ProblemDetails;
+    /**
+     * Conflict
+     */
+    409: ProblemDetails;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type CreateTransactionCategoryError = CreateTransactionCategoryErrors[keyof CreateTransactionCategoryErrors];
+
+export type CreateTransactionCategoryResponses = {
+    /**
+     * Successful Response
      */
     201: unknown;
 };
@@ -707,17 +1048,20 @@ export type CreatePersonResponses = {
 export type DeleteCategoryPatternData = {
     body?: never;
     path: {
+        /**
+         * Id
+         */
         id: number;
     };
     query?: never;
-    url: '/api/patterns/{id}';
+    url: '/categorypatterns/{id}';
 };
 
 export type DeleteCategoryPatternErrors = {
     /**
      * Bad Request
      */
-    400: HttpValidationProblemDetails;
+    400: ProblemDetails;
     /**
      * Not Found
      */
@@ -726,13 +1070,17 @@ export type DeleteCategoryPatternErrors = {
      * Conflict
      */
     409: ProblemDetails;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
 };
 
 export type DeleteCategoryPatternError = DeleteCategoryPatternErrors[keyof DeleteCategoryPatternErrors];
 
 export type DeleteCategoryPatternResponses = {
     /**
-     * No Content
+     * Successful Response
      */
     204: void;
 };
@@ -742,17 +1090,20 @@ export type DeleteCategoryPatternResponse = DeleteCategoryPatternResponses[keyof
 export type LookupCategoryPatternData = {
     body?: never;
     path: {
+        /**
+         * Id
+         */
         id: number;
     };
     query?: never;
-    url: '/api/patterns/{id}';
+    url: '/categorypatterns/{id}';
 };
 
 export type LookupCategoryPatternErrors = {
     /**
      * Bad Request
      */
-    400: HttpValidationProblemDetails;
+    400: ProblemDetails;
     /**
      * Not Found
      */
@@ -761,33 +1112,40 @@ export type LookupCategoryPatternErrors = {
      * Conflict
      */
     409: ProblemDetails;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
 };
 
 export type LookupCategoryPatternError = LookupCategoryPatternErrors[keyof LookupCategoryPatternErrors];
 
 export type LookupCategoryPatternResponses = {
     /**
-     * OK
+     * Successful Response
      */
-    200: CategoryPatternResponse;
+    200: CategoryPattern;
 };
 
 export type LookupCategoryPatternResponse = LookupCategoryPatternResponses[keyof LookupCategoryPatternResponses];
 
 export type UpdateCategoryPatternData = {
-    body?: WriteCategoryPatternRequest;
+    body: WriteCategoryPattern;
     path: {
+        /**
+         * Id
+         */
         id: number;
     };
     query?: never;
-    url: '/api/patterns/{id}';
+    url: '/categorypatterns/{id}';
 };
 
 export type UpdateCategoryPatternErrors = {
     /**
      * Bad Request
      */
-    400: HttpValidationProblemDetails;
+    400: ProblemDetails;
     /**
      * Not Found
      */
@@ -796,34 +1154,44 @@ export type UpdateCategoryPatternErrors = {
      * Conflict
      */
     409: ProblemDetails;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
 };
 
 export type UpdateCategoryPatternError = UpdateCategoryPatternErrors[keyof UpdateCategoryPatternErrors];
 
 export type UpdateCategoryPatternResponses = {
     /**
-     * No Content
+     * Successful Response
      */
     204: void;
 };
 
 export type UpdateCategoryPatternResponse = UpdateCategoryPatternResponses[keyof UpdateCategoryPatternResponses];
 
-export type SearchCategoryPatternData = {
+export type SearchCategoryPatternsData = {
     body?: never;
     path?: never;
     query?: {
-        take?: number;
+        /**
+         * Skip
+         */
         skip?: number;
+        /**
+         * Take
+         */
+        take?: number;
     };
-    url: '/api/patterns';
+    url: '/categorypatterns/';
 };
 
-export type SearchCategoryPatternErrors = {
+export type SearchCategoryPatternsErrors = {
     /**
      * Bad Request
      */
-    400: HttpValidationProblemDetails;
+    400: ProblemDetails;
     /**
      * Not Found
      */
@@ -832,31 +1200,35 @@ export type SearchCategoryPatternErrors = {
      * Conflict
      */
     409: ProblemDetails;
-};
-
-export type SearchCategoryPatternError = SearchCategoryPatternErrors[keyof SearchCategoryPatternErrors];
-
-export type SearchCategoryPatternResponses = {
     /**
-     * OK
+     * Validation Error
      */
-    200: SearchEntityResponseOfCategoryPatternResponse;
+    422: HttpValidationError;
 };
 
-export type SearchCategoryPatternResponse = SearchCategoryPatternResponses[keyof SearchCategoryPatternResponses];
+export type SearchCategoryPatternsError = SearchCategoryPatternsErrors[keyof SearchCategoryPatternsErrors];
+
+export type SearchCategoryPatternsResponses = {
+    /**
+     * Successful Response
+     */
+    200: SearchResponseCategoryPattern;
+};
+
+export type SearchCategoryPatternsResponse = SearchCategoryPatternsResponses[keyof SearchCategoryPatternsResponses];
 
 export type CreateCategoryPatternData = {
-    body?: WriteCategoryPatternRequest;
+    body: WriteCategoryPattern;
     path?: never;
     query?: never;
-    url: '/api/patterns';
+    url: '/categorypatterns/';
 };
 
 export type CreateCategoryPatternErrors = {
     /**
      * Bad Request
      */
-    400: HttpValidationProblemDetails;
+    400: ProblemDetails;
     /**
      * Not Found
      */
@@ -865,31 +1237,101 @@ export type CreateCategoryPatternErrors = {
      * Conflict
      */
     409: ProblemDetails;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
 };
 
 export type CreateCategoryPatternError = CreateCategoryPatternErrors[keyof CreateCategoryPatternErrors];
 
 export type CreateCategoryPatternResponses = {
     /**
-     * Created
+     * Successful Response
      */
     201: unknown;
 };
 
-export type AutocompleteTransactionCategoryByIdData = {
+export type AutocompleteSearchData = {
     body?: never;
     path: {
+        /**
+         * Name
+         */
+        name: string;
+    };
+    query: {
+        /**
+         * Skip
+         */
+        skip?: number;
+        /**
+         * Take
+         */
+        take?: number;
+        /**
+         * Search
+         */
+        search: string;
+    };
+    url: '/autocomplete/{name}';
+};
+
+export type AutocompleteSearchErrors = {
+    /**
+     * Bad Request
+     */
+    400: ProblemDetails;
+    /**
+     * Not Found
+     */
+    404: ProblemDetails;
+    /**
+     * Conflict
+     */
+    409: ProblemDetails;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type AutocompleteSearchError = AutocompleteSearchErrors[keyof AutocompleteSearchErrors];
+
+export type AutocompleteSearchResponses = {
+    /**
+     * Response Autocompletesearch
+     *
+     * Successful Response
+     */
+    200: {
+        [key: string]: string;
+    };
+};
+
+export type AutocompleteSearchResponse = AutocompleteSearchResponses[keyof AutocompleteSearchResponses];
+
+export type AutocompleteSingleData = {
+    body?: never;
+    path: {
+        /**
+         * Name
+         */
+        name: string;
+        /**
+         * Id
+         */
         id: number;
     };
     query?: never;
-    url: '/api/autocomplete/transactioncategory/{id}';
+    url: '/autocomplete/{name}/{id}';
 };
 
-export type AutocompleteTransactionCategoryByIdErrors = {
+export type AutocompleteSingleErrors = {
     /**
      * Bad Request
      */
-    400: HttpValidationProblemDetails;
+    400: ProblemDetails;
     /**
      * Not Found
      */
@@ -898,196 +1340,21 @@ export type AutocompleteTransactionCategoryByIdErrors = {
      * Conflict
      */
     409: ProblemDetails;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
 };
 
-export type AutocompleteTransactionCategoryByIdError = AutocompleteTransactionCategoryByIdErrors[keyof AutocompleteTransactionCategoryByIdErrors];
+export type AutocompleteSingleError = AutocompleteSingleErrors[keyof AutocompleteSingleErrors];
 
-export type AutocompleteTransactionCategoryByIdResponses = {
+export type AutocompleteSingleResponses = {
     /**
-     * OK
+     * Response Autocompletesingle
+     *
+     * Successful Response
      */
-    200: AutocompleteQueryResponse;
+    200: string;
 };
 
-export type AutocompleteTransactionCategoryByIdResponse = AutocompleteTransactionCategoryByIdResponses[keyof AutocompleteTransactionCategoryByIdResponses];
-
-export type AutocompleteTransactionCategoryData = {
-    body?: never;
-    path?: never;
-    query?: {
-        search?: string;
-        take?: number;
-        skip?: number;
-    };
-    url: '/api/autocomplete/transactioncategory';
-};
-
-export type AutocompleteTransactionCategoryErrors = {
-    /**
-     * Bad Request
-     */
-    400: HttpValidationProblemDetails;
-    /**
-     * Not Found
-     */
-    404: ProblemDetails;
-    /**
-     * Conflict
-     */
-    409: ProblemDetails;
-};
-
-export type AutocompleteTransactionCategoryError = AutocompleteTransactionCategoryErrors[keyof AutocompleteTransactionCategoryErrors];
-
-export type AutocompleteTransactionCategoryResponses = {
-    /**
-     * OK
-     */
-    200: Array<AutocompleteQueryResponse>;
-};
-
-export type AutocompleteTransactionCategoryResponse = AutocompleteTransactionCategoryResponses[keyof AutocompleteTransactionCategoryResponses];
-
-export type AutocompleteTransactionSourceByIdData = {
-    body?: never;
-    path: {
-        id: number;
-    };
-    query?: never;
-    url: '/api/autocomplete/transactionsource/{id}';
-};
-
-export type AutocompleteTransactionSourceByIdErrors = {
-    /**
-     * Bad Request
-     */
-    400: HttpValidationProblemDetails;
-    /**
-     * Not Found
-     */
-    404: ProblemDetails;
-    /**
-     * Conflict
-     */
-    409: ProblemDetails;
-};
-
-export type AutocompleteTransactionSourceByIdError = AutocompleteTransactionSourceByIdErrors[keyof AutocompleteTransactionSourceByIdErrors];
-
-export type AutocompleteTransactionSourceByIdResponses = {
-    /**
-     * OK
-     */
-    200: AutocompleteQueryResponse;
-};
-
-export type AutocompleteTransactionSourceByIdResponse = AutocompleteTransactionSourceByIdResponses[keyof AutocompleteTransactionSourceByIdResponses];
-
-export type AutocompleteTransactionSourceData = {
-    body?: never;
-    path?: never;
-    query?: {
-        search?: string;
-        take?: number;
-        skip?: number;
-    };
-    url: '/api/autocomplete/transactionsource';
-};
-
-export type AutocompleteTransactionSourceErrors = {
-    /**
-     * Bad Request
-     */
-    400: HttpValidationProblemDetails;
-    /**
-     * Not Found
-     */
-    404: ProblemDetails;
-    /**
-     * Conflict
-     */
-    409: ProblemDetails;
-};
-
-export type AutocompleteTransactionSourceError = AutocompleteTransactionSourceErrors[keyof AutocompleteTransactionSourceErrors];
-
-export type AutocompleteTransactionSourceResponses = {
-    /**
-     * OK
-     */
-    200: Array<AutocompleteQueryResponse>;
-};
-
-export type AutocompleteTransactionSourceResponse = AutocompleteTransactionSourceResponses[keyof AutocompleteTransactionSourceResponses];
-
-export type AutocompletePersonByIdData = {
-    body?: never;
-    path: {
-        id: number;
-    };
-    query?: never;
-    url: '/api/autocomplete/person/{id}';
-};
-
-export type AutocompletePersonByIdErrors = {
-    /**
-     * Bad Request
-     */
-    400: HttpValidationProblemDetails;
-    /**
-     * Not Found
-     */
-    404: ProblemDetails;
-    /**
-     * Conflict
-     */
-    409: ProblemDetails;
-};
-
-export type AutocompletePersonByIdError = AutocompletePersonByIdErrors[keyof AutocompletePersonByIdErrors];
-
-export type AutocompletePersonByIdResponses = {
-    /**
-     * OK
-     */
-    200: AutocompleteQueryResponse;
-};
-
-export type AutocompletePersonByIdResponse = AutocompletePersonByIdResponses[keyof AutocompletePersonByIdResponses];
-
-export type AutocompletePersonData = {
-    body?: never;
-    path?: never;
-    query?: {
-        search?: string;
-        take?: number;
-        skip?: number;
-    };
-    url: '/api/autocomplete/person';
-};
-
-export type AutocompletePersonErrors = {
-    /**
-     * Bad Request
-     */
-    400: HttpValidationProblemDetails;
-    /**
-     * Not Found
-     */
-    404: ProblemDetails;
-    /**
-     * Conflict
-     */
-    409: ProblemDetails;
-};
-
-export type AutocompletePersonError = AutocompletePersonErrors[keyof AutocompletePersonErrors];
-
-export type AutocompletePersonResponses = {
-    /**
-     * OK
-     */
-    200: Array<AutocompleteQueryResponse>;
-};
-
-export type AutocompletePersonResponse = AutocompletePersonResponses[keyof AutocompletePersonResponses];
+export type AutocompleteSingleResponse = AutocompleteSingleResponses[keyof AutocompleteSingleResponses];

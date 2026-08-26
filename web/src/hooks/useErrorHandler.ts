@@ -1,7 +1,4 @@
-import type {
-  HttpValidationProblemDetails,
-  ProblemDetails,
-} from "@/lib/generated";
+import type { HttpValidationError, ProblemDetails } from "@/lib/generated";
 import { App, type FormInstance } from "antd";
 import { useCallback } from "react";
 
@@ -14,10 +11,10 @@ export default function useErrorHandler() {
   return useCallback(
     (error: unknown, form?: FormInstance) => {
       let modalError = { title: DEFAULT_TITLE, content: DEFAULT_CONTENT };
-      if (isHttpValidationProblemDetails(error)) {
+      if (isHttpValidationError(error)) {
         if (form) return handleValidationFormErrors(form, error);
-        if (error.title) modalError.title = error.title;
-        if (error.errors) modalError.content = joinFieldValidationErrors(error);
+        modalError.title = "Validation Errors";
+        if (error.detail) modalError.content = joinFieldValidationErrors(error);
       }
       if (isProblemDetails(error)) {
         if (error.title) modalError.title = error.title;
@@ -31,32 +28,28 @@ export default function useErrorHandler() {
 
 function handleValidationFormErrors(
   form: FormInstance,
-  problem: HttpValidationProblemDetails,
+  problem: HttpValidationError,
 ) {
-  if (!problem.errors) return;
+  if (!problem.detail) return;
   form.setFields(
-    Object.entries(problem.errors).map(([field, messages]) => ({
-      name: field,
-      errors: messages,
+    problem.detail.map((err) => ({
+      name: "",
+      errors: [err.msg],
     })),
   );
 }
 
-function joinFieldValidationErrors(problem: HttpValidationProblemDetails) {
-  return Object.entries(problem.errors ?? {})
-    .flatMap(([field, messages]) =>
-      messages.map((message) => `${field}: ${message}`),
-    )
+function joinFieldValidationErrors(problem: HttpValidationError) {
+  return (problem.detail ?? [])
+    .flatMap((err) => `${err.loc}: ${err.msg}`)
     .join("\n");
 }
 
-function isHttpValidationProblemDetails(
-  error: unknown,
-): error is HttpValidationProblemDetails {
+function isHttpValidationError(error: unknown): error is HttpValidationError {
   return (
     typeof error === "object" &&
     error !== null &&
-    Object.hasOwn(error, "errors")
+    Object.hasOwn(error, "detail")
   );
 }
 

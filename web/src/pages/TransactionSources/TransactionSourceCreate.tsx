@@ -1,7 +1,7 @@
 import EntityCreateForm from "@/components/EntityForm/EntityCreateForm";
-import type { WriteTransactionSourceRequest } from "@/lib/generated";
+import type { WriteTransactionSource } from "@/lib/generated";
 import {
-  searchTransactionSourceQueryKey,
+  searchTransactionSourcesQueryKey,
   createTransactionSourceMutation,
 } from "@/lib/generated/@tanstack/react-query.gen";
 import { Form, Input, InputNumber } from "antd";
@@ -11,16 +11,16 @@ export default function TransactionSourceCreate() {
     <EntityCreateForm
       title="Add TransactionSource"
       createEntityMutation={createTransactionSourceMutation}
-      toInvalidate={[searchTransactionSourceQueryKey()]}
+      toInvalidate={[searchTransactionSourcesQueryKey()]}
     >
-      <Form.Item<WriteTransactionSourceRequest>
+      <Form.Item<WriteTransactionSource>
         label="Name"
         name="name"
         rules={[{ required: true }]}
       >
         <Input maxLength={100} />
       </Form.Item>
-      <Form.Item<WriteTransactionSourceRequest>
+      <Form.Item<WriteTransactionSource>
         label="Owner"
         name="ownerId"
         rules={[{ required: true }]}

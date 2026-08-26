@@ -1,5 +1,5 @@
 import AppAutocomplete from "@/components/AppAutocomplete";
-import type { WriteCategoryPatternRequest } from "@/lib/generated";
+import type { WriteCategoryPattern } from "@/lib/generated";
 import { transactionCategoryAutocomplete } from "@/utils/autocompleteRequests";
 import { Flex, Form, Input, Radio } from "antd";
 import type { FormInstance } from "antd/lib/form";
@@ -14,7 +14,7 @@ const labelStyle: React.CSSProperties = {
 export default function CategoryPatternModifyShared({
   form,
 }: {
-  form: FormInstance<WriteCategoryPatternRequest>;
+  form: FormInstance<WriteCategoryPattern>;
 }) {
   const [requireManualSelection, setRequireManualSelection] =
     useState<boolean>(true);
@@ -39,7 +39,7 @@ export default function CategoryPatternModifyShared({
   };
   return (
     <>
-      <Form.Item<WriteCategoryPatternRequest>
+      <Form.Item<WriteCategoryPattern>
         label="Pattern"
         name="pattern"
         rules={[{ required: true }]}
@@ -58,7 +58,7 @@ export default function CategoryPatternModifyShared({
               style={labelStyle}
               styles={{ label: { width: "100%" } }}
             >
-              <Form.Item<WriteCategoryPatternRequest>
+              <Form.Item<WriteCategoryPattern>
                 name="transactionCategoryId"
                 label="Specific"
                 rules={[{ required: !requireManualSelection }]}

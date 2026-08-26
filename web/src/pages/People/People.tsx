@@ -3,17 +3,17 @@ import EntityTableCreateAction from "@/components/EntityTable/EntityTableCreateA
 import useDeleteActionForTable from "@/hooks/useDeleteActionForTable";
 import useEditActionForTable from "@/hooks/useEditActionForTable";
 import useQueryForTable from "@/hooks/useQueryForTable";
-import type { PersonResponse } from "@/lib/generated";
+import type { Person } from "@/lib/generated";
 import {
   deletePersonMutation,
-  searchPersonOptions,
-  searchPersonQueryKey,
+  searchPeopleOptions,
+  searchPeopleQueryKey,
 } from "@/lib/generated/@tanstack/react-query.gen";
 import type { ColumnsType } from "antd/es/table";
 import { useMemo } from "react";
 
 function People() {
-  const columns = useMemo<ColumnsType<PersonResponse>>(
+  const columns = useMemo<ColumnsType<Person>>(
     () => [
       {
         title: "First Name",
@@ -29,11 +29,11 @@ function People() {
     [],
   );
   const { query, updateQuery, useQueryResult } =
-    useQueryForTable(searchPersonOptions);
+    useQueryForTable(searchPeopleOptions);
 
   const editAction = useEditActionForTable();
   const deleteAction = useDeleteActionForTable(deletePersonMutation, [
-    searchPersonQueryKey(),
+    searchPeopleQueryKey(),
   ]);
 
   return (

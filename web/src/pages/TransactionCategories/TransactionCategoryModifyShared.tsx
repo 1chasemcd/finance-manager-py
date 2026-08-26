@@ -1,17 +1,17 @@
-import type { WriteTransactionCategoryRequest } from "@/lib/generated";
+import type { WriteTransactionCategory } from "@/lib/generated";
 import { Form, Input } from "antd";
 
 export default function TransactionCategoryModifyShared() {
   return (
     <>
-      <Form.Item<WriteTransactionCategoryRequest>
+      <Form.Item<WriteTransactionCategory>
         label="Name"
         name="name"
         rules={[{ required: true }]}
       >
         <Input maxLength={100} />
       </Form.Item>
-      <Form.Item<WriteTransactionCategoryRequest>
+      <Form.Item<WriteTransactionCategory>
         label="Description"
         name="description"
       >
