@@ -4,10 +4,10 @@ from decimal import Decimal
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from finance_manager.infrastructure.models.person import PersonRow
-from finance_manager.infrastructure.models.transaction import TransactionRow
-from finance_manager.infrastructure.models.transaction_category import TransactionCategoryRow
-from finance_manager.infrastructure.models.transaction_source import TransactionSourceRow
+from finance_manager.infrastructure.models.person_row import PersonRow
+from finance_manager.infrastructure.models.transaction_category_row import TransactionCategoryRow
+from finance_manager.infrastructure.models.transaction_row import TransactionRow
+from finance_manager.infrastructure.models.transaction_source_row import TransactionSourceRow
 
 chase = PersonRow(first_name="Chase", last_name="McDonald")
 hannah = PersonRow(first_name="Hannah", last_name="McDonald")

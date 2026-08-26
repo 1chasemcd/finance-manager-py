@@ -4,10 +4,10 @@ from sqlalchemy import ForeignKey, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from finance_manager.infrastructure.autocomplete_registry import autocomplete
-from finance_manager.infrastructure.models.base import DbBase
+from finance_manager.infrastructure.models.db_base import DbBase
 
 if TYPE_CHECKING:
-    from .person import PersonRow
+    from .person_row import PersonRow
 
 
 @autocomplete("{name}")

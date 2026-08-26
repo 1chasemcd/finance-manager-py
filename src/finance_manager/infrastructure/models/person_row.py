@@ -2,7 +2,7 @@ from sqlalchemy import String
 from sqlalchemy.orm import Mapped, mapped_column
 
 from finance_manager.infrastructure.autocomplete_registry import autocomplete
-from finance_manager.infrastructure.models.base import DbBase
+from finance_manager.infrastructure.models.db_base import DbBase
 
 
 @autocomplete("{first_name} {last_name}")

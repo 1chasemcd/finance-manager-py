@@ -5,7 +5,7 @@ from fastapi.responses import JSONResponse
 
 from finance_manager.api.result_handler import handle_result, handled_error_responses
 from finance_manager.dependencies.people import PersonRepositoryDep
-from finance_manager.schemas.common import PagedQuery
+from finance_manager.schemas.common import PagedQuery, SearchResponse
 from finance_manager.schemas.person import Person, WritePerson
 
 router = APIRouter(prefix="/people")
@@ -26,13 +26,13 @@ async def lookup_person(
 
 @router.get(
     "/",
-    response_model=list[Person],
+    response_model=SearchResponse[Person],
     responses=handled_error_responses(),
 )
 async def search_people(
     request: Annotated[PagedQuery, Query()],
     repo: PersonRepositoryDep,
-) -> list[Person] | JSONResponse:
+) -> SearchResponse[Person] | JSONResponse:
     result = await repo.search(request)
     return handle_result(result)
 

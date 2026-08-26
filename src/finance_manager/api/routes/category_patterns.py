@@ -6,7 +6,7 @@ from fastapi.responses import JSONResponse
 from finance_manager.api.result_handler import handle_result, handled_error_responses
 from finance_manager.dependencies.category_patterns import CategoryPatternRepositoryDep
 from finance_manager.schemas.category_pattern import CategoryPattern, WriteCategoryPattern
-from finance_manager.schemas.common import PagedQuery
+from finance_manager.schemas.common import PagedQuery, SearchResponse
 
 router = APIRouter(prefix="/categorypatterns")
 
@@ -26,13 +26,13 @@ async def lookup_category_pattern(
 
 @router.get(
     "/",
-    response_model=list[CategoryPattern],
+    response_model=SearchResponse[CategoryPattern],
     responses=handled_error_responses(),
 )
 async def search_category_patterns(
     request: Annotated[PagedQuery, Query()],
     repo: CategoryPatternRepositoryDep,
-) -> list[CategoryPattern] | JSONResponse:
+) -> SearchResponse[CategoryPattern] | JSONResponse:
     result = await repo.search(request)
     return handle_result(result)
 

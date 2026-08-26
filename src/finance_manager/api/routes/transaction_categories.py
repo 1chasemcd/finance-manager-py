@@ -5,7 +5,7 @@ from fastapi.responses import JSONResponse
 
 from finance_manager.api.result_handler import handle_result, handled_error_responses
 from finance_manager.dependencies.transaction_categories import TransactionCategoryRepositoryDep
-from finance_manager.schemas.common import PagedQuery
+from finance_manager.schemas.common import PagedQuery, SearchResponse
 from finance_manager.schemas.transaction_category import (
     TransactionCategory,
     WriteTransactionCategory,
@@ -29,13 +29,13 @@ async def lookup_transaction_category(
 
 @router.get(
     "/",
-    response_model=list[TransactionCategory],
+    response_model=SearchResponse[TransactionCategory],
     responses=handled_error_responses(),
 )
 async def search_transaction_categories(
     request: Annotated[PagedQuery, Query()],
     repo: TransactionCategoryRepositoryDep,
-) -> list[TransactionCategory] | JSONResponse:
+) -> SearchResponse[TransactionCategory] | JSONResponse:
     result = await repo.search(request)
     return handle_result(result)
 

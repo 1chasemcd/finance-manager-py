@@ -5,7 +5,7 @@ from fastapi.responses import JSONResponse
 
 from finance_manager.api.result_handler import handle_result, handled_error_responses
 from finance_manager.dependencies.transaction_sources import TransactionSourceRepositoryDep
-from finance_manager.schemas.common import PagedQuery
+from finance_manager.schemas.common import PagedQuery, SearchResponse
 from finance_manager.schemas.transaction_source import (
     TransactionSource,
     WriteTransactionSource,
@@ -29,13 +29,13 @@ async def lookup_transaction_source(
 
 @router.get(
     "/",
-    response_model=list[TransactionSource],
+    response_model=SearchResponse[TransactionSource],
     responses=handled_error_responses(),
 )
 async def search_transaction_sources(
     request: Annotated[PagedQuery, Query()],
     repo: TransactionSourceRepositoryDep,
-) -> list[TransactionSource] | JSONResponse:
+) -> SearchResponse[TransactionSource] | JSONResponse:
     result = await repo.search(request)
     return handle_result(result)
 

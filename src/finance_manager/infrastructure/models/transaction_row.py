@@ -5,11 +5,11 @@ from typing import TYPE_CHECKING
 from sqlalchemy import DateTime, ForeignKey, Numeric, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from finance_manager.infrastructure.models.base import DbBase
+from finance_manager.infrastructure.models.db_base import DbBase
 
 if TYPE_CHECKING:
-    from .transaction_category import TransactionCategoryRow
-    from .transaction_source import TransactionSourceRow
+    from .transaction_category_row import TransactionCategoryRow
+    from .transaction_source_row import TransactionSourceRow
 
 
 class TransactionRow(DbBase):

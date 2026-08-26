@@ -3,26 +3,26 @@ from typing import Any
 from sqlalchemy import Select, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from finance_manager.infrastructure.models.transaction import TransactionRow
-from finance_manager.infrastructure.models.transaction_category import TransactionCategoryRow
-from finance_manager.infrastructure.models.transaction_source import TransactionSourceRow
-from finance_manager.infrastructure.repositories.base import BaseRepository
+from finance_manager.infrastructure.models.transaction_category_row import TransactionCategoryRow
+from finance_manager.infrastructure.models.transaction_row import TransactionRow
+from finance_manager.infrastructure.models.transaction_source_row import TransactionSourceRow
+from finance_manager.infrastructure.repositories.base_repository import BaseRepository
 from finance_manager.schemas.transaction import (
+    SearchTransactions,
     Transaction,
-    TransactionsQuery,
     WriteTransaction,
 )
 
 
 class TransactionRepository(
     BaseRepository[
-        TransactionRow, Transaction, WriteTransaction, WriteTransaction, TransactionsQuery
+        TransactionRow, Transaction, WriteTransaction, WriteTransaction, SearchTransactions
     ]
 ):
     def __init__(self, session: AsyncSession) -> None:
         super().__init__(TransactionRow, Transaction, session)
 
-    def _select_statement(self) -> Select[tuple[Any, ...]]:
+    def _select(self) -> Select[tuple[Any, ...]]:
         return (
             select(
                 TransactionRow.id,
@@ -38,24 +38,8 @@ class TransactionRepository(
             .join(TransactionRow.transaction_source)
         )
 
-    def _map_create(self, request: WriteTransaction) -> TransactionRow:
-        return TransactionRow(
-            timestamp=request.timestamp,
-            amount=request.amount,
-            summary=request.summary,
-            transaction_source_id=request.transaction_source_id,
-            transaction_category_id=request.transaction_category_id,
-        )
-
-    def _map_update(self, request: WriteTransaction, model: TransactionRow) -> None:
-        model.timestamp = request.timestamp
-        model.amount = request.amount
-        model.summary = request.summary
-        model.transaction_source_id = request.transaction_source_id
-        model.transaction_category_id = request.transaction_category_id
-
     def _filter_search(
-        self, statement: Select[tuple[Any, ...]], request: TransactionsQuery
+        self, statement: Select[tuple[Any, ...]], request: SearchTransactions
     ) -> Select[tuple[Any, ...]]:
         statement = super()._filter_search(statement, request)
         if request.min_amount is not None:

@@ -7,7 +7,7 @@ from finance_manager.schemas import SchemaBase
 from finance_manager.schemas.common import PagedQuery
 
 
-class TransactionsQuery(PagedQuery):
+class SearchTransactions(PagedQuery):
     min_date: datetime | None = None
     max_date: datetime | None = None
     min_amount: Decimal | None = None

@@ -28,3 +28,8 @@ class PagedQuery(SchemaBase):
 
 class AutocompleteRequest(PagedQuery):
     search: str = Field(max_length=500)
+
+
+class SearchResponse[TModel](SchemaBase):
+    total: int
+    result: list[TModel]
