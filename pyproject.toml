@@ -14,6 +14,10 @@ dependencies = [
     "sqlalchemy>=2.0.52",
 ]
 
+[tool.uv.build-backend]
+module-name = "app"
+module-root = "src"
+
 [tool.ruff]
 line-length = 100
 target-version = "py314"
@@ -45,7 +49,7 @@ strict = ["src"]
 package = true
 
 [tool.fastapi]
-entrypoint = "finance_manager.main:app"
+entrypoint = "app.main:app"
 
 [build-system]
 requires = ["uv_build>=0.12.5,<0.13.0"]
