@@ -3,7 +3,7 @@ from typing import Annotated
 from fastapi import Depends
 
 from finance_manager.application.contract.person_repository import PersonRepository
-from finance_manager.dependencies import SessionDep
+from finance_manager.dependencies.database import SessionDep
 from finance_manager.infrastructure.repositories.person_repository import PersonRepositoryImpl
 
 

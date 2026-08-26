@@ -5,7 +5,7 @@ from sqlalchemy import Select, func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from finance_manager.core import NoContent, NotFound, Ok, Result
-from finance_manager.infrastructure.models import DbBase
+from finance_manager.infrastructure.models.db_base import DbBase
 from finance_manager.schemas.common import HasPage, PagedQuery, SearchResponse
 
 SelectStatement = Select[tuple[Any, ...]]

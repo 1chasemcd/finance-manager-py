@@ -4,7 +4,7 @@ from dataclasses import dataclass
 
 from sqlalchemy import ColumnElement, SQLColumnExpression, literal
 
-from finance_manager.infrastructure.models import DbBase
+from finance_manager.infrastructure.models.db_base import DbBase
 
 from ..core.errors import NotFound
 from ..core.result import Ok, Result

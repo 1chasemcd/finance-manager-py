@@ -3,8 +3,7 @@ from decimal import Decimal
 
 from pydantic import Field
 
-from finance_manager.schemas import SchemaBase
-from finance_manager.schemas.common import PagedQuery
+from finance_manager.schemas.common import PagedQuery, SchemaBase
 
 
 class SearchTransactions(PagedQuery):

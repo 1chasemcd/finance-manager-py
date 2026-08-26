@@ -5,7 +5,7 @@ from fastapi import Depends
 from finance_manager.application.contract.category_pattern_repository import (
     CategoryPatternRepository,
 )
-from finance_manager.dependencies import SessionDep
+from finance_manager.dependencies.database import SessionDep
 from finance_manager.infrastructure.repositories.category_pattern_repository import (
     CategoryPatternRepositoryImpl,
 )

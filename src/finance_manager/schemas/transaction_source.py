@@ -1,6 +1,6 @@
 from pydantic import Field
 
-from finance_manager.schemas import SchemaBase
+from finance_manager.schemas.common import SchemaBase
 
 
 class WriteTransactionSource(SchemaBase):

@@ -7,7 +7,7 @@ from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_asyn
 
 from finance_manager.config import Settings
 from finance_manager.infrastructure import seed
-from finance_manager.infrastructure.models import DbBase
+from finance_manager.infrastructure.models.db_base import DbBase
 
 
 class DatabaseSessionManager:
