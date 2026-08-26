@@ -1,1 +1,1 @@
-from .common import ApiBase as ApiBase
+from .common import SchemaBase as SchemaBase

@@ -4,10 +4,10 @@ from dataclasses import dataclass
 
 from sqlalchemy import ColumnElement, SQLColumnExpression, literal
 
-from finance_manager.models import DbBase
+from finance_manager.infrastructure.models import DbBase
 
-from .errors import NotFound
-from .result import Ok, Result
+from ..core.errors import NotFound
+from ..core.result import Ok, Result
 
 
 @dataclass

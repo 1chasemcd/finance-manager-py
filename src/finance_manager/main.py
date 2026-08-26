@@ -4,7 +4,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from finance_manager.api import (
+from finance_manager.api.routes import (
     autocomplete,
     category_patterns,
     people,

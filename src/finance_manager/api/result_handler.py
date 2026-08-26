@@ -3,15 +3,15 @@ from typing import Any, TypeVar
 from fastapi import status
 from fastapi.responses import JSONResponse
 
-from finance_manager.schemas.common import ApiBase
+from finance_manager.schemas.common import SchemaBase
 
-from .errors import Conflict, Invalid, NotFound
-from .result import Err, Result
+from ..core.errors import Conflict, Invalid, NotFound
+from ..core.result import Err, Result
 
 T = TypeVar("T")
 
 
-class ProblemDetails(ApiBase):
+class ProblemDetails(SchemaBase):
     title: str
     status: int
     detail: str

@@ -3,7 +3,7 @@ from typing import Annotated
 from fastapi import Depends
 
 from finance_manager.dependencies import SessionDep
-from finance_manager.repositories import TransactionRepository
+from finance_manager.infrastructure.repositories import TransactionRepository
 
 
 def get_transaction_repository(

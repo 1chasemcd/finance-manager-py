@@ -8,7 +8,7 @@ def to_camel(s: str) -> str:
     return parts[0] + "".join(word.capitalize() for word in parts[1:])
 
 
-class ApiBase(BaseModel):
+class SchemaBase(BaseModel):
     model_config = ConfigDict(
         alias_generator=to_camel,
         validate_by_name=True,
@@ -21,10 +21,10 @@ class HasPage(Protocol):
     take: int
 
 
-class PagedRequest(ApiBase):
+class PagedQuery(SchemaBase):
     skip: int = Field(default=0, ge=0)
     take: int = Field(default=50, ge=0, le=50)
 
 
-class AutocompleteRequest(ApiBase):
+class AutocompleteRequest(PagedQuery):
     search: str = Field(max_length=500)

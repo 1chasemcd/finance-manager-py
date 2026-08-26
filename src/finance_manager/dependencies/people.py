@@ -3,7 +3,7 @@ from typing import Annotated
 from fastapi import Depends
 
 from finance_manager.dependencies import SessionDep
-from finance_manager.repositories import PersonRepository
+from finance_manager.infrastructure.repositories import PersonRepository
 
 
 def get_person_repository(

@@ -2,7 +2,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from finance_manager.core import NotFound, Ok, Result
-from finance_manager.core.autocomplete_registry import AutocompleteRegistry
+from finance_manager.infrastructure.autocomplete_registry import AutocompleteRegistry
 from finance_manager.schemas.common import AutocompleteRequest
 
 

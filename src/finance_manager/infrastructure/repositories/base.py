@@ -6,8 +6,8 @@ from sqlalchemy import Select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from finance_manager.core import NoContent, NotFound, Ok, Result
-from finance_manager.models import DbBase
-from finance_manager.schemas.common import HasPage, PagedRequest
+from finance_manager.infrastructure.models import DbBase
+from finance_manager.schemas.common import HasPage, PagedQuery
 
 SelectStatement = Select[tuple[Any, ...]]
 
@@ -17,7 +17,7 @@ class BaseRepository[
     ReadType: BaseModel,
     CreateType: BaseModel,
     UpdateType = CreateType,
-    SearchType: HasPage = PagedRequest,
+    SearchType: HasPage = PagedQuery,
 ](ABC):
     def __init__(
         self,

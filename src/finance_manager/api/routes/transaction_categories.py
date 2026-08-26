@@ -3,11 +3,11 @@ from typing import Annotated
 from fastapi import APIRouter, Query, status
 from fastapi.responses import JSONResponse
 
-from finance_manager.core.result_handler import handle_result, handled_error_responses
+from finance_manager.api.result_handler import handle_result, handled_error_responses
 from finance_manager.dependencies.transaction_categories import TransactionCategoryRepositoryDep
-from finance_manager.schemas.common import PagedRequest
+from finance_manager.schemas.common import PagedQuery
 from finance_manager.schemas.transaction_category import (
-    TransactionCategoryResponse,
+    TransactionCategory,
     WriteTransactionCategory,
 )
 
@@ -16,26 +16,26 @@ router = APIRouter(prefix="/transactioncategories")
 
 @router.get(
     "/{id}",
-    response_model=TransactionCategoryResponse,
+    response_model=TransactionCategory,
     responses=handled_error_responses(),
 )
 async def lookup_transaction_category(
     id: int,
     repo: TransactionCategoryRepositoryDep,
-) -> TransactionCategoryResponse | JSONResponse:
+) -> TransactionCategory | JSONResponse:
     result = await repo.lookup(id)
     return handle_result(result)
 
 
 @router.get(
     "/",
-    response_model=list[TransactionCategoryResponse],
+    response_model=list[TransactionCategory],
     responses=handled_error_responses(),
 )
 async def search_transaction_categories(
-    request: Annotated[PagedRequest, Query()],
+    request: Annotated[PagedQuery, Query()],
     repo: TransactionCategoryRepositoryDep,
-) -> list[TransactionCategoryResponse] | JSONResponse:
+) -> list[TransactionCategory] | JSONResponse:
     result = await repo.search(request)
     return handle_result(result)
 

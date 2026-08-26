@@ -3,7 +3,7 @@ from typing import Annotated
 from fastapi import Depends
 
 from finance_manager.dependencies import SessionDep
-from finance_manager.repositories import CategoryPatternRepository
+from finance_manager.infrastructure.repositories import CategoryPatternRepository
 
 
 def get_category_pattern_repository(

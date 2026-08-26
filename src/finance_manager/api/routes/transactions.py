@@ -3,34 +3,34 @@ from typing import Annotated
 from fastapi import APIRouter, Query
 from fastapi.responses import JSONResponse
 
-from finance_manager.core.result_handler import handle_result, handled_error_responses
+from finance_manager.api.result_handler import handle_result, handled_error_responses
 from finance_manager.dependencies.transactions import TransactionRepositoryDep
-from finance_manager.schemas.transaction import SearchTransactions, TransactionResponse
+from finance_manager.schemas.transaction import Transaction, TransactionsQuery
 
 router = APIRouter(prefix="/transactions")
 
 
 @router.get(
     "/{id}",
-    response_model=TransactionResponse,
+    response_model=Transaction,
     responses=handled_error_responses(),
 )
 async def lookup_transaction(
     id: int,
     repo: TransactionRepositoryDep,
-) -> TransactionResponse | JSONResponse:
+) -> Transaction | JSONResponse:
     result = await repo.lookup(id)
     return handle_result(result)
 
 
 @router.get(
     "/",
-    response_model=list[TransactionResponse],
+    response_model=list[Transaction],
     responses=handled_error_responses(),
 )
 async def search_transactions(
-    request: Annotated[SearchTransactions, Query()],
+    request: Annotated[TransactionsQuery, Query()],
     repo: TransactionRepositoryDep,
-) -> list[TransactionResponse] | JSONResponse:
+) -> list[Transaction] | JSONResponse:
     result = await repo.search(request)
     return handle_result(result)

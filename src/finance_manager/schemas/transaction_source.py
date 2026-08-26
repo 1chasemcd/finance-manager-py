@@ -1,14 +1,14 @@
 from pydantic import Field
 
-from finance_manager.schemas import ApiBase
+from finance_manager.schemas import SchemaBase
 
 
-class WriteTransactionSource(ApiBase):
+class WriteTransactionSource(SchemaBase):
     name: str = Field(max_length=100)
     owner_id: int = Field(ge=0)
 
 
-class TransactionSourceResponse(ApiBase):
+class TransactionSource(SchemaBase):
     id: int
     name: str
     owner_id: int

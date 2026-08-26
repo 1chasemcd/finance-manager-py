@@ -6,8 +6,8 @@ from sqlalchemy import StaticPool
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 
 from finance_manager.config import Settings
-from finance_manager.db import seed
-from finance_manager.models import DbBase
+from finance_manager.infrastructure import seed
+from finance_manager.infrastructure.models import DbBase
 
 
 class DatabaseSessionManager:

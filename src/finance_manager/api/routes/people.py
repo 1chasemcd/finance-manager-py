@@ -3,39 +3,36 @@ from typing import Annotated
 from fastapi import APIRouter, Query, status
 from fastapi.responses import JSONResponse
 
-from finance_manager.core.result_handler import handle_result, handled_error_responses
-from finance_manager.dependencies.transaction_sources import TransactionSourceRepositoryDep
-from finance_manager.schemas.common import PagedRequest
-from finance_manager.schemas.transaction_source import (
-    TransactionSourceResponse,
-    WriteTransactionSource,
-)
+from finance_manager.api.result_handler import handle_result, handled_error_responses
+from finance_manager.dependencies.people import PersonRepositoryDep
+from finance_manager.schemas.common import PagedQuery
+from finance_manager.schemas.person import Person, WritePerson
 
-router = APIRouter(prefix="/transactionsources")
+router = APIRouter(prefix="/people")
 
 
 @router.get(
     "/{id}",
-    response_model=TransactionSourceResponse,
+    response_model=Person,
     responses=handled_error_responses(),
 )
-async def lookup_transaction_source(
+async def lookup_person(
     id: int,
-    repo: TransactionSourceRepositoryDep,
-) -> TransactionSourceResponse | JSONResponse:
+    repo: PersonRepositoryDep,
+) -> Person | JSONResponse:
     result = await repo.lookup(id)
     return handle_result(result)
 
 
 @router.get(
     "/",
-    response_model=list[TransactionSourceResponse],
+    response_model=list[Person],
     responses=handled_error_responses(),
 )
-async def search_transaction_sources(
-    request: Annotated[PagedRequest, Query()],
-    repo: TransactionSourceRepositoryDep,
-) -> list[TransactionSourceResponse] | JSONResponse:
+async def search_people(
+    request: Annotated[PagedQuery, Query()],
+    repo: PersonRepositoryDep,
+) -> list[Person] | JSONResponse:
     result = await repo.search(request)
     return handle_result(result)
 
@@ -46,9 +43,9 @@ async def search_transaction_sources(
     response_model=None,
     responses=handled_error_responses(),
 )
-async def create_transaction_source(
-    request: WriteTransactionSource,
-    repo: TransactionSourceRepositoryDep,
+async def create_person(
+    request: WritePerson,
+    repo: PersonRepositoryDep,
 ) -> None | JSONResponse:
     result = await repo.create(request)
     return handle_result(result)
@@ -60,10 +57,10 @@ async def create_transaction_source(
     response_model=None,
     responses=handled_error_responses(),
 )
-async def update_transaction_source(
+async def update_person(
     id: int,
-    request: WriteTransactionSource,
-    repo: TransactionSourceRepositoryDep,
+    request: WritePerson,
+    repo: PersonRepositoryDep,
 ) -> None | JSONResponse:
     result = await repo.update(id, request)
     return handle_result(result)
@@ -75,9 +72,9 @@ async def update_transaction_source(
     response_model=None,
     responses=handled_error_responses(),
 )
-async def delete_transaction_source(
+async def delete_person(
     id: int,
-    repo: TransactionSourceRepositoryDep,
+    repo: PersonRepositoryDep,
 ) -> None | JSONResponse:
     result = await repo.delete(id)
     return handle_result(result)

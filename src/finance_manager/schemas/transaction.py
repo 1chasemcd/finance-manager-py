@@ -3,11 +3,11 @@ from decimal import Decimal
 
 from pydantic import Field
 
-from finance_manager.schemas import ApiBase
-from finance_manager.schemas.common import PagedRequest
+from finance_manager.schemas import SchemaBase
+from finance_manager.schemas.common import PagedQuery
 
 
-class SearchTransactions(PagedRequest):
+class TransactionsQuery(PagedQuery):
     min_date: datetime | None = None
     max_date: datetime | None = None
     min_amount: Decimal | None = None
@@ -17,7 +17,7 @@ class SearchTransactions(PagedRequest):
     owner_id: int | None = None
 
 
-class WriteTransaction(ApiBase):
+class WriteTransaction(SchemaBase):
     timestamp: datetime
     amount: Decimal = Field(max_digits=12, decimal_places=2)
     summary: str = Field(max_length=500)
@@ -25,7 +25,7 @@ class WriteTransaction(ApiBase):
     transaction_source_id: int
 
 
-class TransactionResponse(ApiBase):
+class Transaction(SchemaBase):
     id: int
     timestamp: datetime
     amount: Decimal

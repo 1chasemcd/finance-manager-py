@@ -4,7 +4,7 @@ from typing import Annotated
 from fastapi import Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from finance_manager.db import DatabaseSessionManager
+from finance_manager.infrastructure.database import DatabaseSessionManager
 
 sessionmanager = DatabaseSessionManager()
 

@@ -3,7 +3,7 @@ from typing import Annotated
 from fastapi import APIRouter, Query
 from fastapi.responses import JSONResponse
 
-from finance_manager.core.result_handler import handle_result, handled_error_responses
+from finance_manager.api.result_handler import handle_result, handled_error_responses
 from finance_manager.dependencies.autocomplete import AutocompleteRepositoryDep
 from finance_manager.schemas.common import AutocompleteRequest
 
