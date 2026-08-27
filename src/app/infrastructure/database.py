@@ -1,8 +1,9 @@
+import sqlite3
 from collections.abc import AsyncGenerator
 from contextlib import asynccontextmanager
 from typing import Any
 
-from sqlalchemy import StaticPool
+from sqlalchemy import StaticPool, event
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 
 from app.config import Settings
@@ -30,6 +31,15 @@ class DatabaseSessionManager:
             db_args.pop("max_overflow")
 
         self._engine = create_async_engine(config.database_url, **db_args)
+
+        # enable foreign key constraints
+        @event.listens_for(self._engine.sync_engine, "connect")
+        def _set_sqlite_pragma(
+            dbapi_connection: sqlite3.Connection,
+            connection_record: Any,
+        ) -> None:
+            dbapi_connection.execute("PRAGMA foreign_keys=ON")
+
         self._sessionmaker = async_sessionmaker(
             bind=self._engine,
             class_=AsyncSession,
