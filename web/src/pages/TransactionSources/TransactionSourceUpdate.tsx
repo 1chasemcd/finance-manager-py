@@ -37,7 +37,7 @@ export default function TransactionSourceUpdate() {
         name="ownerId"
         rules={[{ required: true }]}
       >
-        <AppAutocomplete entityName="person" />
+        <AppAutocomplete entity="person" />
       </Form.Item>
     </EntityUpdateForm>
   );

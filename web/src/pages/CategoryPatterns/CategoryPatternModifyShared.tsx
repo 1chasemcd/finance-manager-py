@@ -65,7 +65,7 @@ export default function CategoryPatternModifyShared({
                 <AppAutocomplete
                   placeholder="Assign specific category to matches..."
                   disabled={requireManualSelection}
-                  entityName="transactioncategory"
+                  entity="transactioncategory"
                 />
               </Form.Item>
             </Radio>

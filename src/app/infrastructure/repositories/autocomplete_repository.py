@@ -12,9 +12,9 @@ class AutocompleteRepositoryImpl:
         self._registry = registry
 
     async def search(
-        self, name: str, request: AutocompleteRequest
+        self, entity: str, request: AutocompleteRequest
     ) -> Result[list[AutocompleteEntry]]:
-        entry = self._registry.get(name)
+        entry = self._registry.get(entity)
         if entry.status == "err":
             return entry
         search = f"%{request.search}%"
@@ -28,8 +28,8 @@ class AutocompleteRepositoryImpl:
         pairs = [AutocompleteEntry(id=key, label=value) for key, value in res]
         return Ok(pairs)
 
-    async def single(self, name: str, id: int) -> Result[AutocompleteEntry]:
-        entry = self._registry.get(name)
+    async def single(self, entity: str, id: int) -> Result[AutocompleteEntry]:
+        entry = self._registry.get(entity)
         if entry.status == "err":
             return entry
         stmt = select(entry.value.display).where(entry.value.id == id)

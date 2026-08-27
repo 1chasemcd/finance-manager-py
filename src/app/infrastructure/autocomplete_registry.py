@@ -53,6 +53,6 @@ def autocomplete[T: DbBase](
 
 
 class AutocompleteRegistry:
-    def get(self, name: str) -> Result[_AutocompleteRegistryEntry]:
-        find = name.lower()
+    def get(self, entity: str) -> Result[_AutocompleteRegistryEntry]:
+        find = entity.lower()
         return Ok(_autocomplete_registry[find]) if find in _autocomplete_registry else NotFound()

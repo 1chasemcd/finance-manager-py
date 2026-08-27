@@ -196,9 +196,9 @@ export const createCategoryPattern = <ThrowOnError extends boolean = false>(opti
 /**
  * Autocomplete Search
  */
-export const autocompleteSearch = <ThrowOnError extends boolean = false>(options: Options<AutocompleteSearchData, ThrowOnError>): RequestResult<AutocompleteSearchResponses, AutocompleteSearchErrors, ThrowOnError> => (options.client ?? client).get<AutocompleteSearchResponses, AutocompleteSearchErrors, ThrowOnError>({ url: '/autocomplete/{name}', ...options });
+export const autocompleteSearch = <ThrowOnError extends boolean = false>(options: Options<AutocompleteSearchData, ThrowOnError>): RequestResult<AutocompleteSearchResponses, AutocompleteSearchErrors, ThrowOnError> => (options.client ?? client).get<AutocompleteSearchResponses, AutocompleteSearchErrors, ThrowOnError>({ url: '/autocomplete/{entity}', ...options });
 
 /**
  * Autocomplete Single
  */
-export const autocompleteSingle = <ThrowOnError extends boolean = false>(options: Options<AutocompleteSingleData, ThrowOnError>): RequestResult<AutocompleteSingleResponses, AutocompleteSingleErrors, ThrowOnError> => (options.client ?? client).get<AutocompleteSingleResponses, AutocompleteSingleErrors, ThrowOnError>({ url: '/autocomplete/{name}/{id}', ...options });
+export const autocompleteSingle = <ThrowOnError extends boolean = false>(options: Options<AutocompleteSingleData, ThrowOnError>): RequestResult<AutocompleteSingleResponses, AutocompleteSingleErrors, ThrowOnError> => (options.client ?? client).get<AutocompleteSingleResponses, AutocompleteSingleErrors, ThrowOnError>({ url: '/autocomplete/{entity}/{id}', ...options });

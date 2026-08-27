@@ -58,18 +58,18 @@ export default function TransactionsFilter({
       </Form.Item>
 
       <Form.Item<TransactionQuery> label="Source" name="transactionSourceId">
-        <AppAutocomplete allowClear entityName="transactionsource" />
+        <AppAutocomplete allowClear entity="transactionsource" />
       </Form.Item>
 
       <Form.Item<TransactionQuery>
         label="Category"
         name="transactionCategoryId"
       >
-        <AppAutocomplete allowClear entityName="transactioncategory" />
+        <AppAutocomplete allowClear entity="transactioncategory" />
       </Form.Item>
 
       <Form.Item<TransactionQuery> label="Owner" name="ownerId">
-        <AppAutocomplete allowClear entityName="person" />
+        <AppAutocomplete allowClear entity="person" />
       </Form.Item>
     </Form>
   );

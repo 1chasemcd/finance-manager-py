@@ -12,7 +12,7 @@ import { useDebounce } from "use-debounce";
 interface AppAutocompleteProps {
   value?: number | null;
   onChange?: (value: number | null) => void;
-  entityName: AutocompleteOption;
+  entity: AutocompleteOption;
 }
 
 function transformAutocompleteResponse({ id, label }: AutocompleteEntry) {
@@ -22,7 +22,7 @@ function transformAutocompleteResponse({ id, label }: AutocompleteEntry) {
 export default function AppAutocomplete({
   value,
   onChange,
-  entityName,
+  entity,
 
   ...props
 }: AppAutocompleteProps & React.ComponentProps<typeof Select>) {
@@ -32,7 +32,7 @@ export default function AppAutocomplete({
 
   const { data, isFetching } = useQuery({
     ...autocompleteSearchOptions({
-      path: { name: entityName },
+      path: { entity },
       query: { search: debouncedSearchText, take: 50, skip: 0 },
     }),
     enabled: hasBeenFocused,
@@ -41,7 +41,7 @@ export default function AppAutocomplete({
   const { data: selectedOption, isFetching: isFetchingSelectedOption } =
     useQuery({
       ...autocompleteSingleOptions({
-        path: { name: entityName, id: value! },
+        path: { entity, id: value! },
       }),
       enabled: value != null && !data?.some((x) => x.id === value),
     });

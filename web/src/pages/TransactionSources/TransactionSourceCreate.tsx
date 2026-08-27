@@ -26,7 +26,7 @@ export default function TransactionSourceCreate() {
         name="ownerId"
         rules={[{ required: true }]}
       >
-        <AppAutocomplete entityName="person" />
+        <AppAutocomplete entity="person" />
       </Form.Item>
     </EntityCreateForm>
   );

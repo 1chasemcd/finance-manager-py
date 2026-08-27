@@ -11,28 +11,28 @@ router = APIRouter(prefix="/autocomplete")
 
 
 @router.get(
-    "/{name}",
+    "/{entity}",
     response_model=list[AutocompleteEntry],
     responses=handled_error_responses(),
 )
 async def autocomplete_search(
-    name: str,
+    entity: str,
     request: Annotated[AutocompleteRequest, Query()],
     repo: AutocompleteRepositoryDep,
 ) -> list[AutocompleteEntry] | JSONResponse:
-    result = await repo.search(name, request)
+    result = await repo.search(entity, request)
     return handle_result(result)
 
 
 @router.get(
-    "/{name}/{id}",
+    "/{entity}/{id}",
     response_model=AutocompleteEntry,
     responses=handled_error_responses(),
 )
 async def autocomplete_single(
-    name: str,
+    entity: str,
     id: int,
     repo: AutocompleteRepositoryDep,
 ) -> AutocompleteEntry | JSONResponse:
-    result = await repo.single(name, id)
+    result = await repo.single(entity, id)
     return handle_result(result)
