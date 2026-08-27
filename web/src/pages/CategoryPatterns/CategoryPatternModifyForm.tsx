@@ -1,5 +1,6 @@
 import AppAutocomplete from "@/components/AppAutocomplete";
 import type { WriteCategoryPattern } from "@/lib/generated";
+import { WriteCategoryPatternSchema } from "@/lib/generated/schemas.gen";
 import { Flex, Form, Input, Radio } from "antd";
 import type { FormInstance } from "antd/lib/form";
 import type { RadioChangeEvent } from "antd/lib/radio";
@@ -43,7 +44,10 @@ export default function CategoryPatternModifyForm({
         name="pattern"
         rules={[{ required: true }]}
       >
-        <Input maxLength={100} style={{ fontFamily: "monospace" }} />
+        <Input
+          maxLength={WriteCategoryPatternSchema.properties.pattern.maxLength}
+          style={{ fontFamily: "monospace" }}
+        />
       </Form.Item>
       <Form.Item label="Category">
         <Radio.Group onChange={radioChange} value={requireManualSelection}>

@@ -1,4 +1,5 @@
 import type { WriteImportDef } from "@/lib/generated";
+import { WriteImportDefSchema } from "@/lib/generated/schemas.gen";
 import { Form, Input } from "antd";
 
 export default function ImportDefModifyForm() {
@@ -9,7 +10,7 @@ export default function ImportDefModifyForm() {
         name="name"
         rules={[{ required: true }]}
       >
-        <Input maxLength={100} />
+        <Input maxLength={WriteImportDefSchema.properties.name.maxLength} />
       </Form.Item>
     </>
   );
