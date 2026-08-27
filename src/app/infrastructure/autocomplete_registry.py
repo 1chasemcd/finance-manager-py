@@ -43,7 +43,7 @@ def autocomplete[T: DbBase](
     template: str,
 ) -> Callable[[type[T]], type[T]]:
     def decorator(cls: type[T]) -> type[T]:
-        _autocomplete_registry[cls.__name__.lower()] = _AutocompleteRegistryEntry(
+        _autocomplete_registry[cls.__tablename__.lower()] = _AutocompleteRegistryEntry(
             id=cls.id, display=_build_expression(cls, template)
         )
         return cls

@@ -5,6 +5,20 @@ export type ClientOptions = {
 };
 
 /**
+ * AutocompleteEntry
+ */
+export type AutocompleteEntry = {
+    /**
+     * Id
+     */
+    id: number;
+    /**
+     * Label
+     */
+    label: string;
+};
+
+/**
  * CategoryPattern
  */
 export type CategoryPattern = {
@@ -1304,9 +1318,7 @@ export type AutocompleteSearchResponses = {
      *
      * Successful Response
      */
-    200: {
-        [key: string]: string;
-    };
+    200: Array<AutocompleteEntry>;
 };
 
 export type AutocompleteSearchResponse = AutocompleteSearchResponses[keyof AutocompleteSearchResponses];
@@ -1350,11 +1362,9 @@ export type AutocompleteSingleError = AutocompleteSingleErrors[keyof Autocomplet
 
 export type AutocompleteSingleResponses = {
     /**
-     * Response Autocompletesingle
-     *
      * Successful Response
      */
-    200: string;
+    200: AutocompleteEntry;
 };
 
 export type AutocompleteSingleResponse = AutocompleteSingleResponses[keyof AutocompleteSingleResponses];

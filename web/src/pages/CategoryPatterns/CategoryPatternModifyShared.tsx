@@ -1,6 +1,5 @@
 import AppAutocomplete from "@/components/AppAutocomplete";
 import type { WriteCategoryPattern } from "@/lib/generated";
-import { transactionCategoryAutocomplete } from "@/utils/autocompleteRequests";
 import { Flex, Form, Input, Radio } from "antd";
 import type { FormInstance } from "antd/lib/form";
 import type { RadioChangeEvent } from "antd/lib/radio";
@@ -66,7 +65,7 @@ export default function CategoryPatternModifyShared({
                 <AppAutocomplete
                   placeholder="Assign specific category to matches..."
                   disabled={requireManualSelection}
-                  requestOptions={transactionCategoryAutocomplete}
+                  entityName="transaction_categories"
                 />
               </Form.Item>
             </Radio>

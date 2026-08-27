@@ -1,5 +1,9 @@
-import type { AutocompleteQueryResponse } from "@/lib/generated";
-import type { AutocompleteRequestOptions } from "@/lib/types/autocomplete";
+import type { AutocompleteOption } from "@/lib/autocompleteOption";
+import type { AutocompleteEntry } from "@/lib/generated";
+import {
+  autocompleteSearchOptions,
+  autocompleteSingleOptions,
+} from "@/lib/generated/@tanstack/react-query.gen";
 import { useQuery } from "@tanstack/react-query";
 import { Select } from "antd";
 import React, { useState } from "react";
@@ -8,19 +12,18 @@ import { useDebounce } from "use-debounce";
 interface AppAutocompleteProps {
   value?: number | null;
   onChange?: (value: number | null) => void;
-  requestOptions: AutocompleteRequestOptions;
+  entityName: AutocompleteOption;
 }
 
-function transformAutocompleteResponse(
-  autocompleteResponse: AutocompleteQueryResponse,
-) {
-  return { value: autocompleteResponse.id, label: autocompleteResponse.value };
+function transformAutocompleteResponse({ id, label }: AutocompleteEntry) {
+  return { value: id, label };
 }
 
 export default function AppAutocomplete({
   value,
   onChange,
-  requestOptions,
+  entityName,
+
   ...props
 }: AppAutocompleteProps & React.ComponentProps<typeof Select>) {
   const [hasBeenFocused, setHasBeenFocused] = useState(false);
@@ -28,7 +31,8 @@ export default function AppAutocomplete({
   const [debouncedSearchText] = useDebounce(searchText, 300);
 
   const { data, isFetching } = useQuery({
-    ...requestOptions.search({
+    ...autocompleteSearchOptions({
+      path: { name: entityName },
       query: { search: debouncedSearchText, take: 50, skip: 0 },
     }),
     enabled: hasBeenFocused,
@@ -36,8 +40,8 @@ export default function AppAutocomplete({
 
   const { data: selectedOption, isFetching: isFetchingSelectedOption } =
     useQuery({
-      ...requestOptions.byId({
-        path: { id: value! },
+      ...autocompleteSingleOptions({
+        path: { name: entityName, id: value! },
       }),
       enabled: value != null && !data?.some((x) => x.id === value),
     });

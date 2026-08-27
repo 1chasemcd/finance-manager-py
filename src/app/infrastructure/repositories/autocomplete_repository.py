@@ -3,7 +3,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core import NotFound, Ok, Result
 from app.infrastructure.autocomplete_registry import AutocompleteRegistry
-from app.schemas.common import AutocompleteRequest
+from app.schemas.common import AutocompleteEntry, AutocompleteRequest
 
 
 class AutocompleteRepositoryImpl:
@@ -11,7 +11,9 @@ class AutocompleteRepositoryImpl:
         self._session = session
         self._registry = registry
 
-    async def search(self, name: str, request: AutocompleteRequest) -> Result[dict[int, str]]:
+    async def search(
+        self, name: str, request: AutocompleteRequest
+    ) -> Result[list[AutocompleteEntry]]:
         entry = self._registry.get(name)
         if entry.status == "err":
             return entry
@@ -23,10 +25,10 @@ class AutocompleteRepositoryImpl:
             .limit(request.take)
         )
         res = await self._session.execute(stmt)
-        pairs: dict[int, str] = {key: value for key, value in res}
+        pairs = [AutocompleteEntry(id=key, label=value) for key, value in res]
         return Ok(pairs)
 
-    async def single(self, name: str, id: int) -> Result[str]:
+    async def single(self, name: str, id: int) -> Result[AutocompleteEntry]:
         entry = self._registry.get(name)
         if entry.status == "err":
             return entry
@@ -34,4 +36,4 @@ class AutocompleteRepositoryImpl:
         res = await self._session.scalar(stmt)
         if not res:
             return NotFound()
-        return Ok(res)
+        return Ok(AutocompleteEntry(id=id, label=res))

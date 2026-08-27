@@ -2,11 +2,6 @@ import AppAutocomplete from "@/components/AppAutocomplete";
 import AppDatePicker, {
   dateConverterProps,
 } from "@/components/AppDatePicker.tsx";
-import {
-  personAutocomplete,
-  transactionCategoryAutocomplete,
-  transactionSourceAutocomplete,
-} from "@/utils/autocompleteRequests";
 import type { SearchTransactionsData } from "@/lib/generated";
 import { Flex, Form, type FormInstance } from "antd";
 import InputCurrency from "@/components/InputCurrency";
@@ -63,18 +58,18 @@ export default function TransactionsFilter({
       </Form.Item>
 
       <Form.Item<TransactionQuery> label="Source" name="transactionSourceId">
-        <AppAutocomplete requestOptions={transactionSourceAutocomplete} />
+        <AppAutocomplete entityName="transaction_sources" />
       </Form.Item>
 
       <Form.Item<TransactionQuery>
         label="Category"
         name="transactionCategoryId"
       >
-        <AppAutocomplete requestOptions={transactionCategoryAutocomplete} />
+        <AppAutocomplete entityName="transaction_categories" />
       </Form.Item>
 
       <Form.Item<TransactionQuery> label="Owner" name="ownerId">
-        <AppAutocomplete requestOptions={personAutocomplete} />
+        <AppAutocomplete entityName="people" />
       </Form.Item>
     </Form>
   );

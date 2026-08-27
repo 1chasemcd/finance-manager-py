@@ -1717,9 +1717,9 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AutocompleteEntry"
                   },
                   "title": "Response Autocompletesearch"
                 }
@@ -1799,8 +1799,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "string",
-                  "title": "Response Autocompletesingle"
+                  "$ref": "#/components/schemas/AutocompleteEntry"
                 }
               }
             }
@@ -1851,6 +1850,24 @@
   },
   "components": {
     "schemas": {
+      "AutocompleteEntry": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          },
+          "label": {
+            "type": "string",
+            "title": "Label"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "label"
+        ],
+        "title": "AutocompleteEntry"
+      },
       "CategoryPattern": {
         "properties": {
           "id": {
