@@ -19,5 +19,9 @@ export default defineConfig({
       name: "@hey-api/sdk",
       transformer: true,
     },
+    {
+      name: "@hey-api/schemas",
+      type: "form",
+    },
   ],
 });
