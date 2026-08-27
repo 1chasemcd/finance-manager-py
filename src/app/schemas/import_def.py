@@ -17,6 +17,7 @@ class WriteImportDef(SchemaBase):
 
 
 class ImportDef(SchemaBase):
+    id: int
     name: str
     skip_rows: int
     row_pattern: str

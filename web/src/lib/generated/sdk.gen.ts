@@ -3,7 +3,7 @@
 import type { Client, ClientMeta, Options as Options2, RequestResult, TDataShape } from './client';
 import { client } from './client.gen';
 import { lookupTransactionResponseTransformer, searchTransactionsResponseTransformer } from './transformers.gen';
-import type { AutocompleteSearchData, AutocompleteSearchErrors, AutocompleteSearchResponses, AutocompleteSingleData, AutocompleteSingleErrors, AutocompleteSingleResponses, CreateCategoryPatternData, CreateCategoryPatternErrors, CreateCategoryPatternResponses, CreatePersonData, CreatePersonErrors, CreatePersonResponses, CreateTransactionCategoryData, CreateTransactionCategoryErrors, CreateTransactionCategoryResponses, CreateTransactionSourceData, CreateTransactionSourceErrors, CreateTransactionSourceResponses, DeleteCategoryPatternData, DeleteCategoryPatternErrors, DeleteCategoryPatternResponses, DeletePersonData, DeletePersonErrors, DeletePersonResponses, DeleteTransactionCategoryData, DeleteTransactionCategoryErrors, DeleteTransactionCategoryResponses, DeleteTransactionSourceData, DeleteTransactionSourceErrors, DeleteTransactionSourceResponses, LookupCategoryPatternData, LookupCategoryPatternErrors, LookupCategoryPatternResponses, LookupPersonData, LookupPersonErrors, LookupPersonResponses, LookupTransactionCategoryData, LookupTransactionCategoryErrors, LookupTransactionCategoryResponses, LookupTransactionData, LookupTransactionErrors, LookupTransactionResponses, LookupTransactionSourceData, LookupTransactionSourceErrors, LookupTransactionSourceResponses, SearchCategoryPatternsData, SearchCategoryPatternsErrors, SearchCategoryPatternsResponses, SearchPeopleData, SearchPeopleErrors, SearchPeopleResponses, SearchTransactionCategoriesData, SearchTransactionCategoriesErrors, SearchTransactionCategoriesResponses, SearchTransactionsData, SearchTransactionsErrors, SearchTransactionSourcesData, SearchTransactionSourcesErrors, SearchTransactionSourcesResponses, SearchTransactionsResponses, UpdateCategoryPatternData, UpdateCategoryPatternErrors, UpdateCategoryPatternResponses, UpdatePersonData, UpdatePersonErrors, UpdatePersonResponses, UpdateTransactionCategoryData, UpdateTransactionCategoryErrors, UpdateTransactionCategoryResponses, UpdateTransactionSourceData, UpdateTransactionSourceErrors, UpdateTransactionSourceResponses } from './types.gen';
+import type { AutocompleteSearchData, AutocompleteSearchErrors, AutocompleteSearchResponses, AutocompleteSingleData, AutocompleteSingleErrors, AutocompleteSingleResponses, CreateCategoryPatternData, CreateCategoryPatternErrors, CreateCategoryPatternResponses, CreateImportDefData, CreateImportDefErrors, CreateImportDefResponses, CreatePersonData, CreatePersonErrors, CreatePersonResponses, CreateTransactionCategoryData, CreateTransactionCategoryErrors, CreateTransactionCategoryResponses, CreateTransactionSourceData, CreateTransactionSourceErrors, CreateTransactionSourceResponses, DeleteCategoryPatternData, DeleteCategoryPatternErrors, DeleteCategoryPatternResponses, DeleteImportDefData, DeleteImportDefErrors, DeleteImportDefResponses, DeletePersonData, DeletePersonErrors, DeletePersonResponses, DeleteTransactionCategoryData, DeleteTransactionCategoryErrors, DeleteTransactionCategoryResponses, DeleteTransactionSourceData, DeleteTransactionSourceErrors, DeleteTransactionSourceResponses, LookupCategoryPatternData, LookupCategoryPatternErrors, LookupCategoryPatternResponses, LookupImportDefData, LookupImportDefErrors, LookupImportDefResponses, LookupPersonData, LookupPersonErrors, LookupPersonResponses, LookupTransactionCategoryData, LookupTransactionCategoryErrors, LookupTransactionCategoryResponses, LookupTransactionData, LookupTransactionErrors, LookupTransactionResponses, LookupTransactionSourceData, LookupTransactionSourceErrors, LookupTransactionSourceResponses, SearchCategoryPatternsData, SearchCategoryPatternsErrors, SearchCategoryPatternsResponses, SearchImportDefsData, SearchImportDefsErrors, SearchImportDefsResponses, SearchPeopleData, SearchPeopleErrors, SearchPeopleResponses, SearchTransactionCategoriesData, SearchTransactionCategoriesErrors, SearchTransactionCategoriesResponses, SearchTransactionsData, SearchTransactionsErrors, SearchTransactionSourcesData, SearchTransactionSourcesErrors, SearchTransactionSourcesResponses, SearchTransactionsResponses, UpdateCategoryPatternData, UpdateCategoryPatternErrors, UpdateCategoryPatternResponses, UpdateImportDefData, UpdateImportDefErrors, UpdateImportDefResponses, UpdatePersonData, UpdatePersonErrors, UpdatePersonResponses, UpdateTransactionCategoryData, UpdateTransactionCategoryErrors, UpdateTransactionCategoryResponses, UpdateTransactionSourceData, UpdateTransactionSourceErrors, UpdateTransactionSourceResponses } from './types.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean, TResponse = unknown> = Options2<TData, ThrowOnError, TResponse> & {
     /**
@@ -186,6 +186,45 @@ export const searchCategoryPatterns = <ThrowOnError extends boolean = false>(opt
  */
 export const createCategoryPattern = <ThrowOnError extends boolean = false>(options: Options<CreateCategoryPatternData, ThrowOnError>): RequestResult<CreateCategoryPatternResponses, CreateCategoryPatternErrors, ThrowOnError> => (options.client ?? client).post<CreateCategoryPatternResponses, CreateCategoryPatternErrors, ThrowOnError>({
     url: '/categorypatterns/',
+    ...options,
+    headers: {
+        'Content-Type': 'application/json',
+        ...options.headers
+    }
+});
+
+/**
+ * Delete Import Def
+ */
+export const deleteImportDef = <ThrowOnError extends boolean = false>(options: Options<DeleteImportDefData, ThrowOnError>): RequestResult<DeleteImportDefResponses, DeleteImportDefErrors, ThrowOnError> => (options.client ?? client).delete<DeleteImportDefResponses, DeleteImportDefErrors, ThrowOnError>({ url: '/importdefs/{id}', ...options });
+
+/**
+ * Lookup Import Def
+ */
+export const lookupImportDef = <ThrowOnError extends boolean = false>(options: Options<LookupImportDefData, ThrowOnError>): RequestResult<LookupImportDefResponses, LookupImportDefErrors, ThrowOnError> => (options.client ?? client).get<LookupImportDefResponses, LookupImportDefErrors, ThrowOnError>({ url: '/importdefs/{id}', ...options });
+
+/**
+ * Update Import Def
+ */
+export const updateImportDef = <ThrowOnError extends boolean = false>(options: Options<UpdateImportDefData, ThrowOnError>): RequestResult<UpdateImportDefResponses, UpdateImportDefErrors, ThrowOnError> => (options.client ?? client).put<UpdateImportDefResponses, UpdateImportDefErrors, ThrowOnError>({
+    url: '/importdefs/{id}',
+    ...options,
+    headers: {
+        'Content-Type': 'application/json',
+        ...options.headers
+    }
+});
+
+/**
+ * Search Import Defs
+ */
+export const searchImportDefs = <ThrowOnError extends boolean = false>(options?: Options<SearchImportDefsData, ThrowOnError>): RequestResult<SearchImportDefsResponses, SearchImportDefsErrors, ThrowOnError> => (options?.client ?? client).get<SearchImportDefsResponses, SearchImportDefsErrors, ThrowOnError>({ url: '/importdefs/', ...options });
+
+/**
+ * Create Import Def
+ */
+export const createImportDef = <ThrowOnError extends boolean = false>(options: Options<CreateImportDefData, ThrowOnError>): RequestResult<CreateImportDefResponses, CreateImportDefErrors, ThrowOnError> => (options.client ?? client).post<CreateImportDefResponses, CreateImportDefErrors, ThrowOnError>({
+    url: '/importdefs/',
     ...options,
     headers: {
         'Content-Type': 'application/json',

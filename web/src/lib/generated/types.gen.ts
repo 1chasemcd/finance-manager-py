@@ -51,6 +51,48 @@ export type HttpValidationError = {
 };
 
 /**
+ * ImportDef
+ */
+export type ImportDef = {
+    /**
+     * Id
+     */
+    id: number;
+    /**
+     * Name
+     */
+    name: string;
+    /**
+     * Skiprows
+     */
+    skipRows: number;
+    /**
+     * Rowpattern
+     */
+    rowPattern: string;
+    /**
+     * Dateindex
+     */
+    dateIndex: number;
+    /**
+     * Summaryindex
+     */
+    summaryIndex: number;
+    /**
+     * Amountindex
+     */
+    amountIndex: number;
+    /**
+     * Dateformat
+     */
+    dateFormat: string;
+    /**
+     * Positiveisspending
+     */
+    positiveIsSpending: boolean;
+};
+
+/**
  * Person
  */
 export type Person = {
@@ -102,6 +144,20 @@ export type SearchResponseCategoryPattern = {
      * Result
      */
     result: Array<CategoryPattern>;
+};
+
+/**
+ * SearchResponse[ImportDef]
+ */
+export type SearchResponseImportDef = {
+    /**
+     * Total
+     */
+    total: number;
+    /**
+     * Result
+     */
+    result: Array<ImportDef>;
 };
 
 /**
@@ -278,6 +334,44 @@ export type WriteCategoryPattern = {
      * Transactioncategoryid
      */
     transactionCategoryId?: number | null;
+};
+
+/**
+ * WriteImportDef
+ */
+export type WriteImportDef = {
+    /**
+     * Name
+     */
+    name: string;
+    /**
+     * Skiprows
+     */
+    skipRows?: number;
+    /**
+     * Rowpattern
+     */
+    rowPattern?: string | null;
+    /**
+     * Dateindex
+     */
+    dateIndex: number;
+    /**
+     * Summaryindex
+     */
+    summaryIndex: number;
+    /**
+     * Amountindex
+     */
+    amountIndex: number;
+    /**
+     * Dateformat
+     */
+    dateFormat: string;
+    /**
+     * Positiveisspending
+     */
+    positiveIsSpending?: boolean;
 };
 
 /**
@@ -1260,6 +1354,213 @@ export type CreateCategoryPatternErrors = {
 export type CreateCategoryPatternError = CreateCategoryPatternErrors[keyof CreateCategoryPatternErrors];
 
 export type CreateCategoryPatternResponses = {
+    /**
+     * Successful Response
+     */
+    201: unknown;
+};
+
+export type DeleteImportDefData = {
+    body?: never;
+    path: {
+        /**
+         * Id
+         */
+        id: number;
+    };
+    query?: never;
+    url: '/importdefs/{id}';
+};
+
+export type DeleteImportDefErrors = {
+    /**
+     * Bad Request
+     */
+    400: ProblemDetails;
+    /**
+     * Not Found
+     */
+    404: ProblemDetails;
+    /**
+     * Conflict
+     */
+    409: ProblemDetails;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type DeleteImportDefError = DeleteImportDefErrors[keyof DeleteImportDefErrors];
+
+export type DeleteImportDefResponses = {
+    /**
+     * Successful Response
+     */
+    204: void;
+};
+
+export type DeleteImportDefResponse = DeleteImportDefResponses[keyof DeleteImportDefResponses];
+
+export type LookupImportDefData = {
+    body?: never;
+    path: {
+        /**
+         * Id
+         */
+        id: number;
+    };
+    query?: never;
+    url: '/importdefs/{id}';
+};
+
+export type LookupImportDefErrors = {
+    /**
+     * Bad Request
+     */
+    400: ProblemDetails;
+    /**
+     * Not Found
+     */
+    404: ProblemDetails;
+    /**
+     * Conflict
+     */
+    409: ProblemDetails;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type LookupImportDefError = LookupImportDefErrors[keyof LookupImportDefErrors];
+
+export type LookupImportDefResponses = {
+    /**
+     * Successful Response
+     */
+    200: ImportDef;
+};
+
+export type LookupImportDefResponse = LookupImportDefResponses[keyof LookupImportDefResponses];
+
+export type UpdateImportDefData = {
+    body: WriteImportDef;
+    path: {
+        /**
+         * Id
+         */
+        id: number;
+    };
+    query?: never;
+    url: '/importdefs/{id}';
+};
+
+export type UpdateImportDefErrors = {
+    /**
+     * Bad Request
+     */
+    400: ProblemDetails;
+    /**
+     * Not Found
+     */
+    404: ProblemDetails;
+    /**
+     * Conflict
+     */
+    409: ProblemDetails;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type UpdateImportDefError = UpdateImportDefErrors[keyof UpdateImportDefErrors];
+
+export type UpdateImportDefResponses = {
+    /**
+     * Successful Response
+     */
+    204: void;
+};
+
+export type UpdateImportDefResponse = UpdateImportDefResponses[keyof UpdateImportDefResponses];
+
+export type SearchImportDefsData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * Skip
+         */
+        skip?: number;
+        /**
+         * Take
+         */
+        take?: number;
+    };
+    url: '/importdefs/';
+};
+
+export type SearchImportDefsErrors = {
+    /**
+     * Bad Request
+     */
+    400: ProblemDetails;
+    /**
+     * Not Found
+     */
+    404: ProblemDetails;
+    /**
+     * Conflict
+     */
+    409: ProblemDetails;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type SearchImportDefsError = SearchImportDefsErrors[keyof SearchImportDefsErrors];
+
+export type SearchImportDefsResponses = {
+    /**
+     * Successful Response
+     */
+    200: SearchResponseImportDef;
+};
+
+export type SearchImportDefsResponse = SearchImportDefsResponses[keyof SearchImportDefsResponses];
+
+export type CreateImportDefData = {
+    body: WriteImportDef;
+    path?: never;
+    query?: never;
+    url: '/importdefs/';
+};
+
+export type CreateImportDefErrors = {
+    /**
+     * Bad Request
+     */
+    400: ProblemDetails;
+    /**
+     * Not Found
+     */
+    404: ProblemDetails;
+    /**
+     * Conflict
+     */
+    409: ProblemDetails;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type CreateImportDefError = CreateImportDefErrors[keyof CreateImportDefErrors];
+
+export type CreateImportDefResponses = {
     /**
      * Successful Response
      */

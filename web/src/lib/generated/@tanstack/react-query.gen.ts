@@ -3,8 +3,8 @@
 import { queryOptions, type UseMutationOptions } from '@tanstack/react-query';
 
 import { client } from '../client.gen';
-import { autocompleteSearch, autocompleteSingle, createCategoryPattern, createPerson, createTransactionCategory, createTransactionSource, deleteCategoryPattern, deletePerson, deleteTransactionCategory, deleteTransactionSource, lookupCategoryPattern, lookupPerson, lookupTransaction, lookupTransactionCategory, lookupTransactionSource, type Options, searchCategoryPatterns, searchPeople, searchTransactionCategories, searchTransactions, searchTransactionSources, updateCategoryPattern, updatePerson, updateTransactionCategory, updateTransactionSource } from '../sdk.gen';
-import type { AutocompleteSearchData, AutocompleteSearchError, AutocompleteSearchResponse, AutocompleteSingleData, AutocompleteSingleError, AutocompleteSingleResponse, CreateCategoryPatternData, CreateCategoryPatternError, CreatePersonData, CreatePersonError, CreateTransactionCategoryData, CreateTransactionCategoryError, CreateTransactionSourceData, CreateTransactionSourceError, DeleteCategoryPatternData, DeleteCategoryPatternError, DeleteCategoryPatternResponse, DeletePersonData, DeletePersonError, DeletePersonResponse, DeleteTransactionCategoryData, DeleteTransactionCategoryError, DeleteTransactionCategoryResponse, DeleteTransactionSourceData, DeleteTransactionSourceError, DeleteTransactionSourceResponse, LookupCategoryPatternData, LookupCategoryPatternError, LookupCategoryPatternResponse, LookupPersonData, LookupPersonError, LookupPersonResponse, LookupTransactionCategoryData, LookupTransactionCategoryError, LookupTransactionCategoryResponse, LookupTransactionData, LookupTransactionError, LookupTransactionResponse, LookupTransactionSourceData, LookupTransactionSourceError, LookupTransactionSourceResponse, SearchCategoryPatternsData, SearchCategoryPatternsError, SearchCategoryPatternsResponse, SearchPeopleData, SearchPeopleError, SearchPeopleResponse, SearchTransactionCategoriesData, SearchTransactionCategoriesError, SearchTransactionCategoriesResponse, SearchTransactionsData, SearchTransactionsError, SearchTransactionSourcesData, SearchTransactionSourcesError, SearchTransactionSourcesResponse, SearchTransactionsResponse, UpdateCategoryPatternData, UpdateCategoryPatternError, UpdateCategoryPatternResponse, UpdatePersonData, UpdatePersonError, UpdatePersonResponse, UpdateTransactionCategoryData, UpdateTransactionCategoryError, UpdateTransactionCategoryResponse, UpdateTransactionSourceData, UpdateTransactionSourceError, UpdateTransactionSourceResponse } from '../types.gen';
+import { autocompleteSearch, autocompleteSingle, createCategoryPattern, createImportDef, createPerson, createTransactionCategory, createTransactionSource, deleteCategoryPattern, deleteImportDef, deletePerson, deleteTransactionCategory, deleteTransactionSource, lookupCategoryPattern, lookupImportDef, lookupPerson, lookupTransaction, lookupTransactionCategory, lookupTransactionSource, type Options, searchCategoryPatterns, searchImportDefs, searchPeople, searchTransactionCategories, searchTransactions, searchTransactionSources, updateCategoryPattern, updateImportDef, updatePerson, updateTransactionCategory, updateTransactionSource } from '../sdk.gen';
+import type { AutocompleteSearchData, AutocompleteSearchError, AutocompleteSearchResponse, AutocompleteSingleData, AutocompleteSingleError, AutocompleteSingleResponse, CreateCategoryPatternData, CreateCategoryPatternError, CreateImportDefData, CreateImportDefError, CreatePersonData, CreatePersonError, CreateTransactionCategoryData, CreateTransactionCategoryError, CreateTransactionSourceData, CreateTransactionSourceError, DeleteCategoryPatternData, DeleteCategoryPatternError, DeleteCategoryPatternResponse, DeleteImportDefData, DeleteImportDefError, DeleteImportDefResponse, DeletePersonData, DeletePersonError, DeletePersonResponse, DeleteTransactionCategoryData, DeleteTransactionCategoryError, DeleteTransactionCategoryResponse, DeleteTransactionSourceData, DeleteTransactionSourceError, DeleteTransactionSourceResponse, LookupCategoryPatternData, LookupCategoryPatternError, LookupCategoryPatternResponse, LookupImportDefData, LookupImportDefError, LookupImportDefResponse, LookupPersonData, LookupPersonError, LookupPersonResponse, LookupTransactionCategoryData, LookupTransactionCategoryError, LookupTransactionCategoryResponse, LookupTransactionData, LookupTransactionError, LookupTransactionResponse, LookupTransactionSourceData, LookupTransactionSourceError, LookupTransactionSourceResponse, SearchCategoryPatternsData, SearchCategoryPatternsError, SearchCategoryPatternsResponse, SearchImportDefsData, SearchImportDefsError, SearchImportDefsResponse, SearchPeopleData, SearchPeopleError, SearchPeopleResponse, SearchTransactionCategoriesData, SearchTransactionCategoriesError, SearchTransactionCategoriesResponse, SearchTransactionsData, SearchTransactionsError, SearchTransactionSourcesData, SearchTransactionSourcesError, SearchTransactionSourcesResponse, SearchTransactionsResponse, UpdateCategoryPatternData, UpdateCategoryPatternError, UpdateCategoryPatternResponse, UpdateImportDefData, UpdateImportDefError, UpdateImportDefResponse, UpdatePersonData, UpdatePersonError, UpdatePersonResponse, UpdateTransactionCategoryData, UpdateTransactionCategoryError, UpdateTransactionCategoryResponse, UpdateTransactionSourceData, UpdateTransactionSourceError, UpdateTransactionSourceResponse } from '../types.gen';
 
 /**
  * Delete Person
@@ -413,6 +413,93 @@ export const createCategoryPatternMutation = (options?: Partial<Options<CreateCa
     const mutationOptions: UseMutationOptions<unknown, CreateCategoryPatternError, Options<CreateCategoryPatternData>> = {
         mutationFn: async (fnOptions) => {
             const { data } = await createCategoryPattern({
+                ...options,
+                ...fnOptions,
+                throwOnError: true
+            });
+            return data;
+        }
+    };
+    return mutationOptions;
+};
+
+/**
+ * Delete Import Def
+ */
+export const deleteImportDefMutation = (options?: Partial<Options<DeleteImportDefData>>): UseMutationOptions<DeleteImportDefResponse, DeleteImportDefError, Options<DeleteImportDefData>> => {
+    const mutationOptions: UseMutationOptions<DeleteImportDefResponse, DeleteImportDefError, Options<DeleteImportDefData>> = {
+        mutationFn: async (fnOptions) => {
+            const { data } = await deleteImportDef({
+                ...options,
+                ...fnOptions,
+                throwOnError: true
+            });
+            return data;
+        }
+    };
+    return mutationOptions;
+};
+
+export const lookupImportDefQueryKey = (options: Options<LookupImportDefData>) => createQueryKey('lookupImportDef', options);
+
+/**
+ * Lookup Import Def
+ */
+export const lookupImportDefOptions = (options: Options<LookupImportDefData>) => queryOptions<LookupImportDefResponse, LookupImportDefError, LookupImportDefResponse, ReturnType<typeof lookupImportDefQueryKey>>({
+    queryFn: async ({ queryKey, signal }) => {
+        const { data } = await lookupImportDef({
+            ...options,
+            ...queryKey[0],
+            signal,
+            throwOnError: true
+        });
+        return data;
+    },
+    queryKey: lookupImportDefQueryKey(options)
+});
+
+/**
+ * Update Import Def
+ */
+export const updateImportDefMutation = (options?: Partial<Options<UpdateImportDefData>>): UseMutationOptions<UpdateImportDefResponse, UpdateImportDefError, Options<UpdateImportDefData>> => {
+    const mutationOptions: UseMutationOptions<UpdateImportDefResponse, UpdateImportDefError, Options<UpdateImportDefData>> = {
+        mutationFn: async (fnOptions) => {
+            const { data } = await updateImportDef({
+                ...options,
+                ...fnOptions,
+                throwOnError: true
+            });
+            return data;
+        }
+    };
+    return mutationOptions;
+};
+
+export const searchImportDefsQueryKey = (options?: Options<SearchImportDefsData>) => createQueryKey('searchImportDefs', options);
+
+/**
+ * Search Import Defs
+ */
+export const searchImportDefsOptions = (options?: Options<SearchImportDefsData>) => queryOptions<SearchImportDefsResponse, SearchImportDefsError, SearchImportDefsResponse, ReturnType<typeof searchImportDefsQueryKey>>({
+    queryFn: async ({ queryKey, signal }) => {
+        const { data } = await searchImportDefs({
+            ...options,
+            ...queryKey[0],
+            signal,
+            throwOnError: true
+        });
+        return data;
+    },
+    queryKey: searchImportDefsQueryKey(options)
+});
+
+/**
+ * Create Import Def
+ */
+export const createImportDefMutation = (options?: Partial<Options<CreateImportDefData>>): UseMutationOptions<unknown, CreateImportDefError, Options<CreateImportDefData>> => {
+    const mutationOptions: UseMutationOptions<unknown, CreateImportDefError, Options<CreateImportDefData>> = {
+        mutationFn: async (fnOptions) => {
+            const { data } = await createImportDef({
                 ...options,
                 ...fnOptions,
                 throwOnError: true

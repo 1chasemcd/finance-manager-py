@@ -15,7 +15,7 @@ import Transactions from "./pages/Transactions/Transactions";
 import Import from "./pages/Import";
 import TransactionCategories from "./pages/TransactionCategories/TransactionCategories";
 import TransactionSources from "./pages/TransactionSources/TransactionSources";
-import ImportDefinitions from "./pages/ImportDefinitions";
+import ImportDefs from "./pages/ImportDefs/ImportDefs";
 import TransactionSourceUpdate from "./pages/TransactionSources/TransactionSourceUpdate";
 import TransactionSourceCreate from "./pages/TransactionSources/TransactionSourceCreate";
 import People from "./pages/People/People";
@@ -26,6 +26,8 @@ import TransactionCategoryCreate from "./pages/TransactionCategories/Transaction
 import CategoryPatternCreate from "./pages/CategoryPatterns/CategoryPatternCreate";
 import CategoryPatternUpdate from "./pages/CategoryPatterns/CategoryPatternUpdate";
 import CategoryPatterns from "./pages/CategoryPatterns/CagegoryPatterns";
+import ImportDefCreate from "./pages/ImportDefs/ImportDefCreate";
+import ImportDefUpdate from "./pages/ImportDefs/ImportDefUpdate";
 
 export const paths = {
   dashboard: "/",
@@ -115,7 +117,11 @@ export const navEntries: NavEntry[] = [
     path: paths.importDefs,
     label: "Import Definitions",
     icon: FileCog,
-    element: <ImportDefinitions />,
+    element: <ImportDefs />,
+    children: [
+      editFormRoute(<ImportDefUpdate />),
+      addFormRoute(<ImportDefCreate />),
+    ],
   }),
   route({
     path: paths.patterns,
