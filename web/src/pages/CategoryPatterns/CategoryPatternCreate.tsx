@@ -3,7 +3,7 @@ import {
   searchCategoryPatternsQueryKey,
   createCategoryPatternMutation,
 } from "@/lib/generated/@tanstack/react-query.gen";
-import CategoryPatternModifyShared from "./CategoryPatternModifyShared";
+import CategoryPatternModifyForm from "./CategoryPatternModifyForm";
 import { Form } from "antd";
 import type { WriteCategoryPattern } from "@/lib/generated";
 
@@ -16,7 +16,7 @@ export default function CategoryPatternCreate() {
       toInvalidate={[searchCategoryPatternsQueryKey()]}
       form={form}
     >
-      <CategoryPatternModifyShared form={form} />
+      <CategoryPatternModifyForm form={form} />
     </EntityCreateForm>
   );
 }

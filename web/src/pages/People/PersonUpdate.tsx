@@ -3,7 +3,7 @@ import {
   searchPeopleQueryKey,
   updatePersonMutation,
 } from "@/lib/generated/@tanstack/react-query.gen";
-import PersonModifyShared from "./PersonModifyShared";
+import PersonModifyForm from "./PersonModifyForm";
 import EntityUpdateForm from "@/components/EntityForm/EntityUpdateForm";
 import type { WritePerson } from "@/lib/generated";
 
@@ -16,7 +16,7 @@ export default function PersonUpdate() {
       dataTransform={(x) => x as WritePerson}
       toInvalidate={[searchPeopleQueryKey()]}
     >
-      <PersonModifyShared />
+      <PersonModifyForm />
     </EntityUpdateForm>
   );
 }

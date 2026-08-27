@@ -3,7 +3,7 @@ import {
   searchPeopleQueryKey,
   createPersonMutation,
 } from "@/lib/generated/@tanstack/react-query.gen";
-import PersonModifyShared from "./PersonModifyShared";
+import PersonModifyForm from "./PersonModifyForm";
 
 export default function PersonCreate() {
   return (
@@ -12,7 +12,7 @@ export default function PersonCreate() {
       createEntityMutation={createPersonMutation}
       toInvalidate={[searchPeopleQueryKey()]}
     >
-      <PersonModifyShared />
+      <PersonModifyForm />
     </EntityCreateForm>
   );
 }

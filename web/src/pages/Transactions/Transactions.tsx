@@ -1,6 +1,6 @@
 import type { Transaction } from "@/lib/generated";
 import { searchTransactionsOptions } from "@/lib/generated/@tanstack/react-query.gen";
-import TransactionsFilter from "./TransactionsFilter";
+import TransactionsFilterForm from "./TransactionsFilterForm";
 import { currencyColumn, dateColumn } from "@/utils/columnFormatters";
 import useQueryForTable from "@/hooks/useQueryForTable";
 import EntityTable from "@/components/EntityTable/EntityTable";
@@ -49,7 +49,7 @@ export default function Transactions() {
 
   const filterAction = (
     <EntityTableFilterAction
-      FilterForm={TransactionsFilter}
+      FilterForm={TransactionsFilterForm}
       query={query}
       updateQuery={updateQuery}
     />

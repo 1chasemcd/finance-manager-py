@@ -1,7 +1,7 @@
 import type { WritePerson } from "@/lib/generated";
 import { Form, Input } from "antd";
 
-export default function PersonModifyShared() {
+export default function PersonModifyForm() {
   return (
     <>
       <Form.Item<WritePerson>

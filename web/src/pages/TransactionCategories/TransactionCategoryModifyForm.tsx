@@ -1,7 +1,7 @@
 import type { WriteTransactionCategory } from "@/lib/generated";
 import { Form, Input } from "antd";
 
-export default function TransactionCategoryModifyShared() {
+export default function TransactionCategoryModifyForm() {
   return (
     <>
       <Form.Item<WriteTransactionCategory>

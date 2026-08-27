@@ -12,7 +12,7 @@ type TransactionsFilterPageProps = {
   form: FormInstance<TransactionQuery>;
 };
 
-export default function TransactionsFilter({
+export default function TransactionsFilterForm({
   form,
 }: TransactionsFilterPageProps) {
   return (

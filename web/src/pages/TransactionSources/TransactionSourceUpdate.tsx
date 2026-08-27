@@ -1,4 +1,3 @@
-import AppAutocomplete from "@/components/AppAutocomplete";
 import EntityUpdateForm from "@/components/EntityForm/EntityUpdateForm";
 import type {
   TransactionSource,
@@ -9,8 +8,8 @@ import {
   searchTransactionSourcesQueryKey,
   updateTransactionSourceMutation,
 } from "@/lib/generated/@tanstack/react-query.gen";
-import { Form, Input } from "antd";
 import { useCallback } from "react";
+import TransactionSourceModifyForm from "./TransactionSourceModifyForm";
 
 export default function TransactionSourceUpdate() {
   const dataTransform = useCallback(
@@ -25,20 +24,7 @@ export default function TransactionSourceUpdate() {
       dataTransform={dataTransform}
       toInvalidate={[searchTransactionSourcesQueryKey()]}
     >
-      <Form.Item<WriteTransactionSource>
-        label="Name"
-        name="name"
-        rules={[{ required: true }]}
-      >
-        <Input maxLength={100} />
-      </Form.Item>
-      <Form.Item<WriteTransactionSource>
-        label="Owner"
-        name="ownerId"
-        rules={[{ required: true }]}
-      >
-        <AppAutocomplete entity="person" />
-      </Form.Item>
+      <TransactionSourceModifyForm />
     </EntityUpdateForm>
   );
 }

@@ -10,7 +10,7 @@ const labelStyle: React.CSSProperties = {
   lineHeight: "32px",
 };
 
-export default function CategoryPatternModifyShared({
+export default function CategoryPatternModifyForm({
   form,
 }: {
   form: FormInstance<WriteCategoryPattern>;

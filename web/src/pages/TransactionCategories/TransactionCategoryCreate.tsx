@@ -3,7 +3,7 @@ import {
   searchTransactionCategoriesQueryKey,
   createTransactionCategoryMutation,
 } from "@/lib/generated/@tanstack/react-query.gen";
-import TransactionCategoryModifyShared from "./TransactionCategoryModifyShared";
+import TransactionCategoryModifyForm from "./TransactionCategoryModifyForm";
 
 export default function TransactionCategoryCreate() {
   return (
@@ -12,7 +12,7 @@ export default function TransactionCategoryCreate() {
       createEntityMutation={createTransactionCategoryMutation}
       toInvalidate={[searchTransactionCategoriesQueryKey()]}
     >
-      <TransactionCategoryModifyShared />
+      <TransactionCategoryModifyForm />
     </EntityCreateForm>
   );
 }

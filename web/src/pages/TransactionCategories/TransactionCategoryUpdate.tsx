@@ -3,7 +3,7 @@ import {
   searchTransactionCategoriesQueryKey,
   updateTransactionCategoryMutation,
 } from "@/lib/generated/@tanstack/react-query.gen";
-import TransactionCategoryModifyShared from "./TransactionCategoryModifyShared";
+import TransactionCategoryModifyForm from "./TransactionCategoryModifyForm";
 import EntityUpdateForm from "@/components/EntityForm/EntityUpdateForm";
 import type { WriteTransactionCategory } from "@/lib/generated";
 
@@ -16,7 +16,7 @@ export default function TransactionCategoryUpdate() {
       dataTransform={(x) => x as WriteTransactionCategory}
       toInvalidate={[searchTransactionCategoriesQueryKey()]}
     >
-      <TransactionCategoryModifyShared />
+      <TransactionCategoryModifyForm />
     </EntityUpdateForm>
   );
 }
