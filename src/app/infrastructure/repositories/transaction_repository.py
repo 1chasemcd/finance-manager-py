@@ -26,7 +26,7 @@ class TransactionRepositoryImpl(
         return (
             select(
                 TransactionRow.id,
-                TransactionRow.timestamp,
+                TransactionRow.date,
                 TransactionRow.amount,
                 TransactionRow.summary,
                 TransactionRow.transaction_source_id,
@@ -47,9 +47,9 @@ class TransactionRepositoryImpl(
         if request.max_amount is not None:
             statement = statement.where(TransactionRow.amount <= request.max_amount)
         if request.min_date is not None:
-            statement = statement.where(TransactionRow.timestamp >= request.min_date)
+            statement = statement.where(TransactionRow.date >= request.min_date)
         if request.max_date is not None:
-            statement = statement.where(TransactionRow.timestamp <= request.max_date)
+            statement = statement.where(TransactionRow.date <= request.max_date)
         if request.transaction_source_id is not None:
             statement = statement.where(
                 TransactionRow.transaction_source_id == request.transaction_source_id

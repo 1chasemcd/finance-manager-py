@@ -26,7 +26,7 @@ async def create_data(session: AsyncSession, file_path: str) -> None:
         reader = csv.reader(file)
         for row in reader:
             tran = TransactionRow()
-            tran.timestamp = datetime.strptime(row[0], "%m/%d/%Y")
+            tran.date = datetime.strptime(row[0], "%m/%d/%Y")
             tran.amount = Decimal(row[1])
             tran.summary = row[2]
             tran.transaction_category = get_or_add_category(session, categories, row[3])

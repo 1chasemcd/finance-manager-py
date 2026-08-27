@@ -1862,10 +1862,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "id",
-          "label"
-        ],
+        "required": ["id", "label"],
         "title": "AutocompleteEntry"
       },
       "CategoryPattern": {
@@ -1939,11 +1936,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "id",
-          "firstName",
-          "lastName"
-        ],
+        "required": ["id", "firstName", "lastName"],
         "title": "Person"
       },
       "ProblemDetails": {
@@ -1973,11 +1966,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "title",
-          "status",
-          "detail"
-        ],
+        "required": ["title", "status", "detail"],
         "title": "ProblemDetails"
       },
       "SearchResponse_CategoryPattern_": {
@@ -1995,10 +1984,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "total",
-          "result"
-        ],
+        "required": ["total", "result"],
         "title": "SearchResponse[CategoryPattern]"
       },
       "SearchResponse_Person_": {
@@ -2016,10 +2002,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "total",
-          "result"
-        ],
+        "required": ["total", "result"],
         "title": "SearchResponse[Person]"
       },
       "SearchResponse_TransactionCategory_": {
@@ -2037,10 +2020,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "total",
-          "result"
-        ],
+        "required": ["total", "result"],
         "title": "SearchResponse[TransactionCategory]"
       },
       "SearchResponse_TransactionSource_": {
@@ -2058,10 +2038,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "total",
-          "result"
-        ],
+        "required": ["total", "result"],
         "title": "SearchResponse[TransactionSource]"
       },
       "SearchResponse_Transaction_": {
@@ -2079,10 +2056,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "total",
-          "result"
-        ],
+        "required": ["total", "result"],
         "title": "SearchResponse[Transaction]"
       },
       "Transaction": {
@@ -2091,10 +2065,10 @@
             "type": "integer",
             "title": "Id"
           },
-          "timestamp": {
+          "date": {
             "type": "string",
             "format": "date-time",
-            "title": "Timestamp"
+            "title": "Date"
           },
           "amount": {
             "type": "string",
@@ -2125,7 +2099,7 @@
         "type": "object",
         "required": [
           "id",
-          "timestamp",
+          "date",
           "amount",
           "summary",
           "transactionCategoryId",
@@ -2158,11 +2132,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "id",
-          "name",
-          "description"
-        ],
+        "required": ["id", "name", "description"],
         "title": "TransactionCategory"
       },
       "TransactionSource": {
@@ -2185,12 +2155,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "id",
-          "name",
-          "ownerId",
-          "ownerName"
-        ],
+        "required": ["id", "name", "ownerId", "ownerName"],
         "title": "TransactionSource"
       },
       "ValidationError": {
@@ -2226,11 +2191,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "loc",
-          "msg",
-          "type"
-        ],
+        "required": ["loc", "msg", "type"],
         "title": "ValidationError"
       },
       "WriteCategoryPattern": {
@@ -2254,9 +2215,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "pattern"
-        ],
+        "required": ["pattern"],
         "title": "WriteCategoryPattern"
       },
       "WritePerson": {
@@ -2273,10 +2232,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "firstName",
-          "lastName"
-        ],
+        "required": ["firstName", "lastName"],
         "title": "WritePerson"
       },
       "WriteTransactionCategory": {
@@ -2300,9 +2256,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "name"
-        ],
+        "required": ["name"],
         "title": "WriteTransactionCategory"
       },
       "WriteTransactionSource": {
@@ -2319,10 +2273,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "name",
-          "ownerId"
-        ],
+        "required": ["name", "ownerId"],
         "title": "WriteTransactionSource"
       }
     }

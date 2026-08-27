@@ -17,7 +17,7 @@ class SearchTransactions(PagedQuery):
 
 
 class WriteTransaction(SchemaBase):
-    timestamp: datetime
+    date: datetime
     amount: Decimal = Field(max_digits=12, decimal_places=2)
     summary: str = Field(max_length=500)
     transaction_category_id: int
@@ -26,7 +26,7 @@ class WriteTransaction(SchemaBase):
 
 class Transaction(SchemaBase):
     id: int
-    timestamp: datetime
+    date: datetime
     amount: Decimal
     summary: str
     transaction_category_id: int

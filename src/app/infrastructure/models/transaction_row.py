@@ -14,7 +14,7 @@ if TYPE_CHECKING:
 
 class TransactionRow(DbBase):
     __tablename__ = "transactions"
-    timestamp: Mapped[datetime] = mapped_column(DateTime)
+    date: Mapped[datetime] = mapped_column(DateTime)
     amount: Mapped[Decimal] = mapped_column(Numeric(12, 2))
     summary: Mapped[str] = mapped_column(String(500))
     transaction_category_id: Mapped[int] = mapped_column(ForeignKey("transaction_categories.id"))

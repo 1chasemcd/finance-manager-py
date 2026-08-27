@@ -13,8 +13,8 @@ export default function Transactions() {
     () => [
       {
         title: "Date",
-        dataIndex: "timestamp",
-        key: "timestamp",
+        dataIndex: "date",
+        key: "date",
         ...dateColumn,
       },
       {
