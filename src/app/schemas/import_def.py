@@ -20,7 +20,7 @@ class ImportDef(SchemaBase):
     id: int
     name: str
     skip_rows: int
-    row_pattern: str
+    row_pattern: str | None
 
     date_index: int
     summary_index: int

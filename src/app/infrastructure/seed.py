@@ -4,6 +4,7 @@ from decimal import Decimal
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.infrastructure.models.import_def_row import ImportDefRow
 from app.infrastructure.models.person_row import PersonRow
 from app.infrastructure.models.transaction_category_row import TransactionCategoryRow
 from app.infrastructure.models.transaction_row import TransactionRow
@@ -11,6 +12,15 @@ from app.infrastructure.models.transaction_source_row import TransactionSourceRo
 
 chase = PersonRow(first_name="Chase", last_name="McDonald")
 hannah = PersonRow(first_name="Hannah", last_name="McDonald")
+import_def = ImportDefRow(
+    name="Basic Import Def",
+    skip_rows=0,
+    date_index=0,
+    amount_index=1,
+    summary_index=2,
+    date_format="%m/%d/%y",
+    positive_is_spending=False,
+)
 
 
 async def create_data(session: AsyncSession, file_path: str) -> None:
@@ -55,7 +65,7 @@ def get_or_add_source(
     if name in sources:
         return sources[name]
     owner = chase if "chase" in name.lower() else hannah
-    src = TransactionSourceRow(name=name, owner=owner)
+    src = TransactionSourceRow(name=name, owner=owner, import_def=import_def)
     sources[name] = src
     session.add(src)
     return src

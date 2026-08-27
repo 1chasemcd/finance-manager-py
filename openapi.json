@@ -2602,6 +2602,10 @@
           "ownerName": {
             "type": "string",
             "title": "Ownername"
+          },
+          "importDefId": {
+            "type": "integer",
+            "title": "Importdefid"
           }
         },
         "type": "object",
@@ -2609,7 +2613,8 @@
           "id",
           "name",
           "ownerId",
-          "ownerName"
+          "ownerName",
+          "importDefId"
         ],
         "title": "TransactionSource"
       },
@@ -2801,12 +2806,18 @@
             "type": "integer",
             "minimum": 0.0,
             "title": "Ownerid"
+          },
+          "importDefId": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Importdefid"
           }
         },
         "type": "object",
         "required": [
           "name",
-          "ownerId"
+          "ownerId",
+          "importDefId"
         ],
         "title": "WriteTransactionSource"
       }

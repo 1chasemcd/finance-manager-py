@@ -356,6 +356,9 @@ export const TransactionSourceSchema = {
         },
         ownerName: {
             type: 'string'
+        },
+        importDefId: {
+            type: 'integer'
         }
     },
     type: 'object',
@@ -363,7 +366,8 @@ export const TransactionSourceSchema = {
         'id',
         'name',
         'ownerId',
-        'ownerName'
+        'ownerName',
+        'importDefId'
     ]
 } as const;
 
@@ -533,11 +537,16 @@ export const WriteTransactionSourceSchema = {
         ownerId: {
             type: 'integer',
             minimum: 0
+        },
+        importDefId: {
+            type: 'integer',
+            minimum: 0
         }
     },
     type: 'object',
     required: [
         'name',
-        'ownerId'
+        'ownerId',
+        'importDefId'
     ]
 } as const;

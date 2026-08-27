@@ -22,6 +22,13 @@ export default function TransactionSourceModifyForm() {
       >
         <AppAutocomplete entity="person" />
       </Form.Item>
+      <Form.Item<WriteTransactionSource>
+        label="Import Definition"
+        name="importDefId"
+        rules={[{ required: true }]}
+      >
+        <AppAutocomplete entity="importdef" />
+      </Form.Item>
     </>
   );
 }

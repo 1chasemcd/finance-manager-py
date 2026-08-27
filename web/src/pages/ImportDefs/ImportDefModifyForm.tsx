@@ -87,6 +87,7 @@ export default function ImportDefModifyForm() {
           >
             <Input
               placeholder="Specify date format"
+              style={{ fontFamily: "monospace" }}
               maxLength={WriteImportDefSchema.properties.dateFormat.maxLength}
             />
           </Form.Item>

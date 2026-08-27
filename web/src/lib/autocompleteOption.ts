@@ -1,2 +1,2 @@
 export type AutocompleteOption =
-  "person" | "transactioncategory" | "transactionsource";
+  "person" | "transactioncategory" | "transactionsource" | "importdef";

@@ -6,6 +6,7 @@ from app.schemas.common import SchemaBase
 class WriteTransactionSource(SchemaBase):
     name: str = Field(max_length=100)
     owner_id: int = Field(ge=0)
+    import_def_id: int = Field(ge=0)
 
 
 class TransactionSource(SchemaBase):
@@ -13,3 +14,4 @@ class TransactionSource(SchemaBase):
     name: str
     owner_id: int
     owner_name: str
+    import_def_id: int

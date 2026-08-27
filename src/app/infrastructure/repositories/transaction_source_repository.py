@@ -23,5 +23,6 @@ class TransactionSourceRepositoryImpl(
             TransactionSourceRow.id,
             TransactionSourceRow.name,
             TransactionSourceRow.owner_id,
+            TransactionSourceRow.import_def_id,
             (PersonRow.first_name + " " + PersonRow.last_name).label("owner_name"),
         ).join(TransactionSourceRow.owner)

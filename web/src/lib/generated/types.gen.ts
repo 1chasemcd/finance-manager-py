@@ -292,6 +292,10 @@ export type TransactionSource = {
      * Ownername
      */
     ownerName: string;
+    /**
+     * Importdefid
+     */
+    importDefId: number;
 };
 
 /**
@@ -414,6 +418,10 @@ export type WriteTransactionSource = {
      * Ownerid
      */
     ownerId: number;
+    /**
+     * Importdefid
+     */
+    importDefId: number;
 };
 
 export type DeletePersonData = {
