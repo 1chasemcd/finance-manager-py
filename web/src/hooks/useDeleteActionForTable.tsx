@@ -5,6 +5,7 @@ import {
   type QueryKey,
 } from "@tanstack/react-query";
 import { App, type MenuProps } from "antd";
+import useErrorHandler from "./useErrorHandler";
 
 type ItemType = NonNullable<MenuProps["items"]>[0];
 
@@ -16,6 +17,7 @@ export default function useDeleteActionForTable(
   const queryClient = useQueryClient();
 
   const options = deleteEntityMutation();
+  const handleErrors = useErrorHandler();
 
   const deleteMutation = useMutation({
     ...options,
@@ -39,7 +41,13 @@ export default function useDeleteActionForTable(
         content: "This action cannot be undone.",
         okText: "Delete",
         okType: "danger",
-        onOk: () => deleteMutation.mutateAsync({ path: { id } }),
+        onOk: async () => {
+          try {
+            await deleteMutation.mutateAsync({ path: { id } });
+          } catch (err) {
+            handleErrors(err);
+          }
+        },
       });
     },
     danger: true,
