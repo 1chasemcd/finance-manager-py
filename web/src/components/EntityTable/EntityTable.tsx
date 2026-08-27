@@ -78,7 +78,11 @@ export default function EntityTable<
             trigger={["click"]}
             arrow
           >
-            <Button type="text" icon={<Ellipsis />}></Button>
+            <Button
+              type="text"
+              icon={<Ellipsis size={20} />}
+              style={{ height: 22, display: "block" }}
+            ></Button>
           </Dropdown>
         ),
       });
