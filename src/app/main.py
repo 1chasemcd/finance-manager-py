@@ -8,6 +8,7 @@ from app.api.route_processor import get_route_processor
 from app.api.routes import (
     autocomplete,
     category_patterns,
+    import_defs,
     people,
     transaction_categories,
     transaction_sources,
@@ -55,6 +56,7 @@ def create_app() -> FastAPI:
     app.include_router(transaction_sources.router)
     app.include_router(transaction_categories.router)
     app.include_router(category_patterns.router)
+    app.include_router(import_defs.router)
     app.include_router(autocomplete.router)
     route_processor.process_routes(app.routes)
 
