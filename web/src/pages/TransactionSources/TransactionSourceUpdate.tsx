@@ -1,3 +1,4 @@
+import AppAutocomplete from "@/components/AppAutocomplete";
 import EntityUpdateForm from "@/components/EntityForm/EntityUpdateForm";
 import type {
   TransactionSource,
@@ -8,7 +9,7 @@ import {
   searchTransactionSourcesQueryKey,
   updateTransactionSourceMutation,
 } from "@/lib/generated/@tanstack/react-query.gen";
-import { Form, Input, InputNumber } from "antd";
+import { Form, Input } from "antd";
 import { useCallback } from "react";
 
 export default function TransactionSourceUpdate() {
@@ -36,7 +37,7 @@ export default function TransactionSourceUpdate() {
         name="ownerId"
         rules={[{ required: true }]}
       >
-        <InputNumber />
+        <AppAutocomplete entityName="person" />
       </Form.Item>
     </EntityUpdateForm>
   );

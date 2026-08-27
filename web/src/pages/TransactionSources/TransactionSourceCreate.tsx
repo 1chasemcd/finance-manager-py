@@ -1,10 +1,11 @@
+import AppAutocomplete from "@/components/AppAutocomplete";
 import EntityCreateForm from "@/components/EntityForm/EntityCreateForm";
 import type { WriteTransactionSource } from "@/lib/generated";
 import {
   searchTransactionSourcesQueryKey,
   createTransactionSourceMutation,
 } from "@/lib/generated/@tanstack/react-query.gen";
-import { Form, Input, InputNumber } from "antd";
+import { Form, Input } from "antd";
 
 export default function TransactionSourceCreate() {
   return (
@@ -25,7 +26,7 @@ export default function TransactionSourceCreate() {
         name="ownerId"
         rules={[{ required: true }]}
       >
-        <InputNumber />
+        <AppAutocomplete entityName="person" />
       </Form.Item>
     </EntityCreateForm>
   );

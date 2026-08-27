@@ -5,7 +5,7 @@ from app.infrastructure.autocomplete_registry import autocomplete
 from app.infrastructure.models.db_base import DbBase
 
 
-@autocomplete("{name}")
+@autocomplete("transactioncategory", "{name}")
 class TransactionCategoryRow(DbBase):
     __tablename__ = "transaction_categories"
     name: Mapped[str] = mapped_column(String(100), unique=True)

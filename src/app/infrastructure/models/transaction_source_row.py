@@ -10,7 +10,7 @@ if TYPE_CHECKING:
     from .person_row import PersonRow
 
 
-@autocomplete("{name}")
+@autocomplete("transactionsource", "{name}")
 class TransactionSourceRow(DbBase):
     __tablename__ = "transaction_sources"
     name: Mapped[str] = mapped_column(String(100), unique=True)

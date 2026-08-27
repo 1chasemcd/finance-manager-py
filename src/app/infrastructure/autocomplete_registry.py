@@ -40,10 +40,11 @@ def _build_expression[T: DbBase](cls: type[T], template: str) -> ColumnElement[s
 
 
 def autocomplete[T: DbBase](
+    name: str,
     template: str,
 ) -> Callable[[type[T]], type[T]]:
     def decorator(cls: type[T]) -> type[T]:
-        _autocomplete_registry[cls.__tablename__.lower()] = _AutocompleteRegistryEntry(
+        _autocomplete_registry[name] = _AutocompleteRegistryEntry(
             id=cls.id, display=_build_expression(cls, template)
         )
         return cls
