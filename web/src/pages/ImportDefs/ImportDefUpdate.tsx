@@ -10,7 +10,7 @@ import type { WriteImportDef } from "@/lib/generated";
 export default function ImportDefUpdate() {
   return (
     <EntityUpdateForm
-      title="Edit Category"
+      title="Edit Import Definition"
       lookupEntityOptions={lookupImportDefOptions}
       updateEntityMutation={updateImportDefMutation}
       dataTransform={(x) => x as WriteImportDef}

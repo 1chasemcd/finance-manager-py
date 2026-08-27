@@ -8,7 +8,7 @@ import ImportDefModifyForm from "./ImportDefModifyForm";
 export default function ImportDefCreate() {
   return (
     <EntityCreateForm
-      title="Add Category"
+      title="Add Import Definition"
       createEntityMutation={createImportDefMutation}
       toInvalidate={[searchImportDefsQueryKey()]}
     >

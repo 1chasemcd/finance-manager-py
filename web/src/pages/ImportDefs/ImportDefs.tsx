@@ -34,7 +34,7 @@ export default function ImportDefs() {
 
   return (
     <EntityTable
-      title="Categories"
+      title="Import Definitions"
       columns={columns}
       pagination={query}
       updatePagination={updateQuery}
