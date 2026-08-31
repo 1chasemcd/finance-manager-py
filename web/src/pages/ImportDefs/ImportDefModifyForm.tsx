@@ -75,10 +75,7 @@ export default function ImportDefModifyForm() {
         </div>
 
         <div style={{ flex: 1 }}>
-          <Form.Item<WriteImportDef>
-            name="positiveIsSpending"
-            rules={[{ required: true }]}
-          >
+          <Form.Item<WriteImportDef> name="positiveIsSpending">
             <Checkbox>Spending is positive amount</Checkbox>
           </Form.Item>
           <Form.Item<WriteImportDef>
